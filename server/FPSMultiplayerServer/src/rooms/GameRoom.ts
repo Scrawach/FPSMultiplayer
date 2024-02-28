@@ -16,7 +16,7 @@ export class GameRoom extends Room<State> {
   }
 
   onJoin (client: Client, options: any) {
-    const position = this.random_position(10);
+    const position = this.generateRandomPosition(10);
 
     console.log(client.sessionId, "joined!");
     console.log(client.sessionId, `spawned position: ${position}`);
