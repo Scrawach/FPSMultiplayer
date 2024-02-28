@@ -15,6 +15,9 @@ public partial class Position : Schema {
 	[Type(1, "number")]
 	public float y = default(float);
 
+	public override string ToString() => 
+		$"({x}, {y})";
+
 	/*
 	 * Support for individual property change callbacks below...
 	 */
