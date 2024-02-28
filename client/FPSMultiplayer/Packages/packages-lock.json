@@ -127,6 +127,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "io.colyseus.sdk": {
+      "version": "https://github.com/colyseus/colyseus-unity3d.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0991d1960f7532b94afcaa77b7a430c9022a5a51"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
