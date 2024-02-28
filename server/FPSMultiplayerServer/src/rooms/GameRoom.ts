@@ -32,7 +32,7 @@ export class GameRoom extends Room<State> {
     console.log("room", this.roomId, "disposing...");
   }
 
-  random_position(size: number) : Position {
+  generateRandomPosition(size: number) : Position {
     const x = Math.random() * size;
     const y = Math.random() * size;
     return new Position(x, y)
