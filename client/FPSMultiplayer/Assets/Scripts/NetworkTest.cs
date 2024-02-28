@@ -9,7 +9,7 @@ public class NetworkTest : MonoBehaviour
     {
         const string roomName = "my_room";
         var client = new ColyseusClient(_settings.WebSocketEndpoint);
-        var room = await client.JoinOrCreate<MyRoomState>(roomName);
+        var room = await client.JoinOrCreate<State>(roomName);
         await room.Leave();
     }
 }
