@@ -1,26 +1,28 @@
-using System.Threading.Tasks;
 using Colyseus;
 using UnityEngine;
 
 public class NetworkTest : MonoBehaviour
 {
     [SerializeField] private ColyseusSettings _settings;
+
+    private ColyseusRoom<State> _room;
     
     private async void Start()
     {
         const string roomName = "my_room";
         var client = new ColyseusClient(_settings.WebSocketEndpoint);
-        var room = await client.JoinOrCreate<State>(roomName);
-        
-        room.OnStateChange += (state, isFirstState) =>
-        {
-            if (!isFirstState)
-                return;
-            
-            Debug.Log($"{room.SessionId}, position {state.players[room.SessionId]}");
-        };
-
-        await Task.Delay(1000);
-        await room.Leave();
+        _room = await client.JoinOrCreate<State>(roomName);
+        _room.OnStateChange += OnStateChanged;
     }
+
+    private void OnStateChanged(State state, bool isFirstState)
+    {
+        if (!isFirstState)
+            return;
+        
+        Debug.Log($"{_room.SessionId}, position {state.players[_room.SessionId]}");
+    }
+
+    private void OnDestroy() => 
+        _room.Leave();
 }
