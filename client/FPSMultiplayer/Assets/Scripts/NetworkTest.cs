@@ -1,5 +1,6 @@
 using Colyseus;
 using Extensions;
+using Network;
 using Schemas;
 using UnityEngine;
 
@@ -27,10 +28,16 @@ public class NetworkTest : MonoBehaviour
         if (!isFirstState)
             return;
 
-        var sessionId = _room.SessionId;
+        state.players.ForEach((key, player) =>
+        {
+            if (_room.SessionId == key)
+                CreatePlayer(key, player);
+            else
+                CreateEnemy(key, player);
+        });
 
-        CreatePlayer(sessionId, state.players[sessionId]);
-        Debug.Log($"{sessionId}, position {state.players[sessionId]}");
+        state.players.OnAdd(CreateEnemy);
+        state.players.OnRemove(null);
     }
 
     private void CreatePlayer(string sessionId, Player player)
@@ -42,6 +49,9 @@ public class NetworkTest : MonoBehaviour
     private void CreateEnemy(string sessionId, Player player)
     {
         var instance = Instantiate(_enemyPrefab, player.position.ToVector3(), Quaternion.identity);
+        var positionSync = instance.GetComponent<NetworkPositionSync>();
+        positionSync.Construct(this);
+        player.OnPositionChange(positionSync.OnPositionChanged);
     }
 
     private void OnDestroy() => 

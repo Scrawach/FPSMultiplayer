@@ -18,7 +18,7 @@ export class GameRoom extends Room<State> {
       if (message) 
         var desiredPosition = this.convertToPosition(message);
         player.position = desiredPosition;
-        console.log(`Received ${desiredPosition} from ${client.sessionId}`);
+        // console.log(`Received ${desiredPosition} from ${client.sessionId}`);
     })
   }
 
