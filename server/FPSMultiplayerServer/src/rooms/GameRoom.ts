@@ -16,18 +16,18 @@ export class GameRoom extends Room<State> {
     this.onMessage("setPosition", (client, message) => {
       const desiredPosition = this.convertToPosition(message);
       this.state.setPlayerPosition(client.sessionId, desiredPosition);
-      console.log(`Received ${desiredPosition} from ${client.sessionId}`);
     })
   }
 
   onJoin (client: Client, options: any) {
     const newPlayer = this.createNewPlayer();
     console.log(client.sessionId, `${newPlayer}`);
-    this.state.players.set(client.sessionId, newPlayer)
+    this.state.addPlayer(client.sessionId, newPlayer);
   }
 
   onLeave (client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
+    this.state.removePlayer(client.sessionId);
   }
 
   onDispose() {

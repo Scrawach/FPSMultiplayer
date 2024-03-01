@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Extensions;
 using Network.Components;
 using Network.Schemas;
@@ -10,10 +11,13 @@ namespace Network.Services.StateListeners
         private readonly NetworkManager _network;
         private readonly NetworkFactory _factory;
 
+        private readonly Dictionary<string, GameObject> _instances;
+
         public PlayerBuilder(NetworkManager network, NetworkFactory factory)
         {
             _network = network;
             _factory = factory;
+            _instances = new Dictionary<string, GameObject>();
         }
     
         public void ChangeState(State state, bool isFirstState)
@@ -22,10 +26,18 @@ namespace Network.Services.StateListeners
                 return;
             
             state.players.OnAdd(OnPlayerAdded);
+            state.players.OnRemove(OnPlayerRemoved);
         }
-        
+
+        private void OnPlayerRemoved(string key, Player value)
+        {
+            var instance = _instances[key];
+            _instances.Remove(key);
+            Object.Destroy(instance);
+        }
+
         private void OnPlayerAdded(string key, Player player) => 
-            CreatePlayer(key, player);
+            _instances[key] = CreatePlayer(key, player);
 
         private GameObject CreatePlayer(string key, Player player)
         {
