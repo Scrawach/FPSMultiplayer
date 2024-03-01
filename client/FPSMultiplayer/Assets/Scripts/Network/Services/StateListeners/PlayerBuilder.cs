@@ -1,4 +1,5 @@
 using Extensions;
+using Network.Components;
 using Network.Schemas;
 using UnityEngine;
 
@@ -31,7 +32,14 @@ namespace Network.Services.StateListeners
             var position = player.position.ToVector3();
             return _network.Id == key 
                 ? _factory.CreatePlayer(position) 
-                : _factory.CreateEnemy(position);
+                : CreateEnemy(key, player);
+        }
+
+        private GameObject CreateEnemy(string key, Player player)
+        {
+            var enemy = _factory.CreateEnemy(player.position.ToVector3());
+            player.OnPositionChange(enemy.GetComponent<NetworkPositionSync>().OnPositionChanged);
+            return enemy;
         }
     }
 }

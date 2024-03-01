@@ -1,3 +1,4 @@
+using System;
 using Extensions;
 using Network.Schemas;
 using Network.Services;
@@ -16,8 +17,5 @@ namespace Network.Components
 
         public void OnPositionChanged(Position current, Position previous) => 
             transform.position = current.ToVector3();
-
-        private void Update() => 
-            _network.SendPosition(transform.position);
     }
 }

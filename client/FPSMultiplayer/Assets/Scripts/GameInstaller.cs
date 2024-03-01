@@ -16,6 +16,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton(container => new ColyseusClient(container.Resolve<ColyseusSettings>()));
 
         builder.AddSingleton<Injector>();
+        builder.AddSingleton<InputService>();
         builder.AddSingleton<NetworkFactory>();
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
