@@ -9,15 +9,15 @@ using Colyseus.Schema;
 using Action = System.Action;
 
 public partial class State : Schema {
-	[Type(0, "map", typeof(MapSchema<Position>))]
-	public MapSchema<Position> players = new MapSchema<Position>();
+	[Type(0, "map", typeof(MapSchema<Player>))]
+	public MapSchema<Player> players = new MapSchema<Player>();
 
 	/*
 	 * Support for individual property change callbacks below...
 	 */
 
-	protected event PropertyChangeHandler<MapSchema<Position>> __playersChange;
-	public Action OnPlayersChange(PropertyChangeHandler<MapSchema<Position>> __handler, bool __immediate = true) {
+	protected event PropertyChangeHandler<MapSchema<Player>> __playersChange;
+	public Action OnPlayersChange(PropertyChangeHandler<MapSchema<Player>> __handler, bool __immediate = true) {
 		if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
 		__callbacks.AddPropertyCallback(nameof(this.players));
 		__playersChange += __handler;
@@ -30,7 +30,7 @@ public partial class State : Schema {
 
 	protected override void TriggerFieldChange(DataChange change) {
 		switch (change.Field) {
-			case nameof(players): __playersChange?.Invoke((MapSchema<Position>) change.Value, (MapSchema<Position>) change.PreviousValue); break;
+			case nameof(players): __playersChange?.Invoke((MapSchema<Player>) change.Value, (MapSchema<Player>) change.PreviousValue); break;
 			default: break;
 		}
 	}
