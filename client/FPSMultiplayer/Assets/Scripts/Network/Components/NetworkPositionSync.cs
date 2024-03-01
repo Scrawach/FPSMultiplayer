@@ -1,7 +1,7 @@
 using Extensions;
+using Network.Schemas;
 using Network.Services;
 using Reflex.Attributes;
-using Schemas;
 using UnityEngine;
 
 namespace Network.Components

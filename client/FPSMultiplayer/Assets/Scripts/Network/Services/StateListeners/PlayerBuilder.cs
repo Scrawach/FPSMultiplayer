@@ -1,5 +1,5 @@
 using Extensions;
-using Schemas;
+using Network.Schemas;
 
 namespace Network.Services.StateListeners
 {

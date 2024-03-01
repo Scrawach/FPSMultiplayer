@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Colyseus;
 using Extensions;
-using Schemas;
+using Network.Schemas;
 using UnityEngine;
 
 namespace Network.Services

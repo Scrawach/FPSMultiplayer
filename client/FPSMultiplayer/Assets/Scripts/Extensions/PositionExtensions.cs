@@ -1,4 +1,4 @@
-using Schemas;
+using Network.Schemas;
 using UnityEngine;
 
 namespace Extensions

@@ -8,7 +8,7 @@
 using Colyseus.Schema;
 using Action = System.Action;
 
-namespace Schemas {
+namespace Network.Schemas {
 	public partial class Position : Schema {
 		[Type(0, "number")]
 		public float x = default(float);

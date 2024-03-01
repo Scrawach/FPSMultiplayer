@@ -8,7 +8,7 @@
 using Colyseus.Schema;
 using Action = System.Action;
 
-namespace Schemas {
+namespace Network.Schemas {
 	public partial class State : Schema {
 		[Type(0, "map", typeof(MapSchema<Player>))]
 		public MapSchema<Player> players = new MapSchema<Player>();

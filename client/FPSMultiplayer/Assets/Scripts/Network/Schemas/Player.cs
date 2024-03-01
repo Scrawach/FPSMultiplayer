@@ -8,7 +8,7 @@
 using Colyseus.Schema;
 using Action = System.Action;
 
-namespace Schemas {
+namespace Network.Schemas {
 	public partial class Player : Schema {
 		[Type(0, "ref", typeof(Position))]
 		public Position position = new Position();

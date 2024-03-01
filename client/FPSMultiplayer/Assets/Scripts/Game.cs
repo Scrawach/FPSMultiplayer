@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Network.Schemas;
 using Network.Services;
 using Network.Services.StateListeners;
-using Schemas;
-using Services;
 
 public class Game
 {

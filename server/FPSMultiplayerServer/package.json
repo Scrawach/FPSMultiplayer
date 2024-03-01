@@ -13,7 +13,7 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf build",
     "test": "mocha -r tsx test/**_test.ts --exit --timeout 15000",
-    "generate": "npx schema-codegen src/rooms/schema/* --output ../../client/FPSMultiplayer/Assets/Scripts/Schemas --csharp --namespace Schemas"
+    "generate": "npx schema-codegen src/rooms/schema/* --output ../../client/FPSMultiplayer/Assets/Scripts/Network/Schemas --csharp --namespace Network.Schemas"
   },
   "author": "",
   "license": "UNLICENSED",
