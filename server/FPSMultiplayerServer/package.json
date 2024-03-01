@@ -13,7 +13,7 @@
     "build": "npm run clean && tsc",
     "clean": "rimraf build",
     "test": "mocha -r tsx test/**_test.ts --exit --timeout 15000",
-    "generate": "npx schema-codegen src/rooms/schema/* --output generated/ --csharp"
+    "generate": "npx schema-codegen src/rooms/schema/* --output generated/ --csharp --namespace Schemas"
   },
   "author": "",
   "license": "UNLICENSED",
