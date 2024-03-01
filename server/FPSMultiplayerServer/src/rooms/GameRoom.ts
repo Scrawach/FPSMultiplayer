@@ -1,6 +1,7 @@
 import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
 import { Position } from "./schema/Position";
+import { Player } from "./schema/Player";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -8,20 +9,15 @@ export class GameRoom extends Room<State> {
   onCreate (options: any) {
     this.setState(new State());
 
-    this.onMessage("type", (client, message) => {
-      //
-      // handle "type" message
-      //
+    this.onMessage("move", (client, message) => {
+      
     });
   }
 
   onJoin (client: Client, options: any) {
-    const position = this.generateRandomPosition(10);
-
-    console.log(client.sessionId, "joined!");
-    console.log(client.sessionId, `spawned position: ${position}`);
-
-    this.state.players.set(client.sessionId, position)
+    const newPlayer = this.createNewPlayer();
+    console.log(client.sessionId, `${newPlayer}`);
+    this.state.players.set(client.sessionId, newPlayer)
   }
 
   onLeave (client: Client, consented: boolean) {
@@ -30,6 +26,13 @@ export class GameRoom extends Room<State> {
 
   onDispose() {
     console.log("room", this.roomId, "disposing...");
+  }
+
+  createNewPlayer() : Player {
+    const player = new Player();
+    const position = this.generateRandomPosition(10);
+    player.position = position;
+    return player;
   }
 
   generateRandomPosition(size: number) : Position {

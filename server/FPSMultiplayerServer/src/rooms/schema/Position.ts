@@ -14,3 +14,7 @@ export class Position extends Schema {
         return `(${this.x},${this.y})`
     }
 }
+
+export class Player extends Schema {
+    @type(Position) position: Position
+}
