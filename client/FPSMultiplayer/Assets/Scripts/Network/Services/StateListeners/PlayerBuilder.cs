@@ -1,5 +1,6 @@
 using Extensions;
 using Network.Schemas;
+using UnityEngine;
 
 namespace Network.Services.StateListeners
 {
@@ -18,14 +19,19 @@ namespace Network.Services.StateListeners
         {
             if (isFirstState == false)
                 return;
+            
+            state.players.OnAdd(OnPlayerAdded);
+        }
         
-            state.players.ForEach((key, player) =>
-            {
-                if (_network.Id == key)
-                    _factory.CreatePlayer(player.position.ToVector3());
-                else
-                    _factory.CreateEnemy(player.position.ToVector3());
-            });
+        private void OnPlayerAdded(string key, Player player) => 
+            CreatePlayer(key, player);
+
+        private GameObject CreatePlayer(string key, Player player)
+        {
+            var position = player.position.ToVector3();
+            return _network.Id == key 
+                ? _factory.CreatePlayer(position) 
+                : _factory.CreateEnemy(position);
         }
     }
 }

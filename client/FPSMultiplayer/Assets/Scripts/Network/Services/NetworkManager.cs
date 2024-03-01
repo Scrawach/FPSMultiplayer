@@ -20,7 +20,7 @@ namespace Network.Services
         public event ColyseusRoom<State>.RoomOnStateChangeEventHandler StateChanged;
 
         public string Id => _room.SessionId;
-    
+
         public async Task Connect()
         {
             const string roomName = "my_room";
