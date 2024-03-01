@@ -36,6 +36,7 @@ public class NetworkTest : MonoBehaviour
     private void CreatePlayer(string sessionId, Player player)
     {
         var instance = Instantiate(_playerPrefab, player.position.ToVector3(), Quaternion.identity);
+        instance.GetComponent<NetworkPositionSync>().Construct(this);
     }
 
     private void CreateEnemy(string sessionId, Player player)
