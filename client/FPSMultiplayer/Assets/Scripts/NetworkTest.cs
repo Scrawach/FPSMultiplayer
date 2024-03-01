@@ -1,4 +1,5 @@
 using Colyseus;
+using Schemas;
 using UnityEngine;
 
 public class NetworkTest : MonoBehaviour
