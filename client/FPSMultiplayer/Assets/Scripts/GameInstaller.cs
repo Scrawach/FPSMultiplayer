@@ -12,8 +12,8 @@ public class GameInstaller : MonoBehaviour, IInstaller
     
     public void InstallBindings(ContainerBuilder builder)
     {
-        builder.AddSingleton(container => new ColyseusClient(container.Resolve<ColyseusSettings>()));
         builder.AddSingleton(Settings);
+        builder.AddSingleton(container => new ColyseusClient(container.Resolve<ColyseusSettings>()));
 
         builder.AddSingleton<Injector>();
         builder.AddSingleton<NetworkFactory>();
