@@ -1,4 +1,5 @@
 using Colyseus;
+using Extensions;
 using Network.Services;
 using Network.Services.StateListeners;
 using Reflex.Core;
@@ -13,11 +14,12 @@ public class GameInstaller : MonoBehaviour, IInstaller
     {
         builder.AddSingleton(container => new ColyseusClient(container.Resolve<ColyseusSettings>()));
         builder.AddSingleton(Settings);
-        builder.AddSingleton(typeof(Injector));
-        builder.AddSingleton(typeof(NetworkFactory));
-        builder.AddSingleton(typeof(NetworkManager));
-        builder.AddSingleton(typeof(Game));
-        builder.AddSingleton(typeof(PlayerBuilder), typeof(INetworkStateListener));
-        // builder.AddSingleton(typeof(DebugChangeState), typeof(INetworkStateListener));
+
+        builder.AddSingleton<Injector>();
+        builder.AddSingleton<NetworkFactory>();
+        builder.AddSingleton<NetworkManager>();
+        builder.AddSingleton<Game>();
+        builder.AddSingleton<INetworkStateListener, PlayerBuilder>();
+        //builder.AddSingleton<INetworkStateListener, DebugChangeState>();
     }
 }
