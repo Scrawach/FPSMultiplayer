@@ -1,14 +1,17 @@
 using Extensions;
+using Network.Services;
+using Reflex.Attributes;
 using Schemas;
 using UnityEngine;
 
-namespace Network
+namespace Network.Components
 {
     public class NetworkPositionSync : MonoBehaviour
     {
-        private NetworkTest _network;
+        private NetworkManager _network;
 
-        public void Construct(NetworkTest network) => 
+        [Inject]
+        public void Construct(NetworkManager network) => 
             _network = network;
 
         public void OnPositionChanged(Position current, Position previous) => 
