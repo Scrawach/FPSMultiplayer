@@ -6,6 +6,7 @@ namespace Network.Services
     public class NetworkFactory
     {
         private const string PlayerPath = "Player";
+        private const string EnemyPath = "Enemy";
     
         private readonly Injector _injector;
 
@@ -16,7 +17,7 @@ namespace Network.Services
             CreateCharacter(PlayerPath, position);
 
         public GameObject CreateEnemy(Vector3 position) => 
-            CreateCharacter(string.Empty, position);
+            CreateCharacter(EnemyPath, position);
 
         private GameObject CreateCharacter(string pathToPrefab, Vector3 position)
         {
