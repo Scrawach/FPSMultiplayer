@@ -12,6 +12,12 @@ export class GameRoom extends Room<State> {
     this.onMessage("move", (client, message) => {
       
     });
+
+    this.onMessage("setPosition", (client, message) => {
+      const player = this.state.players.get(client.sessionId);
+      if (message) 
+        player.position = this.convertToPosition(message);
+    })
   }
 
   onJoin (client: Client, options: any) {
@@ -26,6 +32,10 @@ export class GameRoom extends Room<State> {
 
   onDispose() {
     console.log("room", this.roomId, "disposing...");
+  }
+
+  convertToPosition(message: any) : Position {
+    return new Position(message.x, message.y);
   }
 
   createNewPlayer() : Player {
