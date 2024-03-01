@@ -20,7 +20,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<NetworkFactory>();
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
-        builder.AddSingleton<INetworkStateListener, PlayerBuilder>();
+        builder.AddSingleton<INetworkStateListener, NetworkPlayersBuilder>();
         //builder.AddSingleton<INetworkStateListener, DebugChangeState>();
     }
 }
