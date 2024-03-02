@@ -17,7 +17,8 @@ public class GameInstaller : MonoBehaviour, IInstaller
 
         builder.AddSingleton<Injector>();
         builder.AddSingleton<InputService>();
-        builder.AddSingleton<NetworkFactory>();
+        builder.AddSingleton<GameFactory>();
+        builder.AddSingleton<NetworkGameFactory>();
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
         builder.AddSingleton<INetworkStateListener, NetworkPlayersBuilder>();

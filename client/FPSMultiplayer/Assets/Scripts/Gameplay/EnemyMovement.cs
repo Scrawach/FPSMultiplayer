@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class EnemyController : MonoBehaviour
+    public class EnemyMovement : MonoBehaviour
     {
         [SerializeField] private float _lerpRate = 10f;
         
