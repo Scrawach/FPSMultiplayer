@@ -6,38 +6,21 @@ namespace Gameplay
 {
     public class EnemyController : MonoBehaviour
     {
-        [SerializeField] private CharacterMovement _movement;
-
-        private bool _mustInitPosition;
-        private Vector3 _initPosition;
-        private Vector2 _predictedDirection;
+        [SerializeField] private float _lerpRate = 10f;
         
-        public void OnPositionChanged(Position current, Position previous)
-        {
-            _mustInitPosition = true;
-            _initPosition = current.ToVector3();
-            _predictedDirection = PredictMovementDirection(current, previous);
-        }
-
-        private static Vector2 PredictMovementDirection(Position current, Position previous)
-        {
-            if (previous is null)
-                return Vector2.zero;
-
-            return current.ToVector2() - previous.ToVector2();
-        }
+        private Vector3 _predicatedPosition;
         
-        private void Update()
+        public void OnPositionChanged(Position current, Position previous) => 
+            _predicatedPosition = PredictNextPosition(current, previous);
+
+        private void Update() => 
+            transform.position = Vector3.Lerp(transform.position, _predicatedPosition, _lerpRate * Time.deltaTime);
+        
+        private static Vector3 PredictNextPosition(Position current, Position previous)
         {
-            if (_mustInitPosition)
-            {
-                transform.position = _initPosition;
-                _mustInitPosition = false;
-            }
-            else
-            {
-                _movement.Move(_predictedDirection.normalized);
-            }
+            if (previous is not null) 
+                return current.ToVector3() + (current.ToVector3() - previous.ToVector3());
+            return current.ToVector3();
         }
     }
 }
