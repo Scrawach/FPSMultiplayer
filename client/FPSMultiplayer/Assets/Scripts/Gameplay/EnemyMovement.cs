@@ -6,7 +6,7 @@ namespace Gameplay
 {
     public class EnemyMovement : MonoBehaviour
     {
-        [SerializeField] private float _lerpRate = 10f;
+        [SerializeField] private float _speed = 5f;
         
         private Vector3 _predicatedPosition;
         
@@ -14,13 +14,15 @@ namespace Gameplay
             _predicatedPosition = PredictNextPosition(current, previous);
 
         private void Update() => 
-            transform.position = Vector3.Lerp(transform.position, _predicatedPosition, _lerpRate * Time.deltaTime);
-        
+            transform.position = Vector3.MoveTowards(transform.position, _predicatedPosition, _speed * Time.deltaTime);
+
         private static Vector3 PredictNextPosition(Position current, Position previous)
         {
-            if (previous is not null) 
-                return current.ToVector3() + (current.ToVector3() - previous.ToVector3());
-            return current.ToVector3();
+            if (previous is null) 
+                return current.ToVector3();
+            
+            var previousDirection = current.ToVector3() - previous.ToVector3();
+            return current.ToVector3() + previousDirection;
         }
     }
 }
