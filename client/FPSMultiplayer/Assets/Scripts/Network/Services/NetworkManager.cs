@@ -35,7 +35,7 @@ namespace Network.Services
         }
 
         public void SendPosition(Vector3 position) => 
-            _room.Send(SetPositionEndPoint, position.AsPosition());
+            _room.Send(SetPositionEndPoint, position.ToData());
 
         private void OnStateChanged(State state, bool isFirstState) => 
             StateChanged?.Invoke(state, isFirstState);
