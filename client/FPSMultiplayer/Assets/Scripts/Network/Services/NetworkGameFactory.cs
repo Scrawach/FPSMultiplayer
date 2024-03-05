@@ -4,6 +4,7 @@ using Gameplay;
 using Network.Schemas;
 using Services;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Network.Services
 {
@@ -11,39 +12,46 @@ namespace Network.Services
     {
         private readonly NetworkManager _network;
         private readonly GameFactory _factory;
-        private readonly Dictionary<string, GameObject> _instances;
+        private readonly Dictionary<string, NetworkGameObject> _gameObjects;
 
         public NetworkGameFactory(NetworkManager network, GameFactory factory)
         {
             _network = network;
             _factory = factory;
-            _instances = new Dictionary<string, GameObject>();
+            _gameObjects = new Dictionary<string, NetworkGameObject>();
         }
         
         public GameObject CreateUnit(string key, Player state)
         {
-            _instances[key] = key == _network.Id
-                ? CreatePlayer(state)
-                : CreateEnemy(state);
-            return _instances[key];
+            var networkGameObject = CreateNetworkUnit(key, state);
+            return networkGameObject.Instance;
         }
-
+        
         public void Destroy(string key)
         {
-            var instance = _instances[key];
-            _instances.Remove(key);
-            Object.Destroy(instance);
+            var networkGameObject = _gameObjects[key];
+            _gameObjects.Remove(key);
+            networkGameObject.Dispose?.Invoke();
+            Object.Destroy(networkGameObject.Instance);
         }
 
-        private GameObject CreatePlayer(Player state) => 
-            _factory.CreatePlayer(state.position.ToVector3());
+        private NetworkGameObject CreateNetworkUnit(string key, Player state) =>
+            _gameObjects[key] = key == _network.Id
+                ? CreatePlayer(state)
+                : CreateEnemy(state);
 
-        private GameObject CreateEnemy(Player state)
+        private NetworkGameObject CreatePlayer(Player state)
+        {
+            var instance = _factory.CreatePlayer(state.position.ToVector3());
+            return new NetworkGameObject(state, instance);
+        }
+
+        private NetworkGameObject CreateEnemy(Player state)
         {
             var enemy = _factory.CreateEnemy(state.position.ToVector3());
             var enemyController = enemy.GetComponent<EnemyMovement>();
-            state.OnPositionChange(enemyController.OnPositionChanged);
-            return enemy;
+            var dispose = state.OnPositionChange(enemyController.OnPositionChanged);
+            return new NetworkGameObject(state, enemy, dispose);
         }
     }
 }
