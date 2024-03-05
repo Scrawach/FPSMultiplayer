@@ -1,7 +1,7 @@
 import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
-import { Position } from "./schema/Position";
 import { Player } from "./schema/Player";
+import { Vector3Data } from "./schema/Vector3Data";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -9,12 +9,8 @@ export class GameRoom extends Room<State> {
   onCreate (options: any) {
     this.setState(new State());
 
-    this.onMessage("move", (client, message) => {
-      
-    });
-
     this.onMessage("setPosition", (client, message) => {
-      const desiredPosition = this.convertToPosition(message);
+      const desiredPosition = this.getPosition(message);
       this.state.setPlayerPosition(client.sessionId, desiredPosition);
     })
   }
@@ -34,8 +30,9 @@ export class GameRoom extends Room<State> {
     console.log("room", this.roomId, "disposing...");
   }
 
-  convertToPosition(message: any) : Position {
-    return new Position(message.x, message.y);
+  getPosition(message: any) : Vector3Data {
+    const pos = message.position;
+    return new Vector3Data(pos.x, pos.y, pos.z);
   }
 
   createNewPlayer() : Player {
@@ -45,10 +42,10 @@ export class GameRoom extends Room<State> {
     return player;
   }
 
-  generateRandomPosition(size: number) : Position {
+  generateRandomPosition(size: number) : Vector3Data {
     const x = Math.random() * size;
     const y = Math.random() * size;
-    return new Position(x, y)
+    return new Vector3Data(x, 0, y)
   }
 
 }
