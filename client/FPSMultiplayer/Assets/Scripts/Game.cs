@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Network.Schemas;
 using Network.Services;
-using Network.Services.StateListeners;
+using Network.Services.Initializers;
 
 public class Game
 {
     private readonly NetworkManager _network;
-    private readonly IEnumerable<INetworkStateListener> _listeners;
+    private readonly IEnumerable<INetworkStateInitializer> _initializers;
 
-    public Game(NetworkManager network, IEnumerable<INetworkStateListener> listeners)
+    public Game(NetworkManager network, IEnumerable<INetworkStateInitializer> initializers)
     {
         _network = network;
-        _listeners = listeners;
+        _initializers = initializers;
     }
     
     public async Task Run()
@@ -29,7 +29,13 @@ public class Game
 
     private void OnStateChanged(State state, bool isFirstState)
     {
-        foreach (var listener in _listeners) 
-            listener.ChangeState(state, isFirstState);
+        if (isFirstState)
+            InitializeState(state);
+    }
+
+    private void InitializeState(State state)
+    {
+        foreach (var initializer in _initializers) 
+            initializer.Initialize(state);
     }
 }

@@ -1,7 +1,7 @@
 using Colyseus;
 using Extensions;
 using Network.Services;
-using Network.Services.StateListeners;
+using Network.Services.Initializers;
 using Reflex.Core;
 using Services;
 using UnityEngine;
@@ -21,7 +21,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<NetworkGameFactory>();
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
-        builder.AddSingleton<INetworkStateListener, NetworkPlayersBuilder>();
+        builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
         //builder.AddSingleton<INetworkStateListener, DebugChangeState>();
     }
 }
