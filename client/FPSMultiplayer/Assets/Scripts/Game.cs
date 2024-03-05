@@ -30,10 +30,10 @@ public class Game
     private void OnStateChanged(State state, bool isFirstState)
     {
         if (isFirstState)
-            InitializeState(state);
+            Initialize(state);
     }
 
-    private void InitializeState(State state)
+    private void Initialize(State state)
     {
         foreach (var initializer in _initializers) 
             initializer.Initialize(state);

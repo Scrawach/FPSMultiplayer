@@ -22,8 +22,11 @@ namespace Network.Services.Initializers
             state.players.OnRemove(OnPlayerRemoved).AddTo(_disposes);
         }
         
-        public void Dispose() => 
+        public void Dispose()
+        {
             _disposes.ForEach(dispose => dispose?.Invoke());
+            _disposes.Clear();
+        }
 
         private void OnPlayerAdded(string key, Player player) => 
             _factory.CreateUnit(key, player);
