@@ -23,7 +23,7 @@ namespace Network.Services
 
         public async Task Connect()
         {
-            const string roomName = "my_room";
+            const string roomName = "game_room";
             _room = await _client.JoinOrCreate<State>(roomName);
             _room.OnStateChange += OnStateChanged;
         }
