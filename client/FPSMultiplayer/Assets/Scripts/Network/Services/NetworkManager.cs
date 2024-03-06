@@ -8,7 +8,8 @@ namespace Network.Services
 {
     public class NetworkManager
     {
-        private const string SetPositionEndPoint = "setPosition"; 
+        private const string SetPositionEndPoint = "setPosition";
+        private const string GameRoomName = "game_room";
         
         private readonly ColyseusClient _client;
 
@@ -23,8 +24,7 @@ namespace Network.Services
 
         public async Task Connect()
         {
-            const string roomName = "game_room";
-            _room = await _client.JoinOrCreate<State>(roomName);
+            _room = await _client.JoinOrCreate<State>(GameRoomName);
             _room.OnStateChange += OnStateChanged;
         }
     
