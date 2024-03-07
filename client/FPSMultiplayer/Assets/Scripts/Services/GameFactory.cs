@@ -18,6 +18,9 @@ namespace Services
         public GameObject CreateEnemy(Vector3 position) => 
             CreateUnit(EnemyPath, position);
 
+        public void Destroy(GameObject target) => 
+            Object.Destroy(target);
+
         private GameObject CreateUnit(string pathToPrefab, Vector3 position)
         {
             var prefab = Load<GameObject>(pathToPrefab);

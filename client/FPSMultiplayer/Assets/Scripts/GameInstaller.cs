@@ -22,6 +22,5 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
         builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
-        //builder.AddSingleton<INetworkStateListener, DebugChangeState>();
     }
 }
