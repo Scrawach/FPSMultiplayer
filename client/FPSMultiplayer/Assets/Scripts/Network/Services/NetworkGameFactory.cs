@@ -20,12 +20,9 @@ namespace Network.Services
             _units = new Dictionary<string, NetworkGameObject>();
         }
         
-        public GameObject CreateUnit(string key, Player state)
-        {
-            var networkGameObject = CreateNetworkUnit(key, state);
-            return networkGameObject.Instance;
-        }
-        
+        public GameObject CreateUnit(string key, Player state) => 
+            CreateNetworkUnit(key, state).Instance;
+
         public void Destroy(string key)
         {
             var networkGameObject = _units[key];
