@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Network.Schemas;
 using Network.Services;
 using Network.Services.Initializers;
@@ -15,13 +15,13 @@ public class Game
         _initializers = initializers;
     }
     
-    public async Task Run()
+    public async UniTask Run()
     {
         await _network.Connect();
         _network.StateChanged += OnStateChanged;
     }
 
-    public async Task Stop()
+    public async UniTask Stop()
     {
         await _network.Disconnect();
         _network.StateChanged -= OnStateChanged;
