@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Colyseus;
+using Cysharp.Threading.Tasks;
 using Extensions;
 using Network.Schemas;
 using UnityEngine;
@@ -22,13 +23,13 @@ namespace Network.Services
 
         public string Id => _room.SessionId;
 
-        public async Task Connect()
+        public async UniTask Connect()
         {
             _room = await _client.JoinOrCreate<State>(GameRoomName);
             _room.OnStateChange += OnStateChanged;
         }
     
-        public async Task Disconnect()
+        public async UniTask Disconnect()
         {
             _room.OnStateChange -= OnStateChanged;
             await _room.Leave();
