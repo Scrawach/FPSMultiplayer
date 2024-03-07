@@ -2,6 +2,7 @@ import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
 import { Player } from "./schema/Player";
 import { Vector3Data } from "./schema/Vector3Data";
+import { Movement } from "./schema/Movement";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -38,7 +39,8 @@ export class GameRoom extends Room<State> {
   createNewPlayer() : Player {
     const player = new Player();
     const position = this.generateRandomPosition(10);
-    player.position = position;
+    player.movement = new Movement();
+    player.movement.position = position;
     return player;
   }
 
