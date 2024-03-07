@@ -15,10 +15,10 @@ namespace Gameplay
 
         private void Update() =>
             _movement.MoveTo(_predicatedPosition);
-
-        public void OnPositionChanged(Vector3Data current, Vector3Data previous) => 
-            _predicatedPosition = PredictNextPosition(current, previous);
         
+        public void OnMovementChange(Movement current, Movement previous) => 
+            _predicatedPosition = PredictNextPosition(current.position, previous.position);
+
         private static Vector3 PredictNextPosition(Vector3Data current, Vector3Data previous)
         {
             if (previous is null) 

@@ -38,15 +38,15 @@ namespace Network.Services
 
         private NetworkGameObject CreatePlayer(Player state)
         {
-            var instance = _factory.CreatePlayer(state.position.ToVector3());
+            var instance = _factory.CreatePlayer(state.movement.position.ToVector3());
             return new NetworkGameObject(state, instance);
         }
 
         private NetworkGameObject CreateEnemy(Player state)
         {
-            var enemy = _factory.CreateEnemy(state.position.ToVector3());
+            var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
             var enemyController = enemy.GetComponent<RemoteEnemy>();
-            var dispose = state.OnPositionChange(enemyController.OnPositionChanged);
+            var dispose = state.OnMovementChange(enemyController.OnMovementChange);
             return new NetworkGameObject(state, enemy, dispose);
         }
     }
