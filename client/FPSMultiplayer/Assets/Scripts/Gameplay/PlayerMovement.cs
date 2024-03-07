@@ -15,7 +15,7 @@ namespace Gameplay
             _input = input;
 
         private void Update() => 
-            Move(_input.GetDirection());
+            Move(_input.Axis);
 
         private void Move(Vector2 direction)
         {

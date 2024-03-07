@@ -7,7 +7,7 @@ namespace Services
         private const string HorizontalAxis = "Horizontal";
         private const string VerticalAxis = "Vertical";
         
-        public Vector2 GetDirection() => 
+        public Vector2 Axis => 
             new Vector2(Input.GetAxisRaw(HorizontalAxis), Input.GetAxisRaw(VerticalAxis)).normalized;
     }
 }
