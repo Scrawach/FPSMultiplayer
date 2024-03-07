@@ -11,13 +11,13 @@ namespace Network.Services
     {
         private readonly NetworkManager _network;
         private readonly GameFactory _factory;
-        private readonly Dictionary<string, NetworkGameObject> _gameObjects;
+        private readonly Dictionary<string, NetworkGameObject> _units;
 
         public NetworkGameFactory(NetworkManager network, GameFactory factory)
         {
             _network = network;
             _factory = factory;
-            _gameObjects = new Dictionary<string, NetworkGameObject>();
+            _units = new Dictionary<string, NetworkGameObject>();
         }
         
         public GameObject CreateUnit(string key, Player state)
@@ -28,14 +28,14 @@ namespace Network.Services
         
         public void Destroy(string key)
         {
-            var networkGameObject = _gameObjects[key];
-            _gameObjects.Remove(key);
+            var networkGameObject = _units[key];
+            _units.Remove(key);
             networkGameObject.Dispose?.Invoke();
             _factory.Destroy(networkGameObject.Instance);
         }
 
         private NetworkGameObject CreateNetworkUnit(string key, Player state) =>
-            _gameObjects[key] = key == _network.Id
+            _units[key] = key == _network.Id
                 ? CreatePlayer(state)
                 : CreateEnemy(state);
 
