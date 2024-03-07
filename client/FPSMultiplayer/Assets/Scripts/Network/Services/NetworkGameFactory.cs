@@ -4,7 +4,6 @@ using Gameplay;
 using Network.Schemas;
 using Services;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Network.Services
 {
@@ -32,7 +31,7 @@ namespace Network.Services
             var networkGameObject = _gameObjects[key];
             _gameObjects.Remove(key);
             networkGameObject.Dispose?.Invoke();
-            Object.Destroy(networkGameObject.Instance);
+            _factory.Destroy(networkGameObject.Instance);
         }
 
         private NetworkGameObject CreateNetworkUnit(string key, Player state) =>
