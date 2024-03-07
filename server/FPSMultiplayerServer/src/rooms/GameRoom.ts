@@ -31,7 +31,7 @@ export class GameRoom extends Room<State> {
   }
 
   getPosition(message: any) : Vector3Data {
-    const pos = message.position;
+    const pos = message;
     return new Vector3Data(pos.x, pos.y, pos.z);
   }
 

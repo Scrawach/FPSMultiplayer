@@ -45,7 +45,7 @@ namespace Network.Services
         private NetworkGameObject CreateEnemy(Player state)
         {
             var enemy = _factory.CreateEnemy(state.position.ToVector3());
-            var enemyController = enemy.GetComponent<EnemyMovement>();
+            var enemyController = enemy.GetComponent<RemoteEnemy>();
             var dispose = state.OnPositionChange(enemyController.OnPositionChanged);
             return new NetworkGameObject(state, enemy, dispose);
         }
