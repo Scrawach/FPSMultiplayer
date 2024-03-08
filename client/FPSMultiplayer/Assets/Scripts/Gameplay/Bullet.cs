@@ -5,9 +5,11 @@ namespace Gameplay
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private float _speed;
         
-        public void Construct(Vector3 direction) => 
-            _rigidbody.velocity = direction * _speed;
+        public void Construct(Vector3 velocity) => 
+            _rigidbody.velocity = velocity;
+
+        private void OnCollisionEnter(Collision collision) => 
+            Destroy(gameObject);
     }
 }

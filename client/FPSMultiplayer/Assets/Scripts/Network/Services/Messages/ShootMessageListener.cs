@@ -17,7 +17,7 @@ namespace Network.Services.Messages
                 return;
             
             var enemyInfo = _characters.GetEnemy(message.Id);
-            enemyInfo.Enemy.Shoot(message.Position, message.Direction);
+            enemyInfo.Enemy.Shoot(message.Position, message.Velocity);
         }
     }
 }

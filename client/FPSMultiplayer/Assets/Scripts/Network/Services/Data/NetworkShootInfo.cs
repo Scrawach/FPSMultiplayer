@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Network.Services.Data
 {
@@ -8,6 +9,6 @@ namespace Network.Services.Data
     {
         public string Id;
         public Vector3 Position;
-        public Vector3 Direction;
+        [FormerlySerializedAs("Direction")] public Vector3 Velocity;
     }
 }

@@ -10,7 +10,8 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
-
+        [SerializeField] private Gun _gun;
+        
         private NetworkPositionPrediction _positionPrediction;
         
         [Inject]
@@ -24,9 +25,7 @@ namespace Gameplay
             _rotation.SetRotation(current.rotation.ToVector2());
         }
 
-        public void Shoot(Vector3 position, Vector3 direction)
-        {
-            
-        }
+        public void Shoot(Vector3 position, Vector3 velocity) => 
+            _gun.Shoot(position, velocity);
     }
 }

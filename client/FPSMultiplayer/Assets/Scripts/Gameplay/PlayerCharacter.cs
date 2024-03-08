@@ -8,7 +8,7 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
-        [SerializeField] private Gun _gun;
+        [SerializeField] private PlayerGun _gun;
 
         [field: SerializeField] public Transform Eyes { get; private set; } 
         

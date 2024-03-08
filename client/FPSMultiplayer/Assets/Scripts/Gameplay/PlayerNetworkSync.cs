@@ -9,7 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private CharacterController _character;
         [SerializeField] private CharacterRotation _rotation;
-        [SerializeField] private Gun _gun;
+        [SerializeField] private PlayerGun _gun;
         
         private NetworkTransmitter _transmitter;
 
@@ -26,7 +26,7 @@ namespace Gameplay
         private void OnGunFired()
         {
             var shootPoint = _gun.ShootPoint;
-            _transmitter.SendShoot(shootPoint.position, shootPoint.forward);
+            _transmitter.SendShoot(shootPoint.position, shootPoint.forward * _gun.BulletSpeed);
         }
 
         private void Update()

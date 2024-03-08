@@ -29,13 +29,13 @@ namespace Network.Services
             _room.Send(MovementEndPoint, message);
         }
 
-        public void SendShoot(Vector3 position, Vector3 direction)
+        public void SendShoot(Vector3 position, Vector3 velocity)
         {
             var shootInfo = new NetworkShootInfo()
             {
                 Id = _room.SessionId,
                 Position = position,
-                Direction = direction
+                Velocity = velocity
             };
             
             _room.Send(ShootEndPoint, shootInfo);
