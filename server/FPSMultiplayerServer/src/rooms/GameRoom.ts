@@ -11,9 +11,7 @@ export class GameRoom extends Room<State> {
     this.setState(new State());
 
     this.onMessage("move", (client, message) => {
-      console.log(message)
-      this.state.setPlayerPosition(client.sessionId, this.getPosition(message))
-      this.state.setPlayerVelocity(client.sessionId, this.getVelocity(message))
+      this.state.setPlayerMovement(client.sessionId, this.getMovement(message));
     })
   }
 
@@ -40,6 +38,13 @@ export class GameRoom extends Room<State> {
   getVelocity(message: any) : Vector3Data {
     const vel = message.velocity
     return new Vector3Data(vel.x, vel.y, vel.z);
+  }
+
+  getMovement(message: any) : Movement {
+    var movement = new Movement()
+    movement.position = this.getPosition(message);
+    movement.velocity = this.getVelocity(message);
+    return movement;
   }
 
   createNewPlayer() : Player {

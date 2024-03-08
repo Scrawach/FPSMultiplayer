@@ -8,16 +8,8 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
 
-        private Vector3 _predicatedPosition;
-
-        private void Start() => 
-            _predicatedPosition = transform.position;
-
-        private void Update() =>
-            _movement.MoveTo(_predicatedPosition);
-        
         public void OnMovementChange(Movement current, Movement previous) => 
-            _predicatedPosition = PredictNextPosition(current.position, previous.position);
+            _movement.MoveTo(PredictNextPosition(current.position, previous?.position));
 
         private static Vector3 PredictNextPosition(Vector3Data current, Vector3Data previous)
         {

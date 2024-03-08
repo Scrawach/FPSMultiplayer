@@ -1,6 +1,7 @@
 import { Schema, MapSchema, type } from "@colyseus/schema";
 import { Player } from "./Player";
 import { Vector3Data } from "./Vector3Data"
+import { Movement } from "./Movement"
   
 export class State extends Schema {
     @type({ map: Player }) players = new MapSchema<Player>();
@@ -13,11 +14,7 @@ export class State extends Schema {
         this.players.delete(sessionId);
     }
 
-    setPlayerPosition(sessionId: string, position: Vector3Data) {
-        this.players.get(sessionId).movement.position = position;
-    }
-
-    setPlayerVelocity(sessionId: string, velocity: Vector3Data) {
-        this.players.get(sessionId).movement.velocity = velocity;
+    setPlayerMovement(sessionId: string, movement: Movement) {
+        this.players.get(sessionId).movement = movement;
     }
 }
