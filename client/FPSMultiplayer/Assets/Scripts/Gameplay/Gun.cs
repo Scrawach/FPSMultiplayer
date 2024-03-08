@@ -11,6 +11,8 @@ namespace Gameplay
 
         private float _previousShootTime;
 
+        public Transform ShootPoint => _shootPoint;
+        
         public event Action Fired;
 
         public void Shoot()

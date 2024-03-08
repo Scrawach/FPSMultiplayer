@@ -9,7 +9,9 @@ namespace Network.Services
     public class NetworkManager
     {
         private const string MovementEndPoint = "move";
+        private const string ShootEndPoint = "shoot";
         private const string GameRoomName = "game_room";
+        
         
         private readonly ColyseusClient _client;
 
@@ -47,6 +49,17 @@ namespace Network.Services
             };
             
             _room.Send(MovementEndPoint, message);
+        }
+
+        public void SendShoot(Vector3 position, Vector3 direction)
+        {
+            var message = new Dictionary<string, Vector3>()
+            {
+                [nameof(position)] = position,
+                [nameof(direction)] = direction
+            };
+
+            _room.Send(ShootEndPoint, message);
         }
     }
 }
