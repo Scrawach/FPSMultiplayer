@@ -12,9 +12,11 @@ namespace Gameplay
         private Vector3 _targetPosition;
         private Vector3 _velocity;
         
-        private bool _isJumping;
         private bool _isJumpPressed;
 
+        public float Speed => _speed;
+        public bool IsJumping { get; private set; }
+        
         private void Start() => 
             _targetPosition = transform.position;
 
@@ -23,7 +25,7 @@ namespace Gameplay
 
         public void Jump()
         {
-            if (!_isJumping)
+            if (!IsJumping)
                 _isJumpPressed = true;
         }
 
@@ -52,15 +54,15 @@ namespace Gameplay
 
         private Vector3 HandleJump(Vector3 velocity)
         {
-            if (!_isJumping && _character.isGrounded && _isJumpPressed)
+            if (!IsJumping && _character.isGrounded && _isJumpPressed)
             {
-                _isJumping = true;
+                IsJumping = true;
                 _isJumpPressed = false;
                 velocity.y = _jumpHeight;
             }
-            else if (!_isJumpPressed && _isJumping && _character.isGrounded)
+            else if (!_isJumpPressed && IsJumping && _character.isGrounded)
             {
-                _isJumping = false;
+                IsJumping = false;
             }
 
             return velocity;
