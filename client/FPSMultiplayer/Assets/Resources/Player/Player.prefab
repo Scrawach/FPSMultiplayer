@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 6902104049720794240}
   _speed: 5
+  _jumpHeight: 5
 --- !u!114 &-3485902317530680299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _head: {fileID: 4523542490261965555}
+  _minAngleX: -90
+  _maxAngleX: 90
 --- !u!114 &8970916179701793508
 MonoBehaviour:
   m_ObjectHideFlags: 0

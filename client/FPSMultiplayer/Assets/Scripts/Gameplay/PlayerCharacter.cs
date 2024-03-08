@@ -21,6 +21,9 @@ namespace Gameplay
         {
             MoveTo(_input.MovementAxis);
             RotateTo(_input.MouseAxis);
+            
+            if (_input.IsJumpPressed())
+                _movement.Jump();
         }
 
         private void MoveTo(Vector3 direction)

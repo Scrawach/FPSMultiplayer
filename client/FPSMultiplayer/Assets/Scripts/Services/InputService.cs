@@ -17,5 +17,8 @@ namespace Services
 
         public Vector2 MouseAxis =>
             new Vector2(Input.GetAxis(MouseX), Input.GetAxis(MouseY)) * _mouseSensitivity;
+
+        public bool IsJumpPressed() =>
+            Input.GetKeyDown(KeyCode.Space);
     }
 }
