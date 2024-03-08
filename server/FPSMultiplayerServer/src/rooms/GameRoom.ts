@@ -2,6 +2,7 @@ import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
 import { Player } from "./schema/Player";
 import { Vector3Data } from "./schema/Vector3Data";
+import { Vector2Data } from "./schema/Vector2Data";
 import { Movement } from "./schema/Movement";
 
 export class GameRoom extends Room<State> {
@@ -11,6 +12,7 @@ export class GameRoom extends Room<State> {
     this.setState(new State());
 
     this.onMessage("move", (client, message) => {
+      console.log(message);
       this.state.setPlayerMovement(client.sessionId, this.getMovement(message));
     })
   }
@@ -40,10 +42,16 @@ export class GameRoom extends Room<State> {
     return new Vector3Data(vel.x, vel.y, vel.z);
   }
 
+  getRotation(message: any) : Vector2Data {
+    const vel = message.rotation;
+    return new Vector2Data(vel.x, vel.y);
+  }
+
   getMovement(message: any) : Movement {
     var movement = new Movement()
     movement.position = this.getPosition(message);
     movement.velocity = this.getVelocity(message);
+    movement.rotation = this.getRotation(message);
     return movement;
   }
 

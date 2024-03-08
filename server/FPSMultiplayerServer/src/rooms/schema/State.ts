@@ -15,6 +15,7 @@ export class State extends Schema {
     }
 
     setPlayerMovement(sessionId: string, movement: Movement) {
-        this.players.get(sessionId).movement = movement;
+        const player = this.players.get(sessionId);
+        player.movement = movement;
     }
 }

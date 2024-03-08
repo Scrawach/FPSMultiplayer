@@ -37,12 +37,13 @@ namespace Network.Services
         private void OnStateChanged(State state, bool isFirstState) => 
             StateChanged?.Invoke(state, isFirstState);
 
-        public void SendMovement(Vector3 position, Vector3 velocity)
+        public void SendMovement(Vector3 position, Vector3 velocity, Vector2 rotation)
         {
             var message = new Dictionary<string, Vector3>()
             {
                 [nameof(position)] = position,
-                [nameof(velocity)] = velocity
+                [nameof(velocity)] = velocity,
+                [nameof(rotation)] = rotation
             };
             
             _room.Send(MovementEndPoint, message);

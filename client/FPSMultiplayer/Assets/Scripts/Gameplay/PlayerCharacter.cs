@@ -40,8 +40,8 @@ namespace Gameplay
 
         private void RotateTo(Vector2 mouseAxis)
         {
-            _rotation.RotateX(-mouseAxis.y);
-            _rotation.RotateY(mouseAxis.x);
+            _rotation.RotateHead(-mouseAxis.y);
+            _rotation.RotateCharacter(mouseAxis.x);
         }
     }
 }

@@ -5,13 +5,12 @@
 // GENERATED USING @colyseus/schema 2.0.27
 // 
 
-using System;
 using Colyseus.Schema;
 using Action = System.Action;
 
 namespace Network.Schemas {
 	public partial class Player : Schema {
-		[Colyseus.Schema.Type(0, "ref", typeof(Movement))]
+		[Type(0, "ref", typeof(Movement))]
 		public Movement movement = new Movement();
 
 		/*

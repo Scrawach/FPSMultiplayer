@@ -9,16 +9,16 @@ namespace Gameplay
         [SerializeField] private float _maxAngleX = 90f;
 
         private float _currentRotateX;
-        
-        public void RotateX(float angle)
+
+        public float HeadRotation => _head.transform.localEulerAngles.x;
+
+        public void RotateHead(float angle)
         {
             _currentRotateX = Mathf.Clamp(_currentRotateX + angle, _minAngleX, _maxAngleX);
             _head.transform.localEulerAngles = new Vector3(_currentRotateX, 0, 0);
         }
 
-        public void RotateY(float angle)
-        {
+        public void RotateCharacter(float angle) => 
             transform.Rotate(Vector3.up, angle);
-        }
     }
 }

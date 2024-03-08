@@ -5,8 +5,8 @@ namespace Services
 {
     public class GameFactory
     {
-        private const string PlayerPath = "Player/Player";
-        private const string EnemyPath = "Enemy";
+        private const string PlayerPath = "Characters/Player";
+        private const string EnemyPath = "Characters/Enemy";
     
         private readonly Injector _injector;
         private readonly CameraProvider _cameraProvider;
