@@ -8,6 +8,7 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
+        [SerializeField] private Gun _gun;
 
         [field: SerializeField] public Transform Eyes { get; private set; } 
         
@@ -24,6 +25,9 @@ namespace Gameplay
             
             if (_input.IsJumpPressed())
                 _movement.Jump();
+            
+            if (_input.IsShootPressed())
+                _gun.Shoot();
         }
 
         private void MoveTo(Vector3 direction)

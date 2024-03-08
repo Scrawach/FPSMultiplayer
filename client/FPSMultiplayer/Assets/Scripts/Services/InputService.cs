@@ -20,5 +20,8 @@ namespace Services
 
         public bool IsJumpPressed() =>
             Input.GetKeyDown(KeyCode.Space);
+
+        public bool IsShootPressed() =>
+            Input.GetKeyDown(KeyCode.Mouse0);
     }
 }
