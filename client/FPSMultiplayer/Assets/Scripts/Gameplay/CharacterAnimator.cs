@@ -10,6 +10,7 @@ namespace Gameplay
         [SerializeField] private Animator _animator;
         [SerializeField] private CharacterController _character;
         [SerializeField] private CharacterMovement _movement;
+        [SerializeField] private CharacterGroundChecker _groundChecker;
 
         private void Update()
         {
@@ -21,7 +22,7 @@ namespace Gameplay
                 sign = 1;
             
             _animator.SetFloat(Speed, sign * clampedSpeed);
-            _animator.SetBool(GroundedHash, !_movement.IsJumping);
+            _animator.SetBool(GroundedHash, _groundChecker.IsGrounded);
         }
     }
 }

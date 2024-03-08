@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5752766352267822857}
   - component: {fileID: -3485902317530680299}
   - component: {fileID: 7712389019266384299}
+  - component: {fileID: 3074450395393979452}
   - component: {fileID: 8970916179701793508}
   - component: {fileID: 7773147683269600499}
   m_Layer: 0
@@ -108,8 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 6902104049720794240}
+  _groundChecker: {fileID: 3074450395393979452}
   _speed: 5
   _jumpHeight: 5
+  _jumpDelay: 0.2
 --- !u!114 &-3485902317530680299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +143,21 @@ MonoBehaviour:
   _animator: {fileID: 8936796768305148153}
   _character: {fileID: 6902104049720794240}
   _movement: {fileID: 5752766352267822857}
+  _groundChecker: {fileID: 3074450395393979452}
+--- !u!114 &3074450395393979452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624505128410585335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5272ced0241e418485419a50c5011e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 6902104049720794240}
+  _coyoteTime: 0.15
 --- !u!114 &8970916179701793508
 MonoBehaviour:
   m_ObjectHideFlags: 0
