@@ -10,17 +10,28 @@ namespace Gameplay
         [SerializeField] private float _jumpHeight = 1f;
         [SerializeField] private float _jumpDelay = 0.2f;
 
-        private Vector3 _targetPosition;
         private Vector3 _velocity;
         private float _previousJumpTime;
 
         public float Speed => _speed;
 
-        private void Start() => 
-            _targetPosition = transform.position;
+        private void Update()
+        {
+            _character.Move(_velocity * Time.deltaTime);
+            _velocity = HandleGravity(_velocity);
+        }
+        
+        public void MoveTo(Vector3 targetPosition)
+        {
+            var movementStep = MovementStep(targetPosition);
+            _velocity = new Vector3(movementStep.x, _velocity.y, movementStep.z);
+        }
 
-        public void MoveTo(Vector3 targetPosition) =>
-            _targetPosition = targetPosition;
+        public void UpdateVelocityTo(Vector3 targetPosition)
+        {
+            var movementStep = MovementStep(targetPosition);
+            _velocity = new Vector3(movementStep.x, movementStep.y, movementStep.z);
+        }
 
         public void Jump()
         {
@@ -34,20 +45,12 @@ namespace Gameplay
             _velocity.y = _jumpHeight;
         }
 
-        private void Update()
+        private Vector3 MovementStep(Vector3 targetPosition)
         {
-            _velocity = HandleMovement(_velocity);
-            _character.Move(_velocity * Time.deltaTime);
-            _velocity = HandleGravity(_velocity);
+            var direction = targetPosition - transform.position;
+            return direction * _speed;
         }
 
-        private Vector3 HandleMovement(Vector3 velocity)
-        {
-            var direction = _targetPosition - transform.position;
-            var movementStep = direction * _speed;
-            return new Vector3(movementStep.x, velocity.y, movementStep.z);
-        }
-        
         private Vector3 HandleGravity(Vector3 velocity)
         {
             var gravityStep = Physics.gravity.y * Time.deltaTime;

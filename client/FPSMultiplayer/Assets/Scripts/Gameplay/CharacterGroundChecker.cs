@@ -4,7 +4,8 @@ namespace Gameplay
 {
     public class CharacterGroundChecker : MonoBehaviour
     {
-        [SerializeField] private CharacterController _character;
+        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private float _radius = 0.2f;
         [SerializeField] private float _coyoteTime = 0.15f;
 
         private float _elapsedTime;
@@ -13,7 +14,9 @@ namespace Gameplay
 
         private void Update()
         {
-            if (_character.isGrounded)
+            var isGrounded = Physics.CheckSphere(transform.position, _radius, _groundLayer);
+            
+            if (isGrounded)
             {
                 IsGrounded = true;
                 _elapsedTime = 0;

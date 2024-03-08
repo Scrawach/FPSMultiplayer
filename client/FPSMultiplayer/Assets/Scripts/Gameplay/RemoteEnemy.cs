@@ -20,7 +20,7 @@ namespace Gameplay
         public void OnMovementChange(Movement current, Movement previous)
         {
             _positionPrediction.Add(current);
-            _movement.MoveTo(_positionPrediction.NextPosition());
+            _movement.UpdateVelocityTo(_positionPrediction.NextPosition());
             _rotation.SetRotation(current.rotation.ToVector2());
         }
     }

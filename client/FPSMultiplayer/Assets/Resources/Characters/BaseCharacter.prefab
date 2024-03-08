@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9132924609684417154}
   - component: {fileID: 6902104049720794240}
-  - component: {fileID: 5752766352267822857}
+  - component: {fileID: 6516675217394328361}
   - component: {fileID: -3485902317530680299}
   - component: {fileID: 7712389019266384299}
   - component: {fileID: 3074450395393979452}
@@ -93,8 +93,8 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5752766352267822857
+  m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!114 &6516675217394328361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,13 +103,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4624505128410585335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74783d445d0d4cf1997bd147b681abd2, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd2f555a40f26747bd799313575a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 6902104049720794240}
   _groundChecker: {fileID: 3074450395393979452}
   _speed: 5
-  _jumpHeight: 5
+  _jumpHeight: 6
   _jumpDelay: 0.2
 --- !u!114 &-3485902317530680299
 MonoBehaviour:
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 8936796768305148153}
   _character: {fileID: 6902104049720794240}
-  _movement: {fileID: 5752766352267822857}
+  _movement: {fileID: 6516675217394328361}
   _groundChecker: {fileID: 3074450395393979452}
 --- !u!114 &3074450395393979452
 MonoBehaviour:
@@ -154,7 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5272ced0241e418485419a50c5011e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _character: {fileID: 6902104049720794240}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _radius: 0.2
   _coyoteTime: 0.15
 --- !u!1001 &7767246500014960718
 PrefabInstance:

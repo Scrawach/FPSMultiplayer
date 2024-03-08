@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4cdf0b8fc04ac68d4a1e61d17c8353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 8064620573975137759}
+  _movement: {fileID: 8813903731352889855}
   _rotation: {fileID: 8043764715957616323}
   <Eyes>k__BackingField: {fileID: 7249721637040487862}
 --- !u!114 &7639809342119276205
@@ -129,15 +129,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04985fe7ad9b494ab094e4879b298868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8064620573975137759 stripped
+--- !u!114 &8813903731352889855 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5752766352267822857, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6516675217394328361, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
   m_PrefabInstance: {fileID: 2323478263154215638}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6922927364087517729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74783d445d0d4cf1997bd147b681abd2, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd2f555a40f26747bd799313575a5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!143 &9221001747227645526 stripped
