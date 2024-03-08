@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 9221001747227645526}
   _rotation: {fileID: 8043764715957616323}
+  _gun: {fileID: 7928616313629471637}
 --- !u!114 &7928616313629471637
 MonoBehaviour:
   m_ObjectHideFlags: 0

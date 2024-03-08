@@ -17,17 +17,19 @@ namespace Services
             _cameraProvider = cameraProvider;
         }
 
-        public GameObject CreatePlayer(Vector3 position)
+        public PlayerCharacter CreatePlayer(Vector3 position)
         {
             var player = CreateUnit<PlayerCharacter>(PlayerPath, position);
             _cameraProvider.LootOutOf(player.Eyes);
-            return _injector.Inject(player.gameObject);
+            _injector.Inject(player.gameObject);
+            return player;
         }
 
-        public GameObject CreateEnemy(Vector3 position)
+        public RemoteEnemy CreateEnemy(Vector3 position)
         {
-            var enemy = CreateUnit<GameObject>(EnemyPath, position);
-            return _injector.Inject(enemy);
+            var enemy = CreateUnit<RemoteEnemy>(EnemyPath, position);
+            _injector.Inject(enemy.gameObject);
+            return enemy;
         }
 
         public void Destroy(GameObject target) => 

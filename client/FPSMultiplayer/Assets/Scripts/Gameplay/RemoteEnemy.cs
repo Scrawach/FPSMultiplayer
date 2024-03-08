@@ -1,6 +1,6 @@
 ﻿using Extensions;
 using Network.Schemas;
-using Network.Services;
+using Network.Services.Logic;
 using Reflex.Attributes;
 using UnityEngine;
 
@@ -22,6 +22,11 @@ namespace Gameplay
             _positionPrediction.Add(current);
             _movement.UpdateVelocityTo(_positionPrediction.NextPosition());
             _rotation.SetRotation(current.rotation.ToVector2());
+        }
+
+        public void Shoot(Vector3 position, Vector3 direction)
+        {
+            
         }
     }
 }

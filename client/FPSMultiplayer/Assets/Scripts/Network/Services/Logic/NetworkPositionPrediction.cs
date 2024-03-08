@@ -4,7 +4,7 @@ using Network.Schemas;
 using Structures;
 using UnityEngine;
 
-namespace Network.Services
+namespace Network.Services.Logic
 {
     public class NetworkPositionPrediction
     {

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Extensions;
+﻿using Extensions;
 using Gameplay;
 using Network.Schemas;
+using Network.Services.Characters;
 using Services;
 using UnityEngine;
 
@@ -11,43 +11,56 @@ namespace Network.Services
     {
         private readonly NetworkManager _network;
         private readonly GameFactory _factory;
-        private readonly Dictionary<string, NetworkGameObject> _units;
+        private readonly NetworkCharactersProvider _characters;
 
-        public NetworkGameFactory(NetworkManager network, GameFactory factory)
+        public NetworkGameFactory(NetworkManager network, GameFactory factory, NetworkCharactersProvider characters)
         {
             _network = network;
             _factory = factory;
-            _units = new Dictionary<string, NetworkGameObject>();
+            _characters = characters;
         }
         
         public GameObject CreateUnit(string key, Player state) => 
-            CreateNetworkUnit(key, state).Instance;
+            key == _network.Id 
+                ? CreatePlayer(key, state) 
+                : CreateEnemy(key, state);
+
 
         public void Destroy(string key)
         {
-            var networkGameObject = _units[key];
-            _units.Remove(key);
-            networkGameObject.Dispose?.Invoke();
-            _factory.Destroy(networkGameObject.Instance);
+            var gameObject = Remove(key);
+            _factory.Destroy(gameObject);
         }
 
-        private NetworkGameObject CreateNetworkUnit(string key, Player state) =>
-            _units[key] = key == _network.Id
-                ? CreatePlayer(state)
-                : CreateEnemy(state);
+        private GameObject Remove(string key)
+        {
+            if (key == _network.Id)
+            {
+                var playerInfo = _characters.GetPlayer();
+                _characters.RemovePlayer();
+                return playerInfo.Player.gameObject;
+            }
 
-        private NetworkGameObject CreatePlayer(Player state)
+            var enemyInfo = _characters.GetEnemy(key);
+            _characters.RemoveEnemy(key);
+            enemyInfo.Dispose();
+            return enemyInfo.Enemy.gameObject;
+        }
+
+        private GameObject CreatePlayer(string key, Player state)
         {
             var instance = _factory.CreatePlayer(state.movement.position.ToVector3());
-            return new NetworkGameObject(state, instance);
+            _characters.AddPlayer(key, instance);
+            return instance.gameObject;
         }
 
-        private NetworkGameObject CreateEnemy(Player state)
+        private GameObject CreateEnemy(string key, Player state)
         {
             var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
             var enemyController = enemy.GetComponent<RemoteEnemy>();
             var dispose = state.OnMovementChange(enemyController.OnMovementChange);
-            return new NetworkGameObject(state, enemy, dispose);
+            _characters.AddEnemy(key, enemy, dispose);
+            return enemy.gameObject;
         }
     }
 }

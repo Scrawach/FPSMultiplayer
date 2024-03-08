@@ -16,7 +16,8 @@ export class GameRoom extends Room<State> {
     })
 
     this.onMessage("shoot", (client, message) => {
-      this.broadcast("shoot", message, {except: client});
+      console.log(message);
+      this.broadcast("shoot", message);
     })
   }
 

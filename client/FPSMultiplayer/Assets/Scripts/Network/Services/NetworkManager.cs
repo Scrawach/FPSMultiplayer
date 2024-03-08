@@ -1,24 +1,26 @@
-using System.Collections.Generic;
 using Colyseus;
 using Cysharp.Threading.Tasks;
 using Network.Schemas;
-using UnityEngine;
+using Network.Services.Messages;
 
 namespace Network.Services
 {
     public class NetworkManager
     {
-        private const string MovementEndPoint = "move";
-        private const string ShootEndPoint = "shoot";
         private const string GameRoomName = "game_room";
         
-        
         private readonly ColyseusClient _client;
+        private readonly NetworkTransmitter _transmitter;
+        private readonly INetworkRoomListener _listener;
 
         private ColyseusRoom<State> _room;
 
-        public NetworkManager(ColyseusClient client) => 
+        public NetworkManager(ColyseusClient client, NetworkTransmitter transmitter, INetworkRoomListener listener)
+        {
             _client = client;
+            _transmitter = transmitter;
+            _listener = listener;
+        }
 
         public event ColyseusRoom<State>.RoomOnStateChangeEventHandler StateChanged;
 
@@ -28,39 +30,20 @@ namespace Network.Services
         {
             _room = await _client.JoinOrCreate<State>(GameRoomName);
             _room.OnStateChange += OnStateChanged;
+            _transmitter.Initialize(_room);
+            _listener.Listen(_room);
         }
-    
+
         public async UniTask Disconnect()
         {
             _room.OnStateChange -= OnStateChanged;
             await _room.Leave();
+            _transmitter.Dispose();
+            _room = null;
         }
 
         private void OnStateChanged(State state, bool isFirstState) => 
             StateChanged?.Invoke(state, isFirstState);
-
-        public void SendMovement(Vector3 position, Vector3 velocity, Vector2 rotation)
-        {
-            var message = new Dictionary<string, Vector3>()
-            {
-                [nameof(position)] = position,
-                [nameof(velocity)] = velocity,
-                [nameof(rotation)] = rotation
-            };
-            
-            _room.Send(MovementEndPoint, message);
-        }
-
-        public void SendShoot(Vector3 position, Vector3 direction)
-        {
-            var message = new Dictionary<string, object>()
-            {
-                [nameof(Id)] = Id,
-                [nameof(position)] = position,
-                [nameof(direction)] = direction
-            };
-
-            _room.Send(ShootEndPoint, message);
-        }
+        
     }
 }
