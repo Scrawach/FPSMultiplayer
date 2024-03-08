@@ -53,8 +53,9 @@ namespace Network.Services
 
         public void SendShoot(Vector3 position, Vector3 direction)
         {
-            var message = new Dictionary<string, Vector3>()
+            var message = new Dictionary<string, object>()
             {
+                [nameof(Id)] = Id,
                 [nameof(position)] = position,
                 [nameof(direction)] = direction
             };
