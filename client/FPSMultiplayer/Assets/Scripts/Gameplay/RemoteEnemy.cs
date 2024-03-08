@@ -1,4 +1,5 @@
-﻿using Network.Schemas;
+﻿using Extensions;
+using Network.Schemas;
 using Network.Services;
 using Reflex.Attributes;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Gameplay
     public class RemoteEnemy : MonoBehaviour
     {
         [SerializeField] private CharacterMovement _movement;
+        [SerializeField] private CharacterRotation _rotation;
 
         private NetworkPositionPrediction _positionPrediction;
         
@@ -19,6 +21,7 @@ namespace Gameplay
         {
             _positionPrediction.Add(current);
             _movement.MoveTo(_positionPrediction.NextPosition());
+            _rotation.SetRotation(current.rotation.ToVector2());
         }
     }
 }

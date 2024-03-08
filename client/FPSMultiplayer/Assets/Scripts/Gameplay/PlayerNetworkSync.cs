@@ -17,7 +17,7 @@ namespace Gameplay
 
         private void Update()
         {
-            var rotation = new Vector2(_rotation.HeadRotation, _rotation.transform.eulerAngles.y);
+            var rotation = new Vector2(_rotation.HeadRotation, _rotation.Rotation);
             _network.SendMovement(transform.position, _character.velocity, rotation);
         }
     }
