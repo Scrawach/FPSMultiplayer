@@ -1,31 +1,43 @@
-﻿using UnityEngine;
+﻿using Gameplay;
+using UnityEngine;
 
 namespace Services
 {
     public class GameFactory
     {
-        private const string PlayerPath = "Player";
+        private const string PlayerPath = "Player/Player";
         private const string EnemyPath = "Enemy";
     
         private readonly Injector _injector;
+        private readonly CameraProvider _cameraProvider;
 
-        public GameFactory(Injector injector) => 
+        public GameFactory(Injector injector, CameraProvider cameraProvider)
+        {
             _injector = injector;
-        
-        public GameObject CreatePlayer(Vector3 position) => 
-            CreateUnit(PlayerPath, position);
+            _cameraProvider = cameraProvider;
+        }
 
-        public GameObject CreateEnemy(Vector3 position) => 
-            CreateUnit(EnemyPath, position);
+        public GameObject CreatePlayer(Vector3 position)
+        {
+            var player = CreateUnit<PlayerCharacter>(PlayerPath, position);
+            _cameraProvider.LootOutOf(player.Eyes);
+            return _injector.Inject(player.gameObject);
+        }
+
+        public GameObject CreateEnemy(Vector3 position)
+        {
+            var enemy = CreateUnit<GameObject>(EnemyPath, position);
+            return _injector.Inject(enemy);
+        }
 
         public void Destroy(GameObject target) => 
             Object.Destroy(target);
 
-        private GameObject CreateUnit(string pathToPrefab, Vector3 position)
+        private static TUnit CreateUnit<TUnit>(string pathToPrefab, Vector3 position) where TUnit : Object
         {
-            var prefab = Load<GameObject>(pathToPrefab);
+            var prefab = Load<TUnit>(pathToPrefab);
             var instance = Object.Instantiate(prefab, position, Quaternion.identity);
-            return _injector.Inject(instance);
+            return instance;
         }
 
         private static TResource Load<TResource>(string path) where TResource : Object => 

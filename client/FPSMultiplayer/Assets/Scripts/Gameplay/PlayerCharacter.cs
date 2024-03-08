@@ -7,6 +7,9 @@ namespace Gameplay
     public class PlayerCharacter : MonoBehaviour
     {
         [SerializeField] private CharacterMovement _movement;
+        [SerializeField] private CharacterRotation _rotation;
+
+        [field: SerializeField] public Transform Eyes { get; private set; } 
         
         private InputService _input;
 
@@ -16,8 +19,20 @@ namespace Gameplay
 
         private void Update()
         {
-            var targetPosition = _input.Axis + transform.position;
-            _movement.MoveTo(targetPosition);
+            MoveTo(_input.MovementAxis);
+            RotateTo(_input.MouseAxis);
+        }
+
+        private void MoveTo(Vector3 direction)
+        {
+            var nextPosition = transform.position + direction;
+            _movement.MoveTo(nextPosition);
+        }
+
+        private void RotateTo(Vector2 mouseAxis)
+        {
+            _rotation.RotateX(-mouseAxis.y);
+            _rotation.RotateY(mouseAxis.x);
         }
     }
 }
