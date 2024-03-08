@@ -1,5 +1,6 @@
 using Colyseus;
 using Extensions;
+using Gameplay;
 using Network.Services;
 using Network.Services.Initializers;
 using Reflex.Core;
@@ -22,5 +23,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<Game>();
         builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
+        
+        builder.AddTransient<NetworkPositionPrediction>();
     }
 }

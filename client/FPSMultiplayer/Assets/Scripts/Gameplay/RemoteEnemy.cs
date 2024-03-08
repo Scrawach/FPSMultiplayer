@@ -1,5 +1,6 @@
-﻿using Extensions;
-using Network.Schemas;
+﻿using Network.Schemas;
+using Network.Services;
+using Reflex.Attributes;
 using UnityEngine;
 
 namespace Gameplay
@@ -8,16 +9,16 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
 
-        public void OnMovementChange(Movement current, Movement previous) => 
-            _movement.MoveTo(PredictNextPosition(current.position, previous?.position));
+        private NetworkPositionPrediction _positionPrediction;
+        
+        [Inject]
+        public void Construct(NetworkPositionPrediction positionPrediction) => 
+            _positionPrediction = positionPrediction;
 
-        private static Vector3 PredictNextPosition(Vector3Data current, Vector3Data previous)
+        public void OnMovementChange(Movement current, Movement previous)
         {
-            if (previous is null) 
-                return current.ToVector3();
-            
-            var previousDirection = current.ToVector3() - previous.ToVector3();
-            return current.ToVector3() + previousDirection;
+            _positionPrediction.Add(current);
+            _movement.MoveTo(_positionPrediction.NextPosition());
         }
     }
 }
