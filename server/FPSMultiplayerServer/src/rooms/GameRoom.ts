@@ -10,9 +10,10 @@ export class GameRoom extends Room<State> {
   onCreate (options: any) {
     this.setState(new State());
 
-    this.onMessage("setPosition", (client, message) => {
-      const desiredPosition = this.getPosition(message);
-      this.state.setPlayerPosition(client.sessionId, desiredPosition);
+    this.onMessage("move", (client, message) => {
+      console.log(message)
+      this.state.setPlayerPosition(client.sessionId, this.getPosition(message))
+      this.state.setPlayerVelocity(client.sessionId, this.getVelocity(message))
     })
   }
 
@@ -32,8 +33,13 @@ export class GameRoom extends Room<State> {
   }
 
   getPosition(message: any) : Vector3Data {
-    const pos = message;
+    const pos = message.position;
     return new Vector3Data(pos.x, pos.y, pos.z);
+  }
+
+  getVelocity(message: any) : Vector3Data {
+    const vel = message.velocity
+    return new Vector3Data(vel.x, vel.y, vel.z);
   }
 
   createNewPlayer() : Player {
@@ -41,6 +47,7 @@ export class GameRoom extends Room<State> {
     const position = this.generateRandomPosition(10);
     player.movement = new Movement();
     player.movement.position = position;
+    player.movement.velocity = new Vector3Data(0, 0, 0)
     return player;
   }
 

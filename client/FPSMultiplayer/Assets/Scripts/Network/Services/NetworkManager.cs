@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Colyseus;
 using Cysharp.Threading.Tasks;
-using Extensions;
 using Network.Schemas;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Network.Services
 {
     public class NetworkManager
     {
-        private const string SetPositionEndPoint = "setPosition";
+        private const string MovementEndPoint = "move";
         private const string GameRoomName = "game_room";
         
         private readonly ColyseusClient _client;
@@ -34,10 +34,18 @@ namespace Network.Services
             await _room.Leave();
         }
 
-        public void SendPosition(Vector3 position) => 
-            _room.Send(SetPositionEndPoint, position.ToData());
-
         private void OnStateChanged(State state, bool isFirstState) => 
             StateChanged?.Invoke(state, isFirstState);
+
+        public void SendMovement(Vector3 position, Vector3 velocity)
+        {
+            var message = new Dictionary<string, Vector3>()
+            {
+                [nameof(position)] = position,
+                [nameof(velocity)] = velocity
+            };
+            
+            _room.Send(MovementEndPoint, message);
+        }
     }
 }

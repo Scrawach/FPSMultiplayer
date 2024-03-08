@@ -14,8 +14,10 @@ export class State extends Schema {
     }
 
     setPlayerPosition(sessionId: string, position: Vector3Data) {
-        if (position) {
-            this.players.get(sessionId).position = position;
-        }
+        this.players.get(sessionId).movement.position = position;
+    }
+
+    setPlayerVelocity(sessionId: string, velocity: Vector3Data) {
+        this.players.get(sessionId).movement.velocity = velocity;
     }
 }

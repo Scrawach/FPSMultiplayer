@@ -6,6 +6,8 @@ namespace Gameplay
 {
     public class PlayerNetworkSync : MonoBehaviour
     {
+        [SerializeField] private CharacterController _character;
+        
         private NetworkManager _network;
 
         [Inject]
@@ -13,6 +15,6 @@ namespace Gameplay
             _network = network;
 
         private void Update() => 
-            _network.SendPosition(transform.position);
+            _network.SendMovement(transform.position, _character.velocity);
     }
 }
