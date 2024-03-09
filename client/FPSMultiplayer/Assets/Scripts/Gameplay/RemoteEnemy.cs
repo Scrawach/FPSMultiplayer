@@ -10,6 +10,7 @@ namespace Gameplay
     {
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
+        [SerializeField] private CharacterSitting _sitting;
         [SerializeField] private Gun _gun;
         
         private NetworkPositionPrediction _positionPrediction;
@@ -23,6 +24,7 @@ namespace Gameplay
             _positionPrediction.Add(current);
             _movement.UpdateVelocityTo(_positionPrediction.NextPosition());
             _rotation.SetRotation(current.rotation.ToVector2());
+            _sitting.UpdateState(current.isSitting);
         }
 
         public void Shoot(Vector3 position, Vector3 velocity) => 

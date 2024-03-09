@@ -9,6 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private CharacterController _character;
         [SerializeField] private CharacterRotation _rotation;
+        [SerializeField] private CharacterSitting _sitting;
         [SerializeField] private PlayerGun _gun;
         
         private NetworkTransmitter _transmitter;
@@ -32,7 +33,7 @@ namespace Gameplay
         private void Update()
         {
             var rotation = new Vector2(_rotation.HeadRotation, _rotation.Rotation);
-            _transmitter.SendMovement(transform.position, _character.velocity, rotation);
+            _transmitter.SendMovement(transform.position, _character.velocity, rotation, _sitting.IsSitting);
         }
     }
 }

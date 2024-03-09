@@ -56,6 +56,7 @@ export class GameRoom extends Room<State> {
     movement.position = this.getPosition(message);
     movement.velocity = this.getVelocity(message);
     movement.rotation = this.getRotation(message);
+    movement.isSitting = message.isSitting;
     return movement;
   }
 

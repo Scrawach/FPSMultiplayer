@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 4034408286758292063}
   _rotation: {fileID: 2453739610038132067}
+  _sitting: {fileID: 4691695082728518341}
   _gun: {fileID: 3718100628801102448}
 --- !u!114 &3718100628801102448 stripped
 MonoBehaviour:
@@ -116,5 +117,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcd2f555a40f26747bd799313575a5bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4691695082728518341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3210722054349609907, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+  m_PrefabInstance: {fileID: 7895647302251948406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296480492334690689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e870adb85a346b78488e82fdeb2d6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

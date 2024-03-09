@@ -19,6 +19,9 @@ namespace Network.Schemas {
 		[Type(2, "ref", typeof(Vector2Data))]
 		public Vector2Data rotation = new Vector2Data();
 
+		[Type(3, "boolean")]
+		public bool isSitting = default(bool);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -59,11 +62,24 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<bool> __isSittingChange;
+		public Action OnIsSittingChange(PropertyChangeHandler<bool> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.isSitting));
+			__isSittingChange += __handler;
+			if (__immediate && this.isSitting != default(bool)) { __handler(this.isSitting, default(bool)); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(isSitting));
+				__isSittingChange -= __handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(position): __positionChange?.Invoke((Vector3Data) change.Value, (Vector3Data) change.PreviousValue); break;
 				case nameof(velocity): __velocityChange?.Invoke((Vector3Data) change.Value, (Vector3Data) change.PreviousValue); break;
 				case nameof(rotation): __rotationChange?.Invoke((Vector2Data) change.Value, (Vector2Data) change.PreviousValue); break;
+				case nameof(isSitting): __isSittingChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
 				default: break;
 			}
 		}

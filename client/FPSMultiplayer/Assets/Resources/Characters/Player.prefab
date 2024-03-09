@@ -116,6 +116,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7639809342119276205}
   m_SourcePrefab: {fileID: 100100000, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+--- !u!114 &914338034191913317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3210722054349609907, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+  m_PrefabInstance: {fileID: 2323478263154215638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922927364087517729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e870adb85a346b78488e82fdeb2d6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2231673004714442789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4523542490261965555, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
@@ -156,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 8813903731352889855}
   _rotation: {fileID: 8043764715957616323}
+  _sitting: {fileID: 914338034191913317}
   _gun: {fileID: 7694812247986546218}
   <Eyes>k__BackingField: {fileID: 7249721637040487862}
 --- !u!114 &7639809342119276205
@@ -172,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 9221001747227645526}
   _rotation: {fileID: 8043764715957616323}
+  _sitting: {fileID: 914338034191913317}
   _gun: {fileID: 7694812247986546218}
 --- !u!4 &7249721637040487862 stripped
 Transform:
