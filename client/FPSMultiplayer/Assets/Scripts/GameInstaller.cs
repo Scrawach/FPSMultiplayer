@@ -21,12 +21,16 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<Injector>();
         builder.AddSingleton<InputService>();
         builder.AddSingleton<CameraProvider>();
+        builder.AddSingleton<Assets>();
         builder.AddSingleton<GameFactory>();
+        
         builder.AddSingleton<NetworkCharactersProvider>();
         builder.AddSingleton<NetworkGameFactory>();
         builder.AddSingleton<NetworkManager>();
         builder.AddSingleton<NetworkTransmitter>();
+        
         builder.AddSingleton<Game>();
+        
         builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
         builder.AddSingleton<INetworkRoomListener, ShootMessageListener>();
         

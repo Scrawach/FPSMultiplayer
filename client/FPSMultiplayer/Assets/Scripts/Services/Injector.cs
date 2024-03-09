@@ -10,11 +10,22 @@ namespace Services
 
         public Injector(Container container) => 
             _container = container;
-    
-        public GameObject Inject(GameObject gameObject)
+        public TObject Inject<TObject>(TObject obj) where TObject : Object
         {
-            GameObjectInjector.InjectRecursive(gameObject, _container);
-            return gameObject;
+            switch (obj)
+            {
+                case GameObject gameObject:
+                    GameObjectInjector.InjectRecursive(gameObject, _container);
+                    break;
+                case Component component:
+                    GameObjectInjector.InjectRecursive(component.gameObject, _container);
+                    break;
+                default:
+                    AttributeInjector.Inject(obj, _container);
+                    break;
+            }
+
+            return obj;
         }
     }
 }
