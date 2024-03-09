@@ -1,10 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Gameplay.Characters
 {
     public class CharacterRotation : MonoBehaviour
     {
+        private const float RotationDelta = 180;
+        
         [SerializeField] private Transform _head;
         [SerializeField] private float _minAngleX = -90f;
         [SerializeField] private float _maxAngleX = 90f;
@@ -37,13 +38,13 @@ namespace Gameplay.Characters
         private void ProcessHeadRotation()
         {
             var headTransform = _head.transform;
-            var targetAngle = Mathf.MoveTowardsAngle(headTransform.localEulerAngles.x, _currentRotateX, 180 * Time.deltaTime);
+            var targetAngle = Mathf.MoveTowardsAngle(headTransform.localEulerAngles.x, _currentRotateX, RotationDelta * Time.deltaTime);
             headTransform.localEulerAngles = new Vector3(targetAngle, 0, 0);
         }
 
         private void ProcessBodyRotation()
         {
-            var targetAngle = Mathf.MoveTowardsAngle(transform.localEulerAngles.y, _targetBodyRotation, 180 * Time.deltaTime);
+            var targetAngle = Mathf.MoveTowardsAngle(transform.localEulerAngles.y, _targetBodyRotation, RotationDelta * Time.deltaTime);
             transform.localEulerAngles = new Vector3(0, targetAngle, 0);
         }
     }
