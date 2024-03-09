@@ -23,7 +23,7 @@ namespace Gameplay
         {
             _positionPrediction.Add(current);
             _movement.UpdateVelocityTo(_positionPrediction.NextPosition());
-            _rotation.SetRotation(current.rotation.ToVector2());
+            _rotation.SetRotation(_positionPrediction.NextRotation());
             _sitting.UpdateState(current.isSitting);
         }
 

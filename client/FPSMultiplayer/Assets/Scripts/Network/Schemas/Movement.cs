@@ -19,7 +19,10 @@ namespace Network.Schemas {
 		[Type(2, "ref", typeof(Vector2Data))]
 		public Vector2Data rotation = new Vector2Data();
 
-		[Type(3, "boolean")]
+		[Type(3, "ref", typeof(Vector2Data))]
+		public Vector2Data angles = new Vector2Data();
+
+		[Type(4, "boolean")]
 		public bool isSitting = default(bool);
 
 		/*
@@ -62,6 +65,18 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<Vector2Data> __anglesChange;
+		public Action OnAnglesChange(PropertyChangeHandler<Vector2Data> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.angles));
+			__anglesChange += __handler;
+			if (__immediate && this.angles != null) { __handler(this.angles, null); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(angles));
+				__anglesChange -= __handler;
+			};
+		}
+
 		protected event PropertyChangeHandler<bool> __isSittingChange;
 		public Action OnIsSittingChange(PropertyChangeHandler<bool> __handler, bool __immediate = true) {
 			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
@@ -79,6 +94,7 @@ namespace Network.Schemas {
 				case nameof(position): __positionChange?.Invoke((Vector3Data) change.Value, (Vector3Data) change.PreviousValue); break;
 				case nameof(velocity): __velocityChange?.Invoke((Vector3Data) change.Value, (Vector3Data) change.PreviousValue); break;
 				case nameof(rotation): __rotationChange?.Invoke((Vector2Data) change.Value, (Vector2Data) change.PreviousValue); break;
+				case nameof(angles): __anglesChange?.Invoke((Vector2Data) change.Value, (Vector2Data) change.PreviousValue); break;
 				case nameof(isSitting): __isSittingChange?.Invoke((bool) change.Value, (bool) change.PreviousValue); break;
 				default: break;
 			}

@@ -1,6 +1,7 @@
 ﻿using System;
 using Network.Services;
 using Reflex.Attributes;
+using Services;
 using UnityEngine;
 
 namespace Gameplay
@@ -13,10 +14,14 @@ namespace Gameplay
         [SerializeField] private PlayerGun _gun;
         
         private NetworkTransmitter _transmitter;
+        private InputService _input;
 
         [Inject]
-        public void Construct(NetworkTransmitter network) => 
+        public void Construct(NetworkTransmitter network, InputService input)
+        {
             _transmitter = network;
+            _input = input;
+        }
 
         private void OnEnable() => 
             _gun.Fired += OnGunFired;
@@ -33,7 +38,9 @@ namespace Gameplay
         private void Update()
         {
             var rotation = new Vector2(_rotation.HeadRotation, _rotation.Rotation);
-            _transmitter.SendMovement(transform.position, _character.velocity, rotation, _sitting.IsSitting);
+            var angles = _input.MouseAxis;
+            var rotationAngles = new Vector2(-angles.x, angles.y);
+            _transmitter.SendMovement(transform.position, _character.velocity, rotation, rotationAngles, _sitting.IsSitting);
         }
     }
 }

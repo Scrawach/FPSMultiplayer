@@ -17,13 +17,14 @@ namespace Network.Services
         public void Initialize(ColyseusRoom<State> room) => 
             _room = room;
 
-        public void SendMovement(Vector3 position, Vector3 velocity, Vector2 rotation, bool isSitting)
+        public void SendMovement(Vector3 position, Vector3 velocity, Vector2 rotation, Vector2 angles,  bool isSitting)
         {
             var message = new Dictionary<string, object>()
             {
                 [nameof(position)] = position,
                 [nameof(velocity)] = velocity,
                 [nameof(rotation)] = rotation,
+                [nameof(angles)] = angles,
                 [nameof(isSitting)] = isSitting
             };
             

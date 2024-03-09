@@ -25,7 +25,6 @@ namespace Network.Services
                 ? CreatePlayer(key, state) 
                 : CreateEnemy(key, state);
 
-
         public void Destroy(string key)
         {
             var gameObject = Remove(key);

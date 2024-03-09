@@ -16,7 +16,6 @@ export class GameRoom extends Room<State> {
     })
 
     this.onMessage("shoot", (client, message) => {
-      console.log(message);
       this.broadcast("shoot", message);
     })
   }
@@ -51,12 +50,19 @@ export class GameRoom extends Room<State> {
     return new Vector2Data(vel.x, vel.y);
   }
 
+  getRotationAngles(message: any) : Vector2Data {
+    const angles = message.rotationAngles;
+    return new Vector2Data(angles.x, angles.y);
+  }
+
   getMovement(message: any) : Movement {
     var movement = new Movement()
     movement.position = this.getPosition(message);
     movement.velocity = this.getVelocity(message);
     movement.rotation = this.getRotation(message);
+    //movement.rotationAngles = this.getRotationAngles(message);
     movement.isSitting = message.isSitting;
+    console.log(message);
     return movement;
   }
 
@@ -66,6 +72,9 @@ export class GameRoom extends Room<State> {
     player.movement = new Movement();
     player.movement.position = position;
     player.movement.velocity = new Vector3Data(0, 0, 0)
+    player.movement.rotation = new Vector2Data(0, 0)
+    player.movement.angles = new Vector2Data(0, 0);
+    player.movement.isSitting = false;
     return player;
   }
 
