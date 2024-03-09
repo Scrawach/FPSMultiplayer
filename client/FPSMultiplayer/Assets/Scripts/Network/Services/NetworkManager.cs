@@ -24,8 +24,6 @@ namespace Network.Services
 
         public event ColyseusRoom<State>.RoomOnStateChangeEventHandler StateChanged;
 
-        public string Id => _room.SessionId;
-
         public async UniTask Connect()
         {
             _room = await _client.JoinOrCreate<State>(GameRoomName);
@@ -41,6 +39,9 @@ namespace Network.Services
             _transmitter.Dispose();
             _room = null;
         }
+        
+        public bool IsPlayer(string key) => 
+            _room.SessionId == key;
 
         private void OnStateChanged(State state, bool isFirstState) => 
             StateChanged?.Invoke(state, isFirstState);

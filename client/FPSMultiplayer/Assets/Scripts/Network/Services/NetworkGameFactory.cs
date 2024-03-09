@@ -21,7 +21,7 @@ namespace Network.Services
         }
         
         public GameObject CreateUnit(string key, Player state) => 
-            key == _network.Id 
+            _network.IsPlayer(key) 
                 ? CreatePlayer(key, state) 
                 : CreateEnemy(key, state);
 
@@ -33,7 +33,7 @@ namespace Network.Services
 
         private GameObject Remove(string key)
         {
-            if (key == _network.Id)
+            if (_network.IsPlayer(key))
             {
                 var playerInfo = _characters.GetPlayer();
                 _characters.RemovePlayer();
