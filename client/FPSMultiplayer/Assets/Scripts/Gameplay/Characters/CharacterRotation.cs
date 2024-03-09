@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Gameplay.Characters
 {
@@ -9,6 +10,7 @@ namespace Gameplay.Characters
         [SerializeField] private float _maxAngleX = 90f;
 
         private float _currentRotateX;
+        private float _targetBodyRotation;
 
         public float HeadRotation => _head.transform.localEulerAngles.x;
 
@@ -16,17 +18,33 @@ namespace Gameplay.Characters
         
         public void SetRotation(Vector2 rotation)
         {
-            _head.transform.localEulerAngles = new Vector3(rotation.x, 0, 0);
-            transform.localEulerAngles = new Vector3(0, rotation.y, 0);
+            _currentRotateX = rotation.x;
+            _targetBodyRotation = rotation.y;
         }
         
-        public void RotateHead(float angle)
-        {
+        public void RotateHead(float angle) => 
             _currentRotateX = Mathf.Clamp(_currentRotateX + angle, _minAngleX, _maxAngleX);
-            _head.transform.localEulerAngles = new Vector3(_currentRotateX, 0, 0);
-        }
 
         public void RotateCharacter(float angle) => 
-            transform.Rotate(Vector3.up, angle);
+            _targetBodyRotation += angle;
+
+        private void Update()
+        {
+            ProcessHeadRotation();
+            ProcessBodyRotation();
+        }
+
+        private void ProcessHeadRotation()
+        {
+            var headTransform = _head.transform;
+            var targetAngle = Mathf.MoveTowardsAngle(headTransform.localEulerAngles.x, _currentRotateX, 180 * Time.deltaTime);
+            headTransform.localEulerAngles = new Vector3(targetAngle, 0, 0);
+        }
+
+        private void ProcessBodyRotation()
+        {
+            var targetAngle = Mathf.MoveTowardsAngle(transform.localEulerAngles.y, _targetBodyRotation, 180 * Time.deltaTime);
+            transform.localEulerAngles = new Vector3(0, targetAngle, 0);
+        }
     }
 }
