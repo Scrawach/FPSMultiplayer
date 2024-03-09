@@ -6,7 +6,7 @@ using Network.Services.Listeners;
 
 namespace Network.Services
 {
-    public class NetworkManager
+    public class NetworkConnection
     {
         private const string GameRoomName = "game_room";
         
@@ -15,7 +15,7 @@ namespace Network.Services
 
         private ColyseusRoom<State> _room;
 
-        public NetworkManager(ColyseusClient client, IEnumerable<INetworkRoomListener> listeners)
+        public NetworkConnection(ColyseusClient client, IEnumerable<INetworkRoomListener> listeners)
         {
             _client = client;
             _listeners = listeners;

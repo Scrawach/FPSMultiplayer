@@ -3,9 +3,9 @@ using Network.Services;
 
 public class Game
 {
-    private readonly NetworkManager _network;
+    private readonly NetworkConnection _network;
 
-    public Game(NetworkManager network) => 
+    public Game(NetworkConnection network) => 
         _network = network;
 
     public async UniTask Run() => 

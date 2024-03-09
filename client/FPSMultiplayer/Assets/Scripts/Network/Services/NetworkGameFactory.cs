@@ -9,11 +9,11 @@ namespace Network.Services
 {
     public class NetworkGameFactory
     {
-        private readonly NetworkManager _network;
+        private readonly NetworkConnection _network;
         private readonly GameFactory _factory;
         private readonly NetworkCharactersProvider _characters;
 
-        public NetworkGameFactory(NetworkManager network, GameFactory factory, NetworkCharactersProvider characters)
+        public NetworkGameFactory(NetworkConnection network, GameFactory factory, NetworkCharactersProvider characters)
         {
             _network = network;
             _factory = factory;
