@@ -1,4 +1,6 @@
 ﻿using System;
+using Gameplay.Characters;
+using Gameplay.Weapon;
 using Network.Services;
 using Reflex.Attributes;
 using Services;

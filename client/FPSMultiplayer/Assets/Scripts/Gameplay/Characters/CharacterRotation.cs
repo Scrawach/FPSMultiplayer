@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Characters
 {
     public class CharacterRotation : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Gameplay
         public float HeadRotation => _head.transform.localEulerAngles.x;
 
         public float Rotation => transform.localEulerAngles.y;
-
+        
         public void SetRotation(Vector2 rotation)
         {
             _head.transform.localEulerAngles = new Vector3(rotation.x, 0, 0);

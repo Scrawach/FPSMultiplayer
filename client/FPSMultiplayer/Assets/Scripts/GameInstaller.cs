@@ -30,6 +30,6 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
         builder.AddSingleton<INetworkRoomListener, ShootMessageListener>();
         
-        builder.AddTransient<NetworkPositionPrediction>();
+        builder.AddTransient<NetworkMovementPrediction>();
     }
 }

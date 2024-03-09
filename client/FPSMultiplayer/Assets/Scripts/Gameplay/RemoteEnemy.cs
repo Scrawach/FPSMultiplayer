@@ -1,4 +1,6 @@
 ﻿using Extensions;
+using Gameplay.Characters;
+using Gameplay.Weapon;
 using Network.Schemas;
 using Network.Services.Logic;
 using Reflex.Attributes;
@@ -13,17 +15,17 @@ namespace Gameplay
         [SerializeField] private CharacterSitting _sitting;
         [SerializeField] private Gun _gun;
         
-        private NetworkPositionPrediction _positionPrediction;
+        private NetworkMovementPrediction _movementPrediction;
         
         [Inject]
-        public void Construct(NetworkPositionPrediction positionPrediction) => 
-            _positionPrediction = positionPrediction;
+        public void Construct(NetworkMovementPrediction movementPrediction) => 
+            _movementPrediction = movementPrediction;
 
         public void OnMovementChange(Movement current, Movement previous)
         {
-            _positionPrediction.Add(current);
-            _movement.UpdateVelocityTo(_positionPrediction.NextPosition());
-            _rotation.SetRotation(_positionPrediction.NextRotation());
+            _movementPrediction.Add(current);
+            _movement.UpdateVelocityTo(_movementPrediction.NextPosition());
+            _rotation.SetRotation(_movementPrediction.NextRotation());
             _sitting.UpdateState(current.isSitting);
         }
 

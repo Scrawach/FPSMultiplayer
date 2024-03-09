@@ -1,7 +1,8 @@
 ﻿using System;
+using Gameplay.Projectiles;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Weapon
 {
     public class Gun : MonoBehaviour
     {

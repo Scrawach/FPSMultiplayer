@@ -51,7 +51,7 @@ export class GameRoom extends Room<State> {
   }
 
   getRotationAngles(message: any) : Vector2Data {
-    const angles = message.rotationAngles;
+    const angles = message.angles;
     return new Vector2Data(angles.x, angles.y);
   }
 
@@ -60,7 +60,7 @@ export class GameRoom extends Room<State> {
     movement.position = this.getPosition(message);
     movement.velocity = this.getVelocity(message);
     movement.rotation = this.getRotation(message);
-    //movement.rotationAngles = this.getRotationAngles(message);
+    movement.angles = this.getRotationAngles(message);
     movement.isSitting = message.isSitting;
     console.log(message);
     return movement;
@@ -69,7 +69,6 @@ export class GameRoom extends Room<State> {
   createNewPlayer() : Player {
     const player = new Player();
     const position = this.generateRandomPosition(10);
-    player.movement = new Movement();
     player.movement.position = position;
     player.movement.velocity = new Vector3Data(0, 0, 0)
     player.movement.rotation = new Vector2Data(0, 0)

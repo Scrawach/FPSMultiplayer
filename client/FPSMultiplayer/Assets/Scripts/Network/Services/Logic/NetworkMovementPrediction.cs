@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Network.Services.Logic
 {
-    public class NetworkPositionPrediction
+    public class NetworkMovementPrediction
     {
         private readonly CircularBuffer<float> _receiveTimeIntervals;
         private float _lastReceiveTime;
@@ -17,7 +17,7 @@ namespace Network.Services.Logic
         private Vector2 _rotation;
         private Vector2 _rotationAngles;
 
-        public NetworkPositionPrediction() => 
+        public NetworkMovementPrediction() => 
             _receiveTimeIntervals = new CircularBuffer<float>(4);
 
         public void Add(Movement current)
