@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    public class RemoteEnemy : MonoBehaviour
+    public class EnemyCharacter : MonoBehaviour
     {
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;

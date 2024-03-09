@@ -16,8 +16,8 @@ namespace Network.Services.Characters
         public void AddPlayer(string key, PlayerCharacter character) => 
             _player = new PlayerInfo(key, character);
 
-        public void AddEnemy(string key, RemoteEnemy enemy, Action dispose = null) => 
-            _enemies[key] = new EnemyInfo(key, enemy, dispose);
+        public void AddEnemy(string key, EnemyCharacter enemyCharacter, Action dispose = null) => 
+            _enemies[key] = new EnemyInfo(key, enemyCharacter, dispose);
 
         public bool HasEnemy(string key) =>
             _enemies.ContainsKey(key);

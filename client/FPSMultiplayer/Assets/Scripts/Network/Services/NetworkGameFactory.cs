@@ -43,7 +43,7 @@ namespace Network.Services
             var enemyInfo = _characters.GetEnemy(key);
             _characters.RemoveEnemy(key);
             enemyInfo.Dispose();
-            return enemyInfo.Enemy.gameObject;
+            return enemyInfo.EnemyCharacter.gameObject;
         }
 
         private GameObject CreatePlayer(string key, Player state)
@@ -56,7 +56,7 @@ namespace Network.Services
         private GameObject CreateEnemy(string key, Player state)
         {
             var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
-            var enemyController = enemy.GetComponent<RemoteEnemy>();
+            var enemyController = enemy.GetComponent<EnemyCharacter>();
             var dispose = state.OnMovementChange(enemyController.OnMovementChange);
             _characters.AddEnemy(key, enemy, dispose);
             return enemy.gameObject;

@@ -7,13 +7,13 @@ namespace Network.Services.Data
     public struct EnemyInfo : IDisposable
     {
         public string Id;
-        public RemoteEnemy Enemy;
+        public EnemyCharacter EnemyCharacter;
         public Action DisposeAction;
 
-        public EnemyInfo(string id, RemoteEnemy enemy, Action disposeAction)
+        public EnemyInfo(string id, EnemyCharacter enemyCharacter, Action disposeAction)
         {
             Id = id;
-            Enemy = enemy;
+            EnemyCharacter = enemyCharacter;
             DisposeAction = disposeAction;
         }
 

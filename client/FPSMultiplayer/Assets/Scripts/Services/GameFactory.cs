@@ -24,9 +24,9 @@ namespace Services
             return player;
         }
 
-        public RemoteEnemy CreateEnemy(Vector3 position)
+        public EnemyCharacter CreateEnemy(Vector3 position)
         {
-            var enemy = CreateUnit<RemoteEnemy>(EnemyPath, position);
+            var enemy = CreateUnit<EnemyCharacter>(EnemyPath, position);
             return enemy;
         }
 
