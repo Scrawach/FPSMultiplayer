@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Extensions;
 using Network.Schemas;
 
-namespace Network.Services.Initializers
+namespace Network.Services.Listeners
 {
-    public class NetworkPlayersInitializer : INetworkStateInitializer
+    public class NetworkPlayersInitializer
     {
         private readonly NetworkGameFactory _factory;
         private readonly List<Action> _disposes;

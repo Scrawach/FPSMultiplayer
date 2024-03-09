@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using Colyseus;
 using Cysharp.Threading.Tasks;
 using Network.Schemas;
-using Network.Services.Messages;
+using Network.Services.Listeners;
 
 namespace Network.Services
 {
@@ -10,41 +11,31 @@ namespace Network.Services
         private const string GameRoomName = "game_room";
         
         private readonly ColyseusClient _client;
-        private readonly NetworkTransmitter _transmitter;
-        private readonly INetworkRoomListener _listener;
+        private readonly IEnumerable<INetworkRoomListener> _listeners;
 
         private ColyseusRoom<State> _room;
 
-        public NetworkManager(ColyseusClient client, NetworkTransmitter transmitter, INetworkRoomListener listener)
+        public NetworkManager(ColyseusClient client, IEnumerable<INetworkRoomListener> listeners)
         {
             _client = client;
-            _transmitter = transmitter;
-            _listener = listener;
+            _listeners = listeners;
         }
-
-        public event ColyseusRoom<State>.RoomOnStateChangeEventHandler StateChanged;
 
         public async UniTask Connect()
         {
             _room = await _client.JoinOrCreate<State>(GameRoomName);
-            _room.OnStateChange += OnStateChanged;
-            _transmitter.Initialize(_room);
-            _listener.Listen(_room);
+            foreach (var listener in _listeners) 
+                listener.Listen(_room);
         }
 
         public async UniTask Disconnect()
         {
-            _room.OnStateChange -= OnStateChanged;
             await _room.Leave();
-            _transmitter.Dispose();
-            _room = null;
+            foreach (var listener in _listeners) 
+                listener.Dispose();
         }
-        
+
         public bool IsPlayer(string key) => 
             _room.SessionId == key;
-
-        private void OnStateChanged(State state, bool isFirstState) => 
-            StateChanged?.Invoke(state, isFirstState);
-        
     }
 }

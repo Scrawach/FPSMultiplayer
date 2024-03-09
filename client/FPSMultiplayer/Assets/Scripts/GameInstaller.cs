@@ -2,7 +2,7 @@ using Colyseus;
 using Extensions;
 using Network.Services;
 using Network.Services.Characters;
-using Network.Services.Initializers;
+using Network.Services.Listeners;
 using Network.Services.Logic;
 using Network.Services.Messages;
 using Reflex.Core;
@@ -28,11 +28,12 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<NetworkCharactersProvider>();
         builder.AddSingleton<NetworkGameFactory>();
         builder.AddSingleton<NetworkManager>();
-        builder.AddSingleton<NetworkTransmitter>();
         
         builder.AddSingleton<Game>();
-        
-        builder.AddSingleton<INetworkStateInitializer, NetworkPlayersInitializer>();
+
+        builder.AddSingleton<NetworkPlayersInitializer>();
+        builder.AddSingletonWithInterfacesAndSelf<NetworkTransmitter>();
+        builder.AddSingleton<INetworkRoomListener, NetworkStateInitializer>();
         builder.AddSingleton<INetworkRoomListener, ShootMessageListener>();
         
         builder.AddTransient<NetworkMovementPrediction>();

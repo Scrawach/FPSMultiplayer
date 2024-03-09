@@ -1,5 +1,6 @@
 ﻿using Colyseus;
 using Network.Schemas;
+using Network.Services.Listeners;
 
 namespace Network.Services.Messages
 {
@@ -14,5 +15,7 @@ namespace Network.Services.Messages
         
         public void Listen(ColyseusRoom<State> room) => 
             room.OnMessage<TMessage>(MessageName, OnReceived);
+
+        public void Dispose() { }
     }
 }

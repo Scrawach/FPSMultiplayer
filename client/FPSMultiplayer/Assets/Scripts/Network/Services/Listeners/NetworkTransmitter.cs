@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Colyseus;
 using Network.Schemas;
 using Network.Services.Data;
 using UnityEngine;
 
-namespace Network.Services
+namespace Network.Services.Listeners
 {
-    public class NetworkTransmitter : IDisposable
+    public class NetworkTransmitter : INetworkRoomListener
     {
         private const string MovementEndPoint = "move";
         private const string ShootEndPoint = "shoot";
         
         private ColyseusRoom<State> _room;
-
-        public void Initialize(ColyseusRoom<State> room) => 
+        
+        public void Listen(ColyseusRoom<State> room) => 
             _room = room;
 
+        public void Dispose() => 
+            _room = null;
+        
         public void SendMovement(Vector3 position, Vector3 velocity, Vector2 rotation, Vector2 angles,  bool isSitting)
         {
             var message = new Dictionary<string, object>()
@@ -42,8 +44,6 @@ namespace Network.Services
             
             _room.Send(ShootEndPoint, shootInfo);
         }
-
-        public void Dispose() => 
-            _room = null;
+        
     }
 }
