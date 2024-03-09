@@ -22,6 +22,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<InputService>();
         builder.AddSingleton<CameraProvider>();
         builder.AddSingleton<Assets>();
+        builder.AddSingleton<BulletFactory>();
         builder.AddSingleton<GameFactory>();
         
         builder.AddSingleton<NetworkCharactersProvider>();
