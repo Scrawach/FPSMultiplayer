@@ -10,7 +10,7 @@ namespace Gameplay.Characters
         [SerializeField] private float _minAngleX = -90f;
         [SerializeField] private float _maxAngleX = 90f;
 
-        private float _currentRotateX;
+        private float _targetHeadRotation;
         private float _targetBodyRotation;
 
         public float HeadRotation => _head.transform.localEulerAngles.x;
@@ -19,12 +19,12 @@ namespace Gameplay.Characters
         
         public void SetRotation(Vector2 rotation)
         {
-            _currentRotateX = rotation.x;
+            _targetHeadRotation = rotation.x;
             _targetBodyRotation = rotation.y;
         }
         
         public void RotateHead(float angle) => 
-            _currentRotateX = Mathf.Clamp(_currentRotateX + angle, _minAngleX, _maxAngleX);
+            _targetHeadRotation = Mathf.Clamp(_targetHeadRotation + angle, _minAngleX, _maxAngleX);
 
         public void RotateCharacter(float angle) => 
             _targetBodyRotation += angle;
@@ -38,7 +38,7 @@ namespace Gameplay.Characters
         private void ProcessHeadRotation()
         {
             var headTransform = _head.transform;
-            var targetAngle = Mathf.MoveTowardsAngle(headTransform.localEulerAngles.x, _currentRotateX, RotationDelta * Time.deltaTime);
+            var targetAngle = Mathf.MoveTowardsAngle(headTransform.localEulerAngles.x, _targetHeadRotation, RotationDelta * Time.deltaTime);
             headTransform.localEulerAngles = new Vector3(targetAngle, 0, 0);
         }
 
