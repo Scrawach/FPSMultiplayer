@@ -1,4 +1,5 @@
 import { Player } from "./schema/Player";
+import { PlayerSettings } from "./schema/PlayerSettings";
 import { Vector2Data } from "./schema/Vector2Data";
 import { Vector3Data } from "./schema/Vector3Data";
 
@@ -9,7 +10,7 @@ export class Environment {
         this.worldSize = worldSize;
     }
     
-    createNewPlayer() : Player {
+    createNewPlayer(settings: PlayerSettings) : Player {
         const player = new Player();
         const position = this.getSpawnPosition();
         player.movement.position = position;
@@ -17,6 +18,7 @@ export class Environment {
         player.movement.rotation = new Vector2Data(0, 0)
         player.movement.angles = new Vector2Data(0, 0);
         player.movement.isSitting = false;
+        player.settings = settings;
         return player;
     }
 

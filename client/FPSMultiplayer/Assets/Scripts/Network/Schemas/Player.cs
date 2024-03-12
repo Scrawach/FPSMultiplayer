@@ -13,6 +13,9 @@ namespace Network.Schemas {
 		[Type(0, "ref", typeof(Movement))]
 		public Movement movement = new Movement();
 
+		[Type(1, "ref", typeof(PlayerSettings))]
+		public PlayerSettings settings = new PlayerSettings();
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -29,9 +32,22 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<PlayerSettings> __settingsChange;
+		public Action OnSettingsChange(PropertyChangeHandler<PlayerSettings> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.settings));
+			__settingsChange += __handler;
+			if (__immediate && this.settings != null) { __handler(this.settings, null); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(settings));
+				__settingsChange -= __handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(movement): __movementChange?.Invoke((Movement) change.Value, (Movement) change.PreviousValue); break;
+				case nameof(settings): __settingsChange?.Invoke((PlayerSettings) change.Value, (PlayerSettings) change.PreviousValue); break;
 				default: break;
 			}
 		}

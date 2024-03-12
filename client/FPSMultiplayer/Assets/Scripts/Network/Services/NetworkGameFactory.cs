@@ -20,9 +20,9 @@ namespace Network.Services
             _characters = characters;
         }
         
-        public GameObject CreateUnit(string key, Player state) => 
-            _network.IsPlayer(key) 
-                ? CreatePlayer(key, state) 
+        public GameObject CreateUnit(string key, Player state) =>
+            _network.IsPlayer(key)
+                ? CreatePlayer(key, state)
                 : CreateEnemy(key, state);
 
         public void Destroy(string key)

@@ -25,8 +25,8 @@ export class GameRoom extends Room<State> {
   }
 
   onJoin (client: Client, options: any) {
-    const newPlayer = this.environment.createNewPlayer();
-    console.log(client.sessionId, `${newPlayer}`);
+    const playerSettings = this.messageParser.parsePlayerSettings(options);
+    const newPlayer = this.environment.createNewPlayer(playerSettings);
     this.state.addPlayer(client.sessionId, newPlayer);
   }
 

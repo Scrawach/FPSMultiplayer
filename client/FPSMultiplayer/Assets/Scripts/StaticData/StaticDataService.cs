@@ -3,13 +3,14 @@ using System.Linq;
 using Services;
 using StaticData.Data;
 using StaticData.ScriptableObjects;
+using UnityEngine;
 
 namespace StaticData
 {
     public class StaticDataService
     {
-        private const string CharacterDataPath = "Static Data/Character Settings";
-        private const string GunDataPath = "Static Data/Guns Settings";
+        private const string CharacterDataPath = "StaticData/Character Settings";
+        private const string GunDataPath = "StaticData/Guns Settings";
 
         private readonly Assets _assets;
         

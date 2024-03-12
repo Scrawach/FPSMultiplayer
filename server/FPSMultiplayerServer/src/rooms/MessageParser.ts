@@ -1,4 +1,5 @@
 import { Movement } from "./schema/Movement";
+import { PlayerSettings } from "./schema/PlayerSettings";
 import { Vector2Data } from "./schema/Vector2Data";
 import { Vector3Data } from "./schema/Vector3Data";
 
@@ -10,8 +11,15 @@ export class MessageParser {
         movement.rotation = this.parseRotation(message);
         movement.angles = this.parseAngles(message);
         movement.isSitting = message.isSitting;
-        console.log(message);
         return movement;
+    }
+
+    parsePlayerSettings(message: any) : PlayerSettings {
+        let settings = new PlayerSettings();
+        settings.speed = message.Speed;
+        settings.totalHealth = message.TotalHealth;
+        settings.jumpHeight = message.JumpHeight;
+        return settings;
     }
 
     parsePosition(message: any) : Vector3Data {
