@@ -9,6 +9,14 @@ namespace Services
         public Assets(Injector injector) => 
             _injector = injector;
 
+        public TAsset Load<TAsset>(string path)
+            where TAsset : Object =>
+            Resources.Load<TAsset>(path);
+
+        public TAsset[] LoadAll<TAsset>(string path)
+            where TAsset : Object =>
+            Resources.LoadAll<TAsset>(path);
+        
         public TAsset Instantiate<TAsset>(string path) 
             where TAsset : Object => 
             Instantiate<TAsset>(path, Vector3.zero);
@@ -20,8 +28,7 @@ namespace Services
         public TAsset Instantiate<TAsset>(string path, Vector3 position, Quaternion rotation)
             where TAsset : Object
         {
-            var resource = Resources.Load<TAsset>(path);
-            var instance = Object.Instantiate(resource, position, rotation);
+            var instance = Object.Instantiate(Load<TAsset>(path), position, rotation);
             _injector.Inject(instance);
             return instance;
         }
