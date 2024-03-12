@@ -1,5 +1,4 @@
 ﻿using Extensions;
-using Gameplay;
 using Network.Schemas;
 using Network.Services.Characters;
 using Services;
@@ -56,8 +55,7 @@ namespace Network.Services
         private GameObject CreateEnemy(string key, Player state)
         {
             var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
-            var enemyController = enemy.GetComponent<EnemyCharacter>();
-            var dispose = state.OnMovementChange(enemyController.OnMovementChange);
+            var dispose = state.OnMovementChange(enemy.OnMovementChange);
             _characters.AddEnemy(key, enemy, dispose);
             return enemy.gameObject;
         }
