@@ -16,4 +16,4 @@ MonoBehaviour:
     TotalHealth: 100
     CurrentHealth: 100
     Speed: 6
-    JumpHeight: 1
+    JumpHeight: 6

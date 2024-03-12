@@ -16,6 +16,9 @@ namespace Network.Schemas {
 		[Type(1, "ref", typeof(CharacterStatsData))]
 		public CharacterStatsData stats = new CharacterStatsData();
 
+		[Type(2, "ref", typeof(ScoreData))]
+		public ScoreData score = new ScoreData();
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -44,10 +47,23 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<ScoreData> __scoreChange;
+		public Action OnScoreChange(PropertyChangeHandler<ScoreData> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.score));
+			__scoreChange += __handler;
+			if (__immediate && this.score != null) { __handler(this.score, null); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(score));
+				__scoreChange -= __handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(movement): __movementChange?.Invoke((Movement) change.Value, (Movement) change.PreviousValue); break;
 				case nameof(stats): __statsChange?.Invoke((CharacterStatsData) change.Value, (CharacterStatsData) change.PreviousValue); break;
+				case nameof(score): __scoreChange?.Invoke((ScoreData) change.Value, (ScoreData) change.PreviousValue); break;
 				default: break;
 			}
 		}
