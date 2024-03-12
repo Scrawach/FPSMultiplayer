@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09028874aed44783989b10f12755ad35, type: 3}
   m_Name: Character Settings
   m_EditorClassIdentifier: 
-  Settings:
-    Speed: 6
+  stats:
     TotalHealth: 100
+    CurrentHealth: 100
+    Speed: 6
     JumpHeight: 1

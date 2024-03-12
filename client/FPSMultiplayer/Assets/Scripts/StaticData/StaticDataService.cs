@@ -14,7 +14,7 @@ namespace StaticData
 
         private readonly Assets _assets;
         
-        private CharacterSettings _characterData;
+        private CharacterStats _characterData;
         private Dictionary<GunType, GunSettings> _gunData;
 
         public StaticDataService(Assets assets) => 
@@ -26,14 +26,14 @@ namespace StaticData
             _gunData = LoadGunsData();
         }
 
-        public CharacterSettings ForCharacter() => 
+        public CharacterStats ForCharacter() => 
             _characterData;
 
         public GunSettings ForGun(GunType type) =>
             _gunData[type];
 
-        private CharacterSettings LoadCharacterData() => 
-            _assets.Load<CharacterStaticData>(CharacterDataPath).Settings;
+        private CharacterStats LoadCharacterData() => 
+            _assets.Load<CharacterStaticData>(CharacterDataPath).stats;
 
         private Dictionary<GunType, GunSettings> LoadGunsData()
         {

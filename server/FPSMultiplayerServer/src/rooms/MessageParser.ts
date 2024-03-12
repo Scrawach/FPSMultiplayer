@@ -1,11 +1,11 @@
 import { Movement } from "./schema/Movement";
-import { CharacterSettingsData } from "./schema/CharacterSettingsData";
+import { CharacterStatsData } from "./schema/CharacterStatsData";
 import { Vector2Data } from "./schema/Vector2Data";
 import { Vector3Data } from "./schema/Vector3Data";
 
 export class MessageParser {
     parseMovement(message: any) : Movement {
-        var movement = new Movement()
+        const movement = new Movement()
         movement.position = this.parsePosition(message);
         movement.velocity = this.parseVelocity(message);
         movement.rotation = this.parseRotation(message);
@@ -14,12 +14,13 @@ export class MessageParser {
         return movement;
     }
 
-    parsePlayerSettings(message: any) : CharacterSettingsData {
-        let settings = new CharacterSettingsData();
-        settings.speed = message.Speed;
-        settings.totalHealth = message.TotalHealth;
-        settings.jumpHeight = message.JumpHeight;
-        return settings;
+    parseCharacterStats(message: any) : CharacterStatsData {
+        const stats = new CharacterStatsData();
+        stats.speed = message.Speed;
+        stats.totalHealth = message.TotalHealth;
+        stats.currentHealth = message.CurrentHealth;
+        stats.jumpHeight = message.JumpHeight;
+        return stats;
     }
 
     parsePosition(message: any) : Vector3Data {

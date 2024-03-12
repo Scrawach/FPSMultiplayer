@@ -26,9 +26,9 @@ namespace Network.Services
         public bool IsPlayer(string key) => 
             _room.SessionId == key;
         
-        public async UniTask Connect(CharacterSettings settings)
+        public async UniTask Connect(CharacterStats stats)
         {
-            _room = await _client.JoinOrCreate<State>(GameRoomName, Convert(settings));
+            _room = await _client.JoinOrCreate<State>(GameRoomName, Convert(stats));
             foreach (var listener in _listeners) 
                 listener.Listen(_room);
         }
@@ -40,10 +40,10 @@ namespace Network.Services
                 listener.Dispose();
         }
 
-        private static Dictionary<string, object> Convert(CharacterSettings settings)
+        private static Dictionary<string, object> Convert(CharacterStats stats)
         {
-            var fields = settings.GetType().GetFields();
-            return fields.ToDictionary(field => field.Name, field => field.GetValue(settings));
+            var fields = stats.GetType().GetFields();
+            return fields.ToDictionary(field => field.Name, field => field.GetValue(stats));
         }
     }
 }
