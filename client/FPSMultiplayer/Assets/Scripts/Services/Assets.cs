@@ -23,12 +23,16 @@ namespace Services
 
         public TAsset Instantiate<TAsset>(string path, Vector3 position)
             where TAsset : Object =>
-            Instantiate<TAsset>(path, position, Quaternion.identity);
+            Instantiate<TAsset>(path, position, Quaternion.identity, null);
 
-        public TAsset Instantiate<TAsset>(string path, Vector3 position, Quaternion rotation)
+        public TAsset Instantiate<TAsset>(string path, Transform parent) 
+            where TAsset : Object =>
+            Instantiate<TAsset>(path, Vector3.zero, Quaternion.identity, parent);
+
+        public TAsset Instantiate<TAsset>(string path, Vector3 position, Quaternion rotation, Transform parent)
             where TAsset : Object
         {
-            var instance = Object.Instantiate(Load<TAsset>(path), position, rotation);
+            var instance = Object.Instantiate(Load<TAsset>(path), position, rotation, parent);
             _injector.Inject(instance);
             return instance;
         }
