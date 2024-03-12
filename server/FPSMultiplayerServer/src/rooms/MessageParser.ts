@@ -1,5 +1,5 @@
 import { Movement } from "./schema/Movement";
-import { PlayerSettings } from "./schema/PlayerSettings";
+import { CharacterSettingsData } from "./schema/CharacterSettingsData";
 import { Vector2Data } from "./schema/Vector2Data";
 import { Vector3Data } from "./schema/Vector3Data";
 
@@ -14,8 +14,8 @@ export class MessageParser {
         return movement;
     }
 
-    parsePlayerSettings(message: any) : PlayerSettings {
-        let settings = new PlayerSettings();
+    parsePlayerSettings(message: any) : CharacterSettingsData {
+        let settings = new CharacterSettingsData();
         settings.speed = message.Speed;
         settings.totalHealth = message.TotalHealth;
         settings.jumpHeight = message.JumpHeight;

@@ -1,4 +1,5 @@
 using Network.Schemas;
+using StaticData.Data;
 using UnityEngine;
 
 namespace Extensions

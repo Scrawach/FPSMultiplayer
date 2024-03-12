@@ -1,10 +1,10 @@
 import { Schema, type } from "@colyseus/schema"
 import { Movement } from "./Movement"
-import { PlayerSettings } from "./PlayerSettings";
+import { CharacterSettingsData } from "./CharacterSettingsData";
 
 export class Player extends Schema {
     @type(Movement) movement: Movement = new Movement();
-    @type(PlayerSettings) settings: PlayerSettings = new PlayerSettings();
+    @type(CharacterSettingsData) settings: CharacterSettingsData = new CharacterSettingsData();
 
     public toString = () : string => {
         return `Player: ${this.movement};`

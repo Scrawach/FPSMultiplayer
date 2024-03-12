@@ -1,5 +1,5 @@
 import { Player } from "./schema/Player";
-import { PlayerSettings } from "./schema/PlayerSettings";
+import { CharacterSettingsData } from "./schema/CharacterSettingsData";
 import { Vector2Data } from "./schema/Vector2Data";
 import { Vector3Data } from "./schema/Vector3Data";
 
@@ -10,7 +10,7 @@ export class Environment {
         this.worldSize = worldSize;
     }
     
-    createNewPlayer(settings: PlayerSettings) : Player {
+    createNewPlayer(settings: CharacterSettingsData) : Player {
         const player = new Player();
         const position = this.getSpawnPosition();
         player.movement.position = position;

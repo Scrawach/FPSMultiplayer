@@ -9,7 +9,7 @@ using Colyseus.Schema;
 using Action = System.Action;
 
 namespace Network.Schemas {
-	public partial class PlayerSettings : Schema {
+	public partial class CharacterSettingsData : Schema {
 		[Type(0, "uint8")]
 		public byte speed = default(byte);
 
