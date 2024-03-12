@@ -1,6 +1,5 @@
 import { Schema, MapSchema, type } from "@colyseus/schema";
 import { Player } from "./Player";
-import { Vector3Data } from "./Vector3Data"
 import { Movement } from "./Movement"
   
 export class State extends Schema {
