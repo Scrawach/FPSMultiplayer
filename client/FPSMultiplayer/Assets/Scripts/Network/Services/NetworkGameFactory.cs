@@ -1,6 +1,4 @@
 ﻿using Extensions;
-using Gameplay;
-using Gameplay.Characters;
 using Network.Schemas;
 using Network.Services.Characters;
 using Services;
