@@ -7,6 +7,7 @@ using Network.Services.Logic;
 using Network.Services.Messages;
 using Reflex.Core;
 using Services;
+using StaticData;
 using UnityEngine;
 
 public class GameInstaller : MonoBehaviour, IInstaller
@@ -22,6 +23,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<InputService>();
         builder.AddSingleton<CameraProvider>();
         builder.AddSingleton<Assets>();
+        builder.AddSingleton<StaticDataService>();
         builder.AddSingleton<BulletFactory>();
         builder.AddSingleton<GameFactory>();
         
