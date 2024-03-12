@@ -18,7 +18,7 @@ export class Environment {
         player.movement.rotation = new Vector2Data(0, 0)
         player.movement.angles = new Vector2Data(0, 0);
         player.movement.isSitting = false;
-        player.settings = settings;
+        player.stats = settings;
         return player;
     }
 

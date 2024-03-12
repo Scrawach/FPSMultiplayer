@@ -4,7 +4,7 @@ import { CharacterStatsData } from "./CharacterStatsData";
 
 export class Player extends Schema {
     @type(Movement) movement: Movement = new Movement();
-    @type(CharacterStatsData) settings: CharacterStatsData = new CharacterStatsData();
+    @type(CharacterStatsData) stats: CharacterStatsData = new CharacterStatsData();
 
     public toString = () : string => {
         return `Player: ${this.movement};`

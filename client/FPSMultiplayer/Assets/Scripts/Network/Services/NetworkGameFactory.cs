@@ -55,8 +55,9 @@ namespace Network.Services
         private GameObject CreateEnemy(string key, Player state)
         {
             var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
-            var dispose = state.OnMovementChange(enemy.OnMovementChange);
-            _characters.AddEnemy(key, enemy, dispose);
+            var movementChangeDispose = state.OnMovementChange(enemy.OnMovementChange);
+            var statsChangeDispose = state.OnStatsChange(enemy.OnStatsChange);
+            _characters.AddEnemy(key, enemy, movementChangeDispose, statsChangeDispose);
             return enemy.gameObject;
         }
     }

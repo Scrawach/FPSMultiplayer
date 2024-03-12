@@ -1,5 +1,4 @@
-﻿using Extensions;
-using Gameplay.Characters;
+﻿using Gameplay.Characters;
 using Gameplay.Weapon;
 using Network.Schemas;
 using Network.Services.Logic;
@@ -13,6 +12,7 @@ namespace Gameplay
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
+        [SerializeField] private Health _health;
         [SerializeField] private Gun _gun;
         
         private NetworkMovementPrediction _movementPrediction;
@@ -28,6 +28,9 @@ namespace Gameplay
             _rotation.SetRotation(_movementPrediction.NextRotation());
             _sitting.UpdateState(current.isSitting);
         }
+
+        public void OnStatsChange(CharacterStatsData current, CharacterStatsData previous) => 
+            _health.Construct(current.currentHealth, current.totalHealth);
 
         public void Shoot(Vector3 position, Vector3 velocity) => 
             _gun.Shoot(position, velocity);

@@ -10,6 +10,7 @@ namespace Network.Services.Listeners
     {
         private const string MovementEndPoint = "move";
         private const string ShootEndPoint = "shoot";
+        private const string HealthChangeEndPoint = "healthChange";
         
         private ColyseusRoom<State> _room;
         
@@ -44,6 +45,16 @@ namespace Network.Services.Listeners
             
             _room.Send(ShootEndPoint, shootInfo);
         }
-        
+
+        public void SendHealthChange(int current, int total)
+        {
+            var message = new Dictionary<string, object>()
+            {
+                [nameof(current)] = current,
+                [nameof(total)] = total
+            };
+            
+            _room.Send(HealthChangeEndPoint, message);
+        }
     }
 }

@@ -17,10 +17,14 @@ export class GameRoom extends Room<State> {
 
     this.onMessage("move", (client, message) => {
       this.state.setPlayerMovement(client.sessionId, this.messageParser.parseMovement(message));
-    })
+    });
 
     this.onMessage("shoot", (client, message) => {
       this.broadcast("shoot", message);
+    });
+
+    this.onMessage("changeHealth", (client, message) => {
+      this.state.changeHealth(client.sessionId, message.current, message.total);
     })
   }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Gameplay;
 using UnityEngine;
 
@@ -8,16 +9,19 @@ namespace Network.Services.Data
     {
         public string Id;
         public EnemyCharacter EnemyCharacter;
-        public Action DisposeAction;
+        public Action[] DisposeActions;
 
-        public EnemyInfo(string id, EnemyCharacter enemyCharacter, Action disposeAction)
+        public EnemyInfo(string id, EnemyCharacter enemyCharacter, Action[] disposeActions)
         {
             Id = id;
             EnemyCharacter = enemyCharacter;
-            DisposeAction = disposeAction;
+            DisposeActions = disposeActions;
         }
 
-        public void Dispose() => 
-            DisposeAction?.Invoke();
+        public void Dispose()
+        {
+            foreach (var disposeAction in DisposeActions) 
+                disposeAction?.Invoke();
+        }
     }
 }

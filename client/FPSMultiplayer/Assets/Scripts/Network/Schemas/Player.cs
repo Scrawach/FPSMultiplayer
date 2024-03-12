@@ -14,7 +14,7 @@ namespace Network.Schemas {
 		public Movement movement = new Movement();
 
 		[Type(1, "ref", typeof(CharacterStatsData))]
-		public CharacterStatsData settings = new CharacterStatsData();
+		public CharacterStatsData stats = new CharacterStatsData();
 
 		/*
 		 * Support for individual property change callbacks below...
@@ -32,22 +32,22 @@ namespace Network.Schemas {
 			};
 		}
 
-		protected event PropertyChangeHandler<CharacterStatsData> __settingsChange;
-		public Action OnSettingsChange(PropertyChangeHandler<CharacterStatsData> __handler, bool __immediate = true) {
+		protected event PropertyChangeHandler<CharacterStatsData> __statsChange;
+		public Action OnStatsChange(PropertyChangeHandler<CharacterStatsData> __handler, bool __immediate = true) {
 			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
-			__callbacks.AddPropertyCallback(nameof(this.settings));
-			__settingsChange += __handler;
-			if (__immediate && this.settings != null) { __handler(this.settings, null); }
+			__callbacks.AddPropertyCallback(nameof(this.stats));
+			__statsChange += __handler;
+			if (__immediate && this.stats != null) { __handler(this.stats, null); }
 			return () => {
-				__callbacks.RemovePropertyCallback(nameof(settings));
-				__settingsChange -= __handler;
+				__callbacks.RemovePropertyCallback(nameof(stats));
+				__statsChange -= __handler;
 			};
 		}
 
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(movement): __movementChange?.Invoke((Movement) change.Value, (Movement) change.PreviousValue); break;
-				case nameof(settings): __settingsChange?.Invoke((CharacterStatsData) change.Value, (CharacterStatsData) change.PreviousValue); break;
+				case nameof(stats): __statsChange?.Invoke((CharacterStatsData) change.Value, (CharacterStatsData) change.PreviousValue); break;
 				default: break;
 			}
 		}

@@ -1,7 +1,5 @@
-﻿using System;
-using Gameplay.Characters;
+﻿using Gameplay.Characters;
 using Gameplay.Weapon;
-using Network.Services;
 using Network.Services.Listeners;
 using Reflex.Attributes;
 using Services;
@@ -14,6 +12,7 @@ namespace Gameplay
         [SerializeField] private CharacterController _character;
         [SerializeField] private CharacterRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
+        [SerializeField] private Health _health;
         [SerializeField] private PlayerGun _gun;
         
         private NetworkTransmitter _transmitter;
@@ -26,17 +25,26 @@ namespace Gameplay
             _input = input;
         }
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
             _gun.Fired += OnGunFired;
+            _health.Changed += OnHealthChanged;
+        }
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
             _gun.Fired -= OnGunFired;
-
+            _health.Changed -= OnHealthChanged;
+        }
+        
         private void OnGunFired()
         {
             var shootPoint = _gun.ShootPoint;
             _transmitter.SendShoot(shootPoint.position, shootPoint.forward * _gun.BulletSpeed);
         }
+        
+        private void OnHealthChanged() => 
+            _transmitter.SendHealthChange(_health.Current, _health.Total);
 
         private void Update()
         {

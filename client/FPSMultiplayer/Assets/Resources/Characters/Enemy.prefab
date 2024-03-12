@@ -345,6 +345,7 @@ MonoBehaviour:
   _movement: {fileID: 4034408286758292063}
   _rotation: {fileID: 2453739610038132067}
   _sitting: {fileID: 4691695082728518341}
+  _health: {fileID: 7771997658750466140}
   _gun: {fileID: 3718100628801102448}
 --- !u!114 &3718100628801102448 stripped
 MonoBehaviour:
