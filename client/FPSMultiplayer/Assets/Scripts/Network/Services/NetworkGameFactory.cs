@@ -1,4 +1,6 @@
 ﻿using Extensions;
+using Gameplay;
+using Gameplay.Characters;
 using Network.Schemas;
 using Network.Services.Characters;
 using Services;
@@ -48,6 +50,7 @@ namespace Network.Services
         private GameObject CreatePlayer(string key, Player state)
         {
             var instance = _factory.CreatePlayer(state.movement.position.ToVector3());
+            instance.UpdateStats(state.stats.ToStats());
             _characters.AddPlayer(key, instance);
             return instance.gameObject;
         }

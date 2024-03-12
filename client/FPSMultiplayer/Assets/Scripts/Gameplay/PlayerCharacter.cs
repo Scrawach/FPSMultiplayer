@@ -2,6 +2,7 @@ using Gameplay.Characters;
 using Gameplay.Weapon;
 using Reflex.Attributes;
 using Services;
+using StaticData.Data;
 using UnityEngine;
 
 namespace Gameplay
@@ -11,6 +12,7 @@ namespace Gameplay
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
+        [SerializeField] private Health _health;
         [SerializeField] private PlayerGun _gun;
 
         [field: SerializeField] public Transform Eyes { get; private set; } 
@@ -21,6 +23,12 @@ namespace Gameplay
         public void Construct(InputService input) => 
             _input = input;
 
+        public void UpdateStats(CharacterStats stats)
+        {
+            _movement.Construct(stats.Speed, stats.JumpHeight);
+            _health.Construct(stats.CurrentHealth, stats.TotalHealth);
+        }
+        
         private void Update()
         {
             MoveTo(_input.MovementAxis);

@@ -179,6 +179,7 @@ MonoBehaviour:
   _movement: {fileID: 8813903731352889855}
   _rotation: {fileID: 8043764715957616323}
   _sitting: {fileID: 914338034191913317}
+  _health: {fileID: 2771949050728324092}
   _gun: {fileID: 7694812247986546218}
   <Eyes>k__BackingField: {fileID: 7249721637040487862}
 --- !u!114 &7639809342119276205

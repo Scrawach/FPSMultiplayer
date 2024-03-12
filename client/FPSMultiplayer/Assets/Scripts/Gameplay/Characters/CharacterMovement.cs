@@ -15,6 +15,12 @@ namespace Gameplay.Characters
 
         public float Speed => _speed;
 
+        public void Construct(float speed, float jumpHeight)
+        {
+            _speed = speed;
+            _jumpHeight = jumpHeight;
+        }
+        
         private void Update()
         {
             _character.Move(_velocity * Time.deltaTime);
