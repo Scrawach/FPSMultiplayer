@@ -7,9 +7,9 @@ namespace Gameplay
     {
         public event Action Changed;
         
-        public int Total { get; private set; }
+        [field: SerializeField] public int Total { get; set; }
         
-        public int Current { get; private set; }
+        [field: SerializeField] public int Current { get; set; }
 
         public float Ratio => (float) Current / Total;
         
