@@ -4,7 +4,7 @@ namespace Services
 {
     public class CameraProvider
     {
-        public void LootOutOf(Transform point)
+        public void LookOutOf(Transform point)
         {
             var cameraTransform = Camera.main.transform;
             cameraTransform.SetParent(point);

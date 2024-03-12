@@ -20,7 +20,7 @@ namespace Services
         public PlayerCharacter CreatePlayer(Vector3 position)
         {
             var player = CreateUnit<PlayerCharacter>(PlayerPath, position);
-            _cameraProvider.LootOutOf(player.Eyes);
+            _cameraProvider.LookOutOf(player.Eyes);
             return player;
         }
 
