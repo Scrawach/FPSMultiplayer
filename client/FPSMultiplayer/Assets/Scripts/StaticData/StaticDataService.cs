@@ -33,7 +33,7 @@ namespace StaticData
             _gunData[type];
 
         private CharacterStats LoadCharacterData() => 
-            _assets.Load<CharacterStaticData>(CharacterDataPath).stats;
+            _assets.Load<CharacterStaticData>(CharacterDataPath).Stats;
 
         private Dictionary<GunType, GunSettings> LoadGunsData()
         {

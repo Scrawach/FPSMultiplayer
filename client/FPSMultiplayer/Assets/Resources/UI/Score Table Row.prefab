@@ -55,8 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3403883903698642563}
   - component: {fileID: 5503868538306012598}
-  - component: {fileID: 1973885421348556548}
   - component: {fileID: 7437460592216384069}
+  - component: {fileID: 4931064109658050089}
   m_Layer: 5
   m_Name: Score Table Row
   m_TagString: Untagged
@@ -94,7 +94,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2759105607943418807}
   m_CullTransparentMesh: 1
---- !u!114 &1973885421348556548
+--- !u!114 &7437460592216384069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,11 +103,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2759105607943418807}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e59413bcf140489c5f7a58e36c0688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sessionId: {fileID: 5587208903665588523}
+  _kills: {fileID: 8931875445623587849}
+  _deaths: {fileID: 7963899078375110625}
+--- !u!114 &4931064109658050089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759105607943418807}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -124,21 +139,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7437460592216384069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2759105607943418807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e59413bcf140489c5f7a58e36c0688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sessionId: {fileID: 5587208903665588523}
-  _kills: {fileID: 8931875445623587849}
-  _deaths: {fileID: 7963899078375110625}
 --- !u!1 &3738480197904728976
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -365,8 +365,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -544,8 +544,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
