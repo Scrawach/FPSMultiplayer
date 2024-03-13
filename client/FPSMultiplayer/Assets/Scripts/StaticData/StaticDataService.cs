@@ -3,7 +3,6 @@ using System.Linq;
 using Services;
 using StaticData.Data;
 using StaticData.ScriptableObjects;
-using UnityEngine;
 
 namespace StaticData
 {
@@ -25,10 +24,10 @@ namespace StaticData
             _characterData = LoadCharacterData();
             _gunData = LoadGunsData();
         }
-
+        
         public CharacterStats ForCharacter() => 
             _characterData;
-
+        
         public GunSettings ForGun(GunType type) =>
             _gunData[type];
 

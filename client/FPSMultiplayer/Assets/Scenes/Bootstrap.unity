@@ -629,6 +629,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Point Marker (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1188970382608581598, guid: f31725d4e3e049afc80af833c1e61188, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5332655252477177833, guid: f31725d4e3e049afc80af833c1e61188, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.11
@@ -796,6 +800,10 @@ PrefabInstance:
     - target: {fileID: 1188970382608581598, guid: f31725d4e3e049afc80af833c1e61188, type: 3}
       propertyPath: m_Name
       value: Spawn Point Marker (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1188970382608581598, guid: f31725d4e3e049afc80af833c1e61188, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5332655252477177833, guid: f31725d4e3e049afc80af833c1e61188, type: 3}
       propertyPath: m_LocalPosition.x
