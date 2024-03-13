@@ -12,7 +12,7 @@ namespace Editor
 {
     public static class ServerLevelDataUpdater
     {
-        private const string PathToServerStaticData = "../../server/FPSMultiplayerServer/src/staticData";
+        private const string PathToServerStaticData = "../../server/FPSMultiplayerServer/src/staticData/levels";
 
         [InitializeOnLoadMethod]
         public static void Start() => 

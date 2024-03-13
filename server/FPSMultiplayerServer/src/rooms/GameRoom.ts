@@ -2,17 +2,21 @@ import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
 import { Environment } from "../services/Environment";
 import { MessageParser } from "../services/MessageParser";
+import { StaticData } from "../services/StaticData";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
 
   environment: Environment;
   messageParser: MessageParser;
+  staticData: StaticData
 
   onCreate (options: any) {
     this.environment = new Environment(10);
     this.messageParser = new MessageParser();
+    this.staticData = new StaticData();
 
+    this.staticData.initialize();
     this.setState(new State());
 
     this.onMessage("move", (client, message) => {

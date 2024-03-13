@@ -1,8 +1,8 @@
 import { LevelData } from "../data/LevelData";
 import * as fs from 'fs';
 
-export class StaticDataService {
-    private readonly pathToStaticData: string = "./src/staticData"
+export class StaticData {
+    private readonly pathToStaticData: string = "./src/staticData/levels"
 
     private levels: Map<string, LevelData> = new Map()
 
