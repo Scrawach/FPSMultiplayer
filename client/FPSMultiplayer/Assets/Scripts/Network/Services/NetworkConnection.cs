@@ -40,10 +40,11 @@ namespace Network.Services
                 listener.Dispose();
         }
 
-        private static Dictionary<string, object> Convert(CharacterStats stats)
-        {
-            var fields = stats.GetType().GetFields();
-            return fields.ToDictionary(field => field.Name, field => field.GetValue(stats));
-        }
+        private static Dictionary<string, object> Convert(CharacterStats stats) =>
+            new Dictionary<string, object>()
+            {
+                ["SceneName"] = "Bootstrap",
+                [nameof(CharacterStats)] = stats
+            };
     }
 }

@@ -8,6 +8,7 @@ using Network.Services.Messages;
 using Reflex.Core;
 using Services;
 using StaticData;
+using UI.Score;
 using UnityEngine;
 
 public class GameInstaller : MonoBehaviour, IInstaller
@@ -26,6 +27,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<StaticDataService>();
         builder.AddSingleton<BulletFactory>();
         builder.AddSingleton<GameFactory>();
+        builder.AddSingleton<UiFactory>();
         
         builder.AddSingleton<NetworkCharactersProvider>();
         builder.AddSingleton<NetworkGameFactory>();

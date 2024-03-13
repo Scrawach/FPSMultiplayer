@@ -2,6 +2,7 @@ import { Player } from "../rooms/schema/Player";
 import { CharacterStatsData } from "../rooms/schema/CharacterStatsData";
 import { Vector2Data } from "../rooms/schema/Vector2Data";
 import { Vector3Data } from "../rooms/schema/Vector3Data";
+import { LevelData } from "../data/LevelData";
 
 export class Environment {
     worldSize: number;
@@ -10,9 +11,10 @@ export class Environment {
         this.worldSize = worldSize;
     }
     
-    createNewPlayer(settings: CharacterStatsData) : Player {
+    createNewPlayer(settings: CharacterStatsData, levelData: LevelData) : Player {
         const player = new Player();
-        const position = this.getSpawnPosition();
+        const position = levelData.getRandomSpawnPoint();
+        console.log(`${position}`)
         player.movement.position = position;
         player.movement.velocity = new Vector3Data(0, 0, 0)
         player.movement.rotation = new Vector2Data(0, 0)

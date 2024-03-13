@@ -11,7 +11,8 @@ export class LevelData {
 
     getRandomSpawnPoint() : Vector3Data {
         const index = this.getRandomIndex(this.spawnPoints.length);
-        return this.spawnPoints[length];
+        const target = this.spawnPoints[index];
+        return new Vector3Data(target.x, target.y, target.z);
     }
 
     getRandomIndex(max: number) : number {
