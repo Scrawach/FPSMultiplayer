@@ -13,6 +13,11 @@ namespace Network.Services.Listeners
         private const string HealthChangeEndPoint = "healthChange";
         
         private ColyseusRoom<State> _room;
+
+        public NetworkTransmitter()
+        {
+            Debug.Log($"Create {nameof(NetworkTransmitter)}");
+        }
         
         public void Listen(ColyseusRoom<State> room) => 
             _room = room;

@@ -17,8 +17,15 @@ namespace UI.Score
             _uiFactory = factory;
 
 
-        public void AddRow(string key) => 
-            _rows[key] = _uiFactory.CreateScoreRow(key, _content);
+        public void AddRow(string key, bool isPlayer = false)
+        {
+            var row = _uiFactory.CreateScoreRow(key, _content);
+
+            if (isPlayer)
+                row.Highlight();
+            
+            _rows[key] = row;
+        }
 
         public void RemoveRow(string key)
         {
