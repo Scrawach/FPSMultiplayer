@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5246631097620208722}
   - component: {fileID: 4994112926151543832}
   - component: {fileID: 2716594053408851470}
+  - component: {fileID: 173527007774627980}
   m_Layer: 5
   m_Name: UI Root
   m_TagString: Untagged
@@ -101,3 +102,16 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &173527007774627980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821466356112072675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f1aab80a184a2fb528c35f8dc03987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreTable: {fileID: 0}

@@ -11,16 +11,18 @@ namespace UI.Score
         
         private readonly Assets _assets;
 
-        private GameObject _root;
-
         public UiFactory(Assets assets) => 
             _assets = assets;
 
-        public GameObject CreateUIRoot() => 
-            _root = _assets.Instantiate<GameObject>(UIRootPath);
+        public UIRoot CreateUIRoot() => 
+            _assets.Instantiate<UIRoot>(UIRootPath);
 
-        public ScoreTable CreateScoreTable() => 
-            _assets.Instantiate<ScoreTable>(ScoreTablePath, _root.transform);
+        public ScoreTable CreateScoreTable(UIRoot root)
+        {
+            var table = _assets.Instantiate<ScoreTable>(ScoreTablePath, root.transform);
+            root.ScoreTable = table;
+            return table;
+        }
 
         public ScoreTableRow CreateScoreRow(string sessionId, Transform parent)
         {

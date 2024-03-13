@@ -26,5 +26,8 @@ namespace Services
 
         public bool IsSit() =>
             Input.GetKey(KeyCode.LeftControl);
+
+        public bool IsScoreBoardShown() => 
+            Input.GetKey(KeyCode.Tab);
     }
 }

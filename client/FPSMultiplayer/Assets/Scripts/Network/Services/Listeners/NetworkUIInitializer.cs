@@ -23,8 +23,8 @@ namespace Network.Services.Listeners
 
         public void Initialize(State state)
         {
-            _uiFactory.CreateUIRoot();
-            _scoreTable = _uiFactory.CreateScoreTable();
+            var uiRoot = _uiFactory.CreateUIRoot();
+            _scoreTable = _uiFactory.CreateScoreTable(uiRoot);
             
             state.players.OnAdd(OnPlayerAdded).AddTo(_disposes);
             state.players.OnRemove(OnPlayerRemoved).AddTo(_disposes);
