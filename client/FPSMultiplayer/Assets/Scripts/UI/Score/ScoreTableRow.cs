@@ -9,7 +9,7 @@ namespace UI.Score
         [SerializeField] private TextMeshProUGUI _kills;
         [SerializeField] private TextMeshProUGUI _deaths;
 
-        public void Initialize(string sessionId) => 
+        public void Construct(string sessionId) => 
             _sessionId.text = sessionId;
 
         public void UpdateStats(int kills, int deaths)
