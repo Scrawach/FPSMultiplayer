@@ -1,7 +1,7 @@
 import { Room, Client } from "@colyseus/core";
 import { State } from "./schema/State";
-import { Environment } from "./Environment";
-import { MessageParser } from "./MessageParser";
+import { Environment } from "../services/Environment";
+import { MessageParser } from "../services/MessageParser";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;

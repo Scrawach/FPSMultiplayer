@@ -1,7 +1,7 @@
-import { Player } from "./schema/Player";
-import { CharacterStatsData } from "./schema/CharacterStatsData";
-import { Vector2Data } from "./schema/Vector2Data";
-import { Vector3Data } from "./schema/Vector3Data";
+import { Player } from "../rooms/schema/Player";
+import { CharacterStatsData } from "../rooms/schema/CharacterStatsData";
+import { Vector2Data } from "../rooms/schema/Vector2Data";
+import { Vector3Data } from "../rooms/schema/Vector3Data";
 
 export class Environment {
     worldSize: number;

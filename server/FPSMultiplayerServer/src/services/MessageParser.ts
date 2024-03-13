@@ -1,7 +1,7 @@
-import { Movement } from "./schema/Movement";
-import { CharacterStatsData } from "./schema/CharacterStatsData";
-import { Vector2Data } from "./schema/Vector2Data";
-import { Vector3Data } from "./schema/Vector3Data";
+import { Movement } from "../rooms/schema/Movement";
+import { CharacterStatsData } from "../rooms/schema/CharacterStatsData";
+import { Vector2Data } from "../rooms/schema/Vector2Data";
+import { Vector3Data } from "../rooms/schema/Vector3Data";
 
 export class MessageParser {
     parseMovement(message: any) : Movement {
