@@ -26,7 +26,7 @@ namespace Network.Services.Listeners
             var uiRoot = _uiFactory.CreateUIRoot();
             _scoreTable = _uiFactory.CreateScoreTable(uiRoot);
             
-            state.players.OnAdd(OnPlayerAdded).AddTo(_disposes);
+            state.players.OnAdd(OnPlayerAdded, false).AddTo(_disposes);
             state.players.OnRemove(OnPlayerRemoved).AddTo(_disposes);
         }
         
