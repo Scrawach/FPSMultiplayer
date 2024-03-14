@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI.Score
 {
-    public class UiFactory
+    public class UIFactory
     {
         private const string UIRootPath = "UI/UI Root";
         private const string ScoreTablePath = "UI/Score Table UI";
@@ -11,7 +11,7 @@ namespace UI.Score
         
         private readonly Assets _assets;
 
-        public UiFactory(Assets assets) => 
+        public UIFactory(Assets assets) => 
             _assets = assets;
 
         public UIRoot CreateUIRoot() => 

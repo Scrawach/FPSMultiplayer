@@ -1,22 +1,20 @@
 ﻿using Colyseus;
 using Network.Schemas;
-using UnityEngine;
+using Network.Services.Listeners.Players;
 
 namespace Network.Services.Listeners
 {
-    public class NetworkStateInitializer : INetworkRoomListener
+    public class NetworkStateInitializer : INetworkRoomHandler
     {
-        private readonly NetworkPlayersInitializer _playersInitializer;
-        private readonly NetworkUIInitializer _uiInitializer;
+        private readonly NetworkPlayersListener _playersListener;
         private ColyseusRoom<State> _room;
 
-        public NetworkStateInitializer(NetworkPlayersInitializer playersInitializer, NetworkUIInitializer uiInitializer)
+        public NetworkStateInitializer(NetworkPlayersListener playersListener)
         {
-            _playersInitializer = playersInitializer;
-            _uiInitializer = uiInitializer;
+            _playersListener = playersListener;
         }
 
-        public void Listen(ColyseusRoom<State> room)
+        public void Handle(ColyseusRoom<State> room)
         {
             _room = room;
             _room.OnStateChange += OnStateChanged;
@@ -25,8 +23,7 @@ namespace Network.Services.Listeners
         public void Dispose()
         {
             _room.OnStateChange -= OnStateChanged;
-            _playersInitializer.Dispose();
-            _uiInitializer.Dispose();
+            _playersListener.Dispose();
         }
 
         private void OnStateChanged(State state, bool isFirstState)
@@ -35,8 +32,7 @@ namespace Network.Services.Listeners
                 return;
             
             _room.OnStateChange -= OnStateChanged;
-            _playersInitializer.Initialize(state);
-            _uiInitializer.Initialize(state);
+            _playersListener.Initialize(state);
         }
     }
 }

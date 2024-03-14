@@ -3,6 +3,7 @@ using Extensions;
 using Network.Services;
 using Network.Services.Characters;
 using Network.Services.Listeners;
+using Network.Services.Listeners.Players;
 using Network.Services.Logic;
 using Network.Services.Messages;
 using Reflex.Core;
@@ -27,7 +28,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<StaticDataService>();
         builder.AddSingleton<BulletFactory>();
         builder.AddSingleton<GameFactory>();
-        builder.AddSingleton<UiFactory>();
+        builder.AddSingleton<UIFactory>();
         
         builder.AddSingleton<NetworkCharactersProvider>();
         builder.AddSingleton<NetworkGameFactory>();
@@ -35,11 +36,13 @@ public class GameInstaller : MonoBehaviour, IInstaller
         
         builder.AddSingleton<Game>();
 
-        builder.AddSingleton<NetworkPlayersInitializer>();
-        builder.AddSingleton<NetworkUIInitializer>();
+        builder.AddSingleton<IPlayersChangeHandler, PlayersInitializer>();
+        builder.AddSingleton<IPlayersChangeHandler, UIPlayerInitializer>();
+        builder.AddSingleton<NetworkPlayersListener>();
+        
         builder.AddSingletonWithInterfacesAndSelf<NetworkTransmitter>();
-        builder.AddSingleton<INetworkRoomListener, NetworkStateInitializer>();
-        builder.AddSingleton<INetworkRoomListener, ShootMessageListener>();
+        builder.AddSingleton<INetworkRoomHandler, NetworkStateInitializer>();
+        builder.AddSingleton<INetworkRoomHandler, ShootMessageHandler>();
         
         builder.AddTransient<NetworkMovementPrediction>();
     }

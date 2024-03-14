@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Network.Services.Listeners
 {
-    public class NetworkTransmitter : INetworkRoomListener
+    public class NetworkTransmitter : INetworkRoomHandler
     {
         private const string MovementEndPoint = "move";
         private const string ShootEndPoint = "shoot";
@@ -19,7 +19,7 @@ namespace Network.Services.Listeners
             Debug.Log($"Create {nameof(NetworkTransmitter)}");
         }
         
-        public void Listen(ColyseusRoom<State> room) => 
+        public void Handle(ColyseusRoom<State> room) => 
             _room = room;
 
         public void Dispose() => 

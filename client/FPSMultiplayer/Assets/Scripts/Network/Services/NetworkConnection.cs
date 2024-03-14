@@ -13,11 +13,11 @@ namespace Network.Services
         private const string GameRoomName = "game_room";
         
         private readonly ColyseusClient _client;
-        private readonly IEnumerable<INetworkRoomListener> _listeners;
+        private readonly IEnumerable<INetworkRoomHandler> _listeners;
 
         private ColyseusRoom<State> _room;
 
-        public NetworkConnection(ColyseusClient client, IEnumerable<INetworkRoomListener> listeners)
+        public NetworkConnection(ColyseusClient client, IEnumerable<INetworkRoomHandler> listeners)
         {
             _client = client;
             _listeners = listeners;
@@ -30,7 +30,7 @@ namespace Network.Services
         {
             _room = await _client.JoinOrCreate<State>(GameRoomName, Convert(stats));
             foreach (var listener in _listeners) 
-                listener.Listen(_room);
+                listener.Handle(_room);
         }
 
         public async UniTask Disconnect()

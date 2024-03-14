@@ -3,11 +3,11 @@ using Network.Services.Data;
 
 namespace Network.Services.Messages
 {
-    public class ShootMessageListener : MessageListener<NetworkShootInfo>
+    public class ShootMessageHandler : MessageHandler<NetworkShootInfo>
     {
         private readonly NetworkCharactersProvider _characters;
 
-        public ShootMessageListener(NetworkCharactersProvider characters) 
+        public ShootMessageHandler(NetworkCharactersProvider characters) 
             : base("shoot") =>
             _characters = characters;
 

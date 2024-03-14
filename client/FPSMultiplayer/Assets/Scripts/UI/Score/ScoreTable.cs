@@ -10,10 +10,10 @@ namespace UI.Score
         
         private readonly Dictionary<string, ScoreTableRow> _rows = new();
 
-        private UiFactory _uiFactory;
+        private UIFactory _uiFactory;
 
         [Inject]
-        public void Construct(UiFactory factory) => 
+        public void Construct(UIFactory factory) => 
             _uiFactory = factory;
 
 

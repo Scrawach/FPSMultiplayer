@@ -4,8 +4,8 @@ using Network.Schemas;
 
 namespace Network.Services.Listeners
 {
-    public interface INetworkRoomListener : IDisposable
+    public interface INetworkRoomHandler : IDisposable
     {
-        void Listen(ColyseusRoom<State> room);
+        void Handle(ColyseusRoom<State> room);
     }
 }
