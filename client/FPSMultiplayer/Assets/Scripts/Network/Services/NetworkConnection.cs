@@ -26,9 +26,9 @@ namespace Network.Services
         public bool IsPlayer(string key) => 
             _room.SessionId == key;
         
-        public async UniTask Connect(CharacterStats stats)
+        public async UniTask Connect(string sceneName, CharacterStats stats)
         {
-            _room = await _client.JoinOrCreate<State>(GameRoomName, Convert(stats));
+            _room = await _client.JoinOrCreate<State>(GameRoomName, ConvertDataToDictionary(sceneName, stats));
             foreach (var listener in _listeners) 
                 listener.Handle(_room);
         }
@@ -40,10 +40,10 @@ namespace Network.Services
                 listener.Dispose();
         }
 
-        private static Dictionary<string, object> Convert(CharacterStats stats) =>
+        private static Dictionary<string, object> ConvertDataToDictionary(string sceneName, CharacterStats stats) =>
             new Dictionary<string, object>()
             {
-                ["SceneName"] = "Bootstrap",
+                ["SceneName"] = sceneName,
                 [nameof(CharacterStats)] = stats
             };
     }

@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Network.Services;
 using StaticData;
+using UnityEngine.SceneManagement;
 
 public class Game
 {
@@ -17,7 +18,8 @@ public class Game
     {
         _staticData.Load();
         var characterSettings = _staticData.ForCharacter();
-        await _network.Connect(characterSettings);
+        var sceneName = SceneManager.GetActiveScene().name;
+        await _network.Connect(sceneName, characterSettings);
     }
 
     public async UniTask Stop() => 
