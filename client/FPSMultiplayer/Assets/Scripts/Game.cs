@@ -17,9 +17,9 @@ public class Game
     public async UniTask Run()
     {
         _staticData.Load();
-        var characterSettings = _staticData.ForCharacter();
+        var characterStats = _staticData.ForCharacter();
         var sceneName = SceneManager.GetActiveScene().name;
-        await _network.Connect(sceneName, characterSettings);
+        await _network.Connect(sceneName, characterStats);
     }
 
     public async UniTask Stop() => 
