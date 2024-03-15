@@ -16,11 +16,6 @@ namespace Network.Services.Listeners
         
         private ColyseusRoom<State> _room;
 
-        public NetworkTransmitter()
-        {
-            Debug.Log($"Create {nameof(NetworkTransmitter)}");
-        }
-        
         public void Handle(ColyseusRoom<State> room) => 
             _room = room;
 
