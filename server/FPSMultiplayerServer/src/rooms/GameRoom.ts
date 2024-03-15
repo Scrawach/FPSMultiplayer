@@ -5,6 +5,7 @@ import { MessageParser } from "../services/MessageParser";
 import { StaticData } from "../services/StaticData";
 import { HealthData } from "./schema/HealthData";
 import { ScoreData } from "./schema/ScoreData";
+import { LevelData } from "../data/LevelData";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -12,6 +13,8 @@ export class GameRoom extends Room<State> {
   environment: Environment;
   messageParser: MessageParser;
   staticData: StaticData
+
+  levelData: LevelData
 
   onCreate (options: any) {
     this.environment = new Environment(10);
@@ -36,15 +39,13 @@ export class GameRoom extends Room<State> {
 
       const targetPlayer = this.state.players.get(targetId);
       const totalHealth = targetPlayer.health.total;
-
       targetPlayer.health = new HealthData(currentHealth, totalHealth);
 
       if (targetPlayer.health.current <= 0){
-        console.log(`${attackedId} kill ${targetId}`);
-        const attackerPlayer = this.state.players.get(attackedId);
-        attackerPlayer.score = new ScoreData(attackerPlayer.score.kills + 1, attackerPlayer.score.deaths);
-        targetPlayer.score = new ScoreData(targetPlayer.score.kills, targetPlayer.score.deaths + 1);
+        this.state.playerKillSomeone(attackedId, targetId);
+        this.respawn(targetId);
       }
+
     })
 
     this.onMessage("equipGun", (client, message) => {
@@ -53,10 +54,10 @@ export class GameRoom extends Room<State> {
   }
 
   onJoin (client: Client, options: any) {
-    const levelData = this.staticData.getLevelData(options.SceneName);
+    this.levelData = this.staticData.getLevelData(options.SceneName);
     const playerSettings = this.messageParser.parseCharacterStats(options.CharacterStats);
     const health = this.messageParser.parseHealthStats(options);
-    const newPlayer = this.environment.createNewPlayer(playerSettings, health, levelData);
+    const newPlayer = this.environment.createNewPlayer(playerSettings, health, this.levelData);
     this.state.addPlayer(client.sessionId, newPlayer);
   }
 
@@ -67,5 +68,12 @@ export class GameRoom extends Room<State> {
 
   onDispose() {
     console.log("room", this.roomId, "disposing...");
+  }
+
+  respawn(targetId: string) {
+    const targetPlayer = this.state.players.get(targetId);
+    const respawnPosition = this.levelData.getRandomSpawnPoint();
+    this.clients.getById(targetId).send("respawn", respawnPosition);
+    targetPlayer.health = new HealthData(targetPlayer.health.total, targetPlayer.health.total);
   }
 }

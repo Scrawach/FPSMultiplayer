@@ -1,6 +1,7 @@
 using System;
 using Gameplay;
 using Network.Services.Data;
+using UnityEngine;
 
 namespace Network.Services.Characters
 {
@@ -19,5 +20,8 @@ namespace Network.Services.Characters
             Player = default;
             return true;
         }
+
+        public void Revive(Vector3 targetPosition) => 
+            Player.Player.Revive(targetPosition);
     }
 }

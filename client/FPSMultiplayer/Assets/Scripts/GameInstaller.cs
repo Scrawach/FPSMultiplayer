@@ -44,6 +44,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingletonWithInterfacesAndSelf<NetworkTransmitter>();
         builder.AddSingleton<INetworkRoomHandler, NetworkStateInitializer>();
         builder.AddSingleton<INetworkRoomHandler, ShootMessageHandler>();
+        builder.AddSingleton<INetworkRoomHandler, RespawnMessageHandler>();
         
         builder.AddTransient<NetworkMovementPrediction>();
     }

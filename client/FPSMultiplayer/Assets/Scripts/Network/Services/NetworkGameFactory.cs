@@ -67,6 +67,7 @@ namespace Network.Services
             enemy.GetComponent<UniqueId>().Construct(key);
             var movementChangeDispose = state.OnMovementChange(enemy.OnMovementChange);
             var equippedGunChangeDispose = state.OnEquippedGunChange(enemy.OnEquippedGunChange);
+            var healthChangeDispose = state.OnHealthChange(enemy.OnHealthChange);
             _enemies.Add(key, enemy, movementChangeDispose, equippedGunChangeDispose);
             return enemy.gameObject;
         }

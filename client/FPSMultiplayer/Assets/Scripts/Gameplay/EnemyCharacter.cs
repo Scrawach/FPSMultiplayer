@@ -1,5 +1,4 @@
-﻿using System;
-using Gameplay.Characters;
+﻿using Gameplay.Characters;
 using Gameplay.Weapon;
 using Network.Schemas;
 using Network.Services.Listeners;
@@ -50,5 +49,14 @@ namespace Gameplay
         
         public void Shoot(Vector3 position, Vector3 velocity) => 
             _guns.Current.Shoot(string.Empty, 0, position, velocity);
+
+        public void OnHealthChange(HealthData current, HealthData previous)
+        {
+            if (previous == null)
+                return;
+            
+            if (current.current > previous.current) 
+                _health.Construct(current.current, current.total);
+        }
     }
 }

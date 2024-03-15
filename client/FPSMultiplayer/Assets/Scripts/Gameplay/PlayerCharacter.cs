@@ -29,6 +29,15 @@ namespace Gameplay
             _health.Construct(currentHealth, totalHealth);
         }
         
+        public void Revive(Vector3 targetPosition)
+        {
+            _health.Restore();
+            _movement.MoveTo(Vector3.zero);
+            _movement.enabled = false;
+            transform.position = targetPosition;
+            _movement.enabled = true; 
+        }
+        
         private void Update()
         {
             MoveTo(_input.MovementAxis);
