@@ -15,9 +15,9 @@ namespace Gameplay.Weapon
         public void Construct(BulletFactory factory) => 
             _factory = factory;
 
-        public void Shoot(Vector3 position, Vector3 velocity)
+        public void Shoot(string attackerId, int damage, Vector3 position, Vector3 velocity)
         {
-            _factory.CreateBullet(position, velocity);
+            _factory.CreateBullet(attackerId, damage, position, velocity);
             Fired?.Invoke();
         }
     }

@@ -28,7 +28,7 @@ namespace Gameplay.Weapon
                 return;
             
             _previousShootTime = Time.time;
-            _gun.Shoot(_shootPoint.position, _shootPoint.forward * _speed);
+            _gun.Shoot("player", 10, _shootPoint.position, _shootPoint.forward * _speed);
         }
 
         private bool IsCooldown() => 

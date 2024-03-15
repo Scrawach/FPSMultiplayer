@@ -11,6 +11,7 @@ namespace Network.Services.Listeners
         private const string MovementEndPoint = "move";
         private const string ShootEndPoint = "shoot";
         private const string HealthChangeEndPoint = "healthChange";
+        private const string TakeDamageEndPoint = "takeDamage";
         
         private ColyseusRoom<State> _room;
 
@@ -60,6 +61,18 @@ namespace Network.Services.Listeners
             };
             
             _room.Send(HealthChangeEndPoint, message);
+        }
+
+        public void SendTakeDamage(string targetId, string attackedId, int currentHealth)
+        {
+            var message = new Dictionary<string, object>()
+            {
+                [nameof(targetId)] = targetId,
+                [nameof(attackedId)] = attackedId,
+                [nameof(currentHealth)] = currentHealth
+            };
+
+            _room.Send(TakeDamageEndPoint, message);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace Services
         public BulletFactory(Assets assets) => 
             _assets = assets;
 
-        public Bullet CreateBullet(Vector3 position, Vector3 velocity)
+        public Bullet CreateBullet(string attackerId, int damage, Vector3 position, Vector3 velocity)
         {
             var bullet = _assets.Instantiate<Bullet>(BulletPath, position);
-            bullet.Construct(velocity);
+            bullet.Construct(velocity, attackerId,damage);
             return bullet;
         }
     }

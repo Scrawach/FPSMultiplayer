@@ -5,11 +5,23 @@ namespace Gameplay.Projectiles
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
-        
-        public void Construct(Vector3 velocity) => 
-            _rigidbody.velocity = velocity;
 
-        private void OnCollisionEnter(Collision collision) => 
+        private string _attackedId;
+        private int _damage;
+        
+        public void Construct(Vector3 velocity, string attackerId, int damage)
+        {
+            _rigidbody.velocity = velocity;
+            _attackedId = attackerId;
+            _damage = damage;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent(out Health health)) 
+                health.TakeDamage(_attackedId, _damage);
+
             Destroy(gameObject);
+        }
     }
 }

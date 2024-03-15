@@ -6,6 +6,8 @@ namespace Gameplay
     public class Health : MonoBehaviour
     {
         public event Action Changed;
+
+        public event Action<string> DamageTaken;
         
         [field: SerializeField] public int Total { get; private set; }
         
@@ -19,10 +21,11 @@ namespace Gameplay
             Current = current;
         }
         
-        public void TakeDamage(int damage)
+        public void TakeDamage(string attackerId, int damage)
         {
             Current = Mathf.Clamp(Current - damage, 0, Total);
             Changed?.Invoke();
+            DamageTaken?.Invoke(attackerId);
         }
 
         public void Restore()
