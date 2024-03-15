@@ -43,10 +43,11 @@ namespace Network.Services
         private static Dictionary<string, object> ConvertDataToDictionary(string sceneName, CharacterStats stats) =>
             new Dictionary<string, object>()
             {
-                ["SceneName"] = sceneName,
-                ["CurrentHealth"] = 100,
-                ["TotalHealth"] = 100,
-                [nameof(CharacterStats)] = stats
+                ["sceneName"] = sceneName,
+                ["currentHealth"] = stats.CurrentHealth,
+                ["totalHealth"] = stats.TotalHealth,
+                ["speed"] = stats.Speed,
+                ["jumpHeight"] = stats.JumpHeight
             };
     }
 }

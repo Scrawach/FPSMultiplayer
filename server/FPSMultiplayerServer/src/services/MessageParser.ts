@@ -17,13 +17,13 @@ export class MessageParser {
 
     parseCharacterStats(message: any) : CharacterStatsData {
         const stats = new CharacterStatsData();
-        stats.speed = message.Speed;
-        stats.jumpHeight = message.JumpHeight;
+        stats.speed = message.speed;
+        stats.jumpHeight = message.jumpHeight;
         return stats;
     }
 
     parseHealthStats(message: any) : HealthData {
-        const health = new HealthData(message.CurrentHealth, message.TotalHealth);
+        const health = new HealthData(message.currentHealth, message.totalHealth);
         return health;
     }
 

@@ -3,6 +3,7 @@ using Gameplay;
 using Network.Schemas;
 using Network.Services.Characters;
 using Services;
+using StaticData.Data;
 using UnityEngine;
 
 namespace Network.Services
@@ -56,7 +57,7 @@ namespace Network.Services
             instance.GetComponent<UniqueId>().Construct(key);
             var networkSync = instance.GetComponent<PlayerNetworkSync>();
             var healthChangeDispose = state.OnHealthChange(networkSync.OnHealthChanged);
-            instance.UpdateStats(state.health.current, state.health.total, state.stats.ToStats());
+            instance.UpdateStats(new CharacterStats(state.health.current, state.health.total, state.stats.speed, state.stats.jumpHeight));
             _player.Add(key, instance, healthChangeDispose);
             return instance.gameObject;
         }
