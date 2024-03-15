@@ -1,4 +1,5 @@
-﻿using Gameplay.Characters;
+﻿using System;
+using Gameplay.Characters;
 using Gameplay.Weapon;
 using Network.Schemas;
 using Network.Services.Listeners;
@@ -13,13 +14,28 @@ namespace Gameplay
         [SerializeField] private CharacterMovement _movement;
         [SerializeField] private CharacterRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
+        [SerializeField] private UniqueId _uniqueId;
+        [SerializeField] private Health _health;
         [SerializeField] private GunsEquipment _guns;
         
         private NetworkMovementPrediction _movementPrediction;
-
+        private NetworkTransmitter _transmitter;
+        
         [Inject]
-        public void Construct(NetworkMovementPrediction movementPrediction) => 
+        public void Construct(NetworkMovementPrediction movementPrediction, NetworkTransmitter transmitter)
+        {
             _movementPrediction = movementPrediction;
+            _transmitter = transmitter;
+        }
+
+        private void OnEnable() => 
+            _health.DamageTaken += OnDamageTaken;
+
+        private void OnDisable() => 
+            _health.DamageTaken -= OnDamageTaken;
+
+        private void OnDamageTaken(string attacker) => 
+            _transmitter.SendTakeDamage(_uniqueId.Value, attacker, _health.Current);
 
         public void OnMovementChange(Movement current, Movement previous)
         {
