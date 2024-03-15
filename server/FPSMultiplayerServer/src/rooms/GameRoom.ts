@@ -35,7 +35,16 @@ export class GameRoom extends Room<State> {
       const targetId = message.targetId;
       const attackedId = message.targetId;
       const currentHealth = message.currentHealth;
-      console.log(message);
+
+      const targetPlayer = this.state.players.get(targetId);
+      targetPlayer.health.current = currentHealth;
+
+      if (targetPlayer.health.current <= 0){
+        console.log(`${attackedId} kill ${targetId}`);
+        const attackerPlayer = this.state.players.get(attackedId);
+        attackerPlayer.score.kills++;
+        targetPlayer.score.deaths++;
+      }
     })
 
     this.onMessage("equipGun", (client, message) => {
