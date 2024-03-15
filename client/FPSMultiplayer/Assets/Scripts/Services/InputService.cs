@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Services
 {
@@ -11,6 +12,12 @@ namespace Services
         private const string MouseY = "Mouse Y";
 
         private float _mouseSensitivity = 2f;
+
+        private Dictionary<KeyCode, int> _keyCodeMappings = new Dictionary<KeyCode, int>()
+        {
+            [KeyCode.Alpha1] = 0,
+            [KeyCode.Alpha2] = 1
+        };
 
         public Vector3 MovementAxis => 
             new Vector3(Input.GetAxisRaw(HorizontalAxis), 0, Input.GetAxisRaw(VerticalAxis)).normalized;
@@ -29,5 +36,20 @@ namespace Services
 
         public bool IsScoreBoardShown() => 
             Input.GetKey(KeyCode.Tab);
+
+        public bool IsChangeWeaponPressed(out int id)
+        {
+            foreach (var mapping in _keyCodeMappings)
+            {
+                if (Input.GetKeyDown(mapping.Key))
+                {
+                    id = mapping.Value;
+                    return true;
+                }
+            }
+
+            id = 0;
+            return false;
+        }
     }
 }

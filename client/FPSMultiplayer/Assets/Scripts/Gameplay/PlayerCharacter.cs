@@ -39,6 +39,9 @@ namespace Gameplay
             
             if (_input.IsShootPressed())
                 _gun.Shoot();
+            
+            if (_input.IsChangeWeaponPressed(out var gunId))
+                _gun.Equip(gunId);
 
             _sitting.UpdateState(_input.IsSit());
         }

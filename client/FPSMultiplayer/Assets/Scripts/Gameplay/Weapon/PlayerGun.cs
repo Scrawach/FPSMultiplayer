@@ -20,11 +20,9 @@ namespace Gameplay.Weapon
             remove => _equipment.Current.Fired -= value;
         }
 
-        public void Equip(int gunId)
-        {
+        public void Equip(int gunId) => 
             _equipment.Equip(gunId);
-        }
-        
+
         public void Shoot()
         {
             if (IsCooldown()) 
