@@ -13,7 +13,7 @@ namespace Services
 
         private float _mouseSensitivity = 2f;
 
-        private Dictionary<KeyCode, int> _keyCodeMappings = new Dictionary<KeyCode, int>()
+        private readonly Dictionary<KeyCode, int> _gunIdMapping = new()
         {
             [KeyCode.Alpha1] = 0,
             [KeyCode.Alpha2] = 1
@@ -39,7 +39,7 @@ namespace Services
 
         public bool IsChangeWeaponPressed(out int id)
         {
-            foreach (var mapping in _keyCodeMappings)
+            foreach (var mapping in _gunIdMapping)
             {
                 if (Input.GetKeyDown(mapping.Key))
                 {
