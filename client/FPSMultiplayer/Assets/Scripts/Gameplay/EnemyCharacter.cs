@@ -34,10 +34,8 @@ namespace Gameplay
         private void OnDisable() => 
             _health.DamageTaken -= OnDamageTaken;
 
-        private void OnDamageTaken(string attackedId)
-        {
+        private void OnDamageTaken(string attackedId) => 
             _transmitter.SendTakeDamage(_uniqueId.Value, attackedId, _health.Current);
-        }
 
         public void OnMovementChange(Movement current, Movement previous)
         {

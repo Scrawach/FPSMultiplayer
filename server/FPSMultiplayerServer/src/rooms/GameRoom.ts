@@ -29,6 +29,10 @@ export class GameRoom extends Room<State> {
 
     this.onMessage("changeHealth", (client, message) => {
       this.state.changeHealth(client.sessionId, message.current, message.total);
+    });
+
+    this.onMessage("takeDamage", (client, message) => {
+      console.log(message);
     })
   }
 

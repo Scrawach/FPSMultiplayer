@@ -327,6 +327,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9132924609684417154, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
   m_PrefabInstance: {fileID: 7895647302251948406}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1428464150449060647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9097295371710419537, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+  m_PrefabInstance: {fileID: 7895647302251948406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296480492334690689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2423c09da88541e498fad07ca9bb1270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2453739610038132067 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3485902317530680299, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
@@ -358,6 +369,7 @@ MonoBehaviour:
   _movement: {fileID: 4034408286758292063}
   _rotation: {fileID: 2453739610038132067}
   _sitting: {fileID: 4691695082728518341}
+  _uniqueId: {fileID: 1428464150449060647}
   _health: {fileID: 7771997658750466140}
   _gun: {fileID: 3718100628801102448}
 --- !u!114 &3718100628801102448 stripped
