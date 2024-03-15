@@ -1,16 +1,25 @@
-﻿using Gameplay;
+﻿using System;
+using Gameplay;
 
 namespace Network.Services.Data
 {
-    public struct PlayerInfo
+    public class PlayerInfo : IDisposable
     {
-        public string Id;
-        public PlayerCharacter Player;
+        public readonly string Id;
+        public readonly PlayerCharacter Player;
+        public readonly Action[] DisposeActions;
 
-        public PlayerInfo(string id, PlayerCharacter player)
+        public PlayerInfo(string id, PlayerCharacter player, params Action[] disposeActions)
         {
             Id = id;
             Player = player;
+            DisposeActions = disposeActions;
+        }
+
+        public void Dispose()
+        {
+            foreach (var disposeAction in DisposeActions) 
+                disposeAction?.Invoke();
         }
     }
 }

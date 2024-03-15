@@ -11,13 +11,16 @@ namespace Network.Services
     {
         private readonly NetworkConnection _network;
         private readonly GameFactory _factory;
-        private readonly NetworkCharactersProvider _characters;
+        private readonly NetworkPlayerProvider _player;
+        private readonly NetworkEnemyProvider _enemies;
 
-        public NetworkGameFactory(NetworkConnection network, GameFactory factory, NetworkCharactersProvider characters)
+        public NetworkGameFactory(NetworkConnection network, GameFactory factory, NetworkPlayerProvider player,
+            NetworkEnemyProvider enemies)
         {
             _network = network;
             _factory = factory;
-            _characters = characters;
+            _player = player;
+            _enemies = enemies;
         }
         
         public GameObject CreateUnit(string key, Player state) =>
@@ -35,13 +38,14 @@ namespace Network.Services
         {
             if (_network.IsPlayer(key))
             {
-                var playerInfo = _characters.GetPlayer();
-                _characters.RemovePlayer();
+                var playerInfo = _player.Player;
+                _player.Remove();
+                playerInfo.Dispose();
                 return playerInfo.Player.gameObject;
             }
 
-            var enemyInfo = _characters.GetEnemy(key);
-            _characters.RemoveEnemy(key);
+            var enemyInfo = _enemies[key];
+            _enemies.Remove(key);
             enemyInfo.Dispose();
             return enemyInfo.EnemyCharacter.gameObject;
         }
@@ -50,8 +54,9 @@ namespace Network.Services
         {
             var instance = _factory.CreatePlayer(state.movement.position.ToVector3());
             instance.GetComponent<UniqueId>().Construct(key);
+            var healthChangeDispose = state.OnHealthChange(instance.OnHealthChanged);
             instance.UpdateStats(state.stats.ToStats());
-            _characters.AddPlayer(key, instance);
+            _player.Add(key, instance, healthChangeDispose);
             return instance.gameObject;
         }
 
@@ -61,7 +66,7 @@ namespace Network.Services
             enemy.GetComponent<UniqueId>().Construct(key);
             var movementChangeDispose = state.OnMovementChange(enemy.OnMovementChange);
             var statsChangeDispose = state.OnStatsChange(enemy.OnStatsChange);
-            _characters.AddEnemy(key, enemy, movementChangeDispose, statsChangeDispose);
+            _enemies.Add(key, enemy, movementChangeDispose, statsChangeDispose);
             return enemy.gameObject;
         }
     }

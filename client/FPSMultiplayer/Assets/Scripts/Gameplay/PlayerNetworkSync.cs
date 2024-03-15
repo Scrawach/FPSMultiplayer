@@ -25,26 +25,17 @@ namespace Gameplay
             _input = input;
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _gun.Fired += OnGunFired;
-            _health.Changed += OnHealthChanged;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _gun.Fired -= OnGunFired;
-            _health.Changed -= OnHealthChanged;
-        }
-        
+
         private void OnGunFired()
         {
             var shootPoint = _gun.ShootPoint;
             _transmitter.SendShoot(shootPoint.position, shootPoint.forward * _gun.BulletSpeed);
         }
-        
-        private void OnHealthChanged() => 
-            _transmitter.SendHealthChange(_health.Current, _health.Total);
 
         private void Update()
         {

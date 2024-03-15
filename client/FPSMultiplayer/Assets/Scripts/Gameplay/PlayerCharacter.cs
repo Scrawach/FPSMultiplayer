@@ -1,5 +1,6 @@
 using Gameplay.Characters;
 using Gameplay.Weapon;
+using Network.Schemas;
 using Reflex.Attributes;
 using Services;
 using StaticData.Data;
@@ -29,6 +30,10 @@ namespace Gameplay
             _health.Construct(stats.CurrentHealth, stats.TotalHealth);
         }
         
+        
+        public void OnHealthChanged(HealthData current, HealthData previousValue) => 
+            _health.Construct(current.current, current.total);
+
         private void Update()
         {
             MoveTo(_input.MovementAxis);

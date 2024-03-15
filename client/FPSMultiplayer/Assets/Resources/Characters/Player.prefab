@@ -143,6 +143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2500b1082504956a25889667c22c749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6809076341929728135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9097295371710419537, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
+  m_PrefabInstance: {fileID: 2323478263154215638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922927364087517729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2423c09da88541e498fad07ca9bb1270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6922927364087517729 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4624505128410585335, guid: 3d3c99b2f2241be4796611cb8a3b61b5, type: 3}
@@ -160,9 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a3eb441ef84e608935a021fe8d3df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uniqueId: {fileID: 6809076341929728135}
   _gun: {fileID: 9094182282750656976}
   _shootPoint: {fileID: 7332645835623023679}
   _shootDelay: 0.2
+  _damage: 1
   _speed: 20
 --- !u!114 &5076479929989977154
 MonoBehaviour:

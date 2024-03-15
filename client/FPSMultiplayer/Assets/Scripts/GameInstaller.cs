@@ -30,7 +30,8 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton<GameFactory>();
         builder.AddSingleton<UIFactory>();
         
-        builder.AddSingleton<NetworkCharactersProvider>();
+        builder.AddSingleton<NetworkPlayerProvider>();
+        builder.AddSingleton<NetworkEnemyProvider>();
         builder.AddSingleton<NetworkGameFactory>();
         builder.AddSingleton<NetworkConnection>();
         
