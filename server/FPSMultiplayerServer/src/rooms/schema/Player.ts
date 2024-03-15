@@ -9,6 +9,7 @@ export class Player extends Schema {
     @type(CharacterStatsData) stats: CharacterStatsData = new CharacterStatsData();
     @type(ScoreData) score: ScoreData = new ScoreData();
     @type(HealthData) health: HealthData = new HealthData();
+    @type("uint8") equippedGun: number = 0;
 
     public toString = () : string => {
         return `Player: ${this.movement};`

@@ -6,22 +6,23 @@ namespace Gameplay.Weapon
     public class PlayerGun : MonoBehaviour
     {
         [SerializeField] private UniqueId _uniqueId;
-        [SerializeField] private Gun _gun;
-        [SerializeField] private Transform _shootPoint;
-        [SerializeField] private float _shootDelay;
-        [SerializeField] private int _damage;
-        [SerializeField] private float _speed;
+        [SerializeField] private GunsEquipment _equipment;
 
         private float _previousShootTime;
 
-        public Transform ShootPoint => _shootPoint;
+        public Transform ShootPoint => _equipment.Current.ShootPoint;
 
-        public float BulletSpeed => _speed;
+        public float BulletSpeed => _equipment.Current.BulletSpeed;
         
         public event Action Fired
         {
-            add => _gun.Fired += value;
-            remove => _gun.Fired -= value;
+            add => _equipment.Current.Fired += value;
+            remove => _equipment.Current.Fired -= value;
+        }
+
+        public void Equip(int gunId)
+        {
+            _equipment.Equip(gunId);
         }
         
         public void Shoot()
@@ -30,11 +31,11 @@ namespace Gameplay.Weapon
                 return;
             
             _previousShootTime = Time.time;
-            _gun.Shoot(_uniqueId.Value, _damage, _shootPoint.position, _shootPoint.forward * _speed);
+            _equipment.Current.Shoot(_uniqueId.Value, _equipment.Current.Damage, ShootPoint.position, ShootPoint.forward * _equipment.Current.BulletSpeed);
         }
 
         private bool IsCooldown() => 
-            Time.time < _previousShootTime + _shootDelay;
+            Time.time < _previousShootTime + _equipment.Current.ShootCooldown;
         
     }
 }

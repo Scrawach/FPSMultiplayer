@@ -22,6 +22,9 @@ namespace Network.Schemas {
 		[Type(3, "ref", typeof(HealthData))]
 		public HealthData health = new HealthData();
 
+		[Type(4, "uint8")]
+		public byte equippedGun = default(byte);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -74,12 +77,25 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<byte> __equippedGunChange;
+		public Action OnEquippedGunChange(PropertyChangeHandler<byte> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.equippedGun));
+			__equippedGunChange += __handler;
+			if (__immediate && this.equippedGun != default(byte)) { __handler(this.equippedGun, default(byte)); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(equippedGun));
+				__equippedGunChange -= __handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(movement): __movementChange?.Invoke((Movement) change.Value, (Movement) change.PreviousValue); break;
 				case nameof(stats): __statsChange?.Invoke((CharacterStatsData) change.Value, (CharacterStatsData) change.PreviousValue); break;
 				case nameof(score): __scoreChange?.Invoke((ScoreData) change.Value, (ScoreData) change.PreviousValue); break;
 				case nameof(health): __healthChange?.Invoke((HealthData) change.Value, (HealthData) change.PreviousValue); break;
+				case nameof(equippedGun): __equippedGunChange?.Invoke((byte) change.Value, (byte) change.PreviousValue); break;
 				default: break;
 			}
 		}

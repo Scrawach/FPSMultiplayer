@@ -1,5 +1,6 @@
 ﻿using Gameplay.Characters;
 using Gameplay.Weapon;
+using Network.Schemas;
 using Network.Services.Listeners;
 using Reflex.Attributes;
 using Services;
@@ -30,6 +31,9 @@ namespace Gameplay
 
         private void OnDisable() => 
             _gun.Fired -= OnGunFired;
+        
+        public void OnHealthChanged(HealthData current, HealthData previousValue) => 
+            _health.Construct(current.current, current.total);
 
         private void OnGunFired()
         {

@@ -54,7 +54,8 @@ namespace Network.Services
         {
             var instance = _factory.CreatePlayer(state.movement.position.ToVector3());
             instance.GetComponent<UniqueId>().Construct(key);
-            var healthChangeDispose = state.OnHealthChange(instance.OnHealthChanged);
+            var networkSync = instance.GetComponent<PlayerNetworkSync>();
+            var healthChangeDispose = state.OnHealthChange(networkSync.OnHealthChanged);
             instance.UpdateStats(state.stats.ToStats());
             _player.Add(key, instance, healthChangeDispose);
             return instance.gameObject;
@@ -65,8 +66,8 @@ namespace Network.Services
             var enemy = _factory.CreateEnemy(state.movement.position.ToVector3());
             enemy.GetComponent<UniqueId>().Construct(key);
             var movementChangeDispose = state.OnMovementChange(enemy.OnMovementChange);
-            var statsChangeDispose = state.OnStatsChange(enemy.OnStatsChange);
-            _enemies.Add(key, enemy, movementChangeDispose, statsChangeDispose);
+            var equippedGunChangeDispose = state.OnEquippedGunChange(enemy.OnEquippedGunChange);
+            _enemies.Add(key, enemy, movementChangeDispose, equippedGunChangeDispose);
             return enemy.gameObject;
         }
     }
