@@ -18,6 +18,11 @@ export class State extends Schema {
         player.movement = movement;
     }
 
+    equipGun(sessionId: string, gunId: number) {
+        const player = this.players.get(sessionId);
+        player.equippedGun = gunId;
+    }
+
     changeHealth(sessionId: string, current: number, total: number) {
         const player = this.players.get(sessionId);
         player.stats.currentHealth = current;

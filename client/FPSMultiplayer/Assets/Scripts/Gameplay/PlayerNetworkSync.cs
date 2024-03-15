@@ -26,8 +26,14 @@ namespace Gameplay
             _input = input;
         }
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
             _gun.Fired += OnGunFired;
+            _gun.Equipped += OnGunEquipped;
+        }
+
+        private void OnGunEquipped(int equippedGunId) => 
+            _transmitter.SendEquipGun(equippedGunId);
 
         private void OnDisable() => 
             _gun.Fired -= OnGunFired;

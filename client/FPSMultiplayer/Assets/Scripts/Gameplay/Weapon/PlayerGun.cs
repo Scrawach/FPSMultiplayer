@@ -13,7 +13,13 @@ namespace Gameplay.Weapon
         public Transform ShootPoint => _equipment.Current.ShootPoint;
 
         public float BulletSpeed => _equipment.Current.BulletSpeed;
-        
+
+        public event Action<int> Equipped
+        {
+            add => _equipment.Equipped += value;
+            remove => _equipment.Equipped -= value;
+        }
+
         public event Action Fired
         {
             add => _equipment.Current.Fired += value;

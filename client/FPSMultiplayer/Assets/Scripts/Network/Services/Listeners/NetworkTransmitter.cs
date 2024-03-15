@@ -12,6 +12,7 @@ namespace Network.Services.Listeners
         private const string ShootEndPoint = "shoot";
         private const string HealthChangeEndPoint = "healthChange";
         private const string TakeDamageEndPoint = "takeDamage";
+        private const string EquipGunEndPoint = "equipGun";
         
         private ColyseusRoom<State> _room;
 
@@ -74,5 +75,8 @@ namespace Network.Services.Listeners
 
             _room.Send(TakeDamageEndPoint, message);
         }
+
+        public void SendEquipGun(int equippedGunId) => 
+            _room.Send(EquipGunEndPoint, equippedGunId);
     }
 }

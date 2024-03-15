@@ -32,7 +32,14 @@ export class GameRoom extends Room<State> {
     });
 
     this.onMessage("takeDamage", (client, message) => {
+      const targetId = message.targetId;
+      const attackedId = message.targetId;
+      const currentHealth = message.currentHealth;
       console.log(message);
+    })
+
+    this.onMessage("equipGun", (client, message) => {
+      this.state.equipGun(client.sessionId, message);
     })
   }
 
