@@ -32,7 +32,7 @@ namespace UI.Score
             return row;
         }
 
-        public void Destroy(ScoreTableRow instance) => 
+        public void Destroy(GameObject instance) => 
             Object.Destroy(instance);
     }
 }

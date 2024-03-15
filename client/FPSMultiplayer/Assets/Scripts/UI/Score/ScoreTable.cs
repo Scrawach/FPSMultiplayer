@@ -30,7 +30,7 @@ namespace UI.Score
         public void RemoveRow(string key)
         {
             var instance = _rows[key];
-            _uiFactory.Destroy(instance);
+            _uiFactory.Destroy(instance.gameObject);
             _rows.Remove(key);
         }
     }
