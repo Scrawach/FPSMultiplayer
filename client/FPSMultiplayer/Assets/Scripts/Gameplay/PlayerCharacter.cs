@@ -23,10 +23,10 @@ namespace Gameplay
         public void Construct(InputService input) => 
             _input = input;
 
-        public void UpdateStats(CharacterStats stats)
+        public void UpdateStats(int currentHealth, int totalHealth, CharacterStats stats)
         {
             _movement.Construct(stats.Speed, stats.JumpHeight);
-            _health.Construct(stats.CurrentHealth, stats.TotalHealth);
+            _health.Construct(currentHealth, totalHealth);
         }
         
         private void Update()

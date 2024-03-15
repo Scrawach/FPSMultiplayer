@@ -3,6 +3,7 @@ import { State } from "./schema/State";
 import { Environment } from "../services/Environment";
 import { MessageParser } from "../services/MessageParser";
 import { StaticData } from "../services/StaticData";
+import { HealthData } from "./schema/HealthData";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -27,17 +28,15 @@ export class GameRoom extends Room<State> {
       this.broadcast("shoot", message);
     });
 
-    this.onMessage("changeHealth", (client, message) => {
-      this.state.changeHealth(client.sessionId, message.current, message.total);
-    });
-
     this.onMessage("takeDamage", (client, message) => {
       const targetId = message.targetId;
       const attackedId = message.targetId;
       const currentHealth = message.currentHealth;
 
       const targetPlayer = this.state.players.get(targetId);
-      targetPlayer.health.current = currentHealth;
+      const totalHealth = targetPlayer.health.total;
+
+      targetPlayer.health = new HealthData(currentHealth, totalHealth);
 
       if (targetPlayer.health.current <= 0){
         console.log(`${attackedId} kill ${targetId}`);
@@ -55,7 +54,8 @@ export class GameRoom extends Room<State> {
   onJoin (client: Client, options: any) {
     const levelData = this.staticData.getLevelData(options.SceneName);
     const playerSettings = this.messageParser.parseCharacterStats(options.CharacterStats);
-    const newPlayer = this.environment.createNewPlayer(playerSettings, levelData);
+    const health = this.messageParser.parseHealthStats(options);
+    const newPlayer = this.environment.createNewPlayer(playerSettings, health, levelData);
     this.state.addPlayer(client.sessionId, newPlayer);
   }
 

@@ -19,6 +19,7 @@ namespace Gameplay
         {
             Total = total;
             Current = current;
+            Changed?.Invoke();
         }
         
         public void TakeDamage(string attackerId, int damage)

@@ -2,6 +2,7 @@ import { Movement } from "../rooms/schema/Movement";
 import { CharacterStatsData } from "../rooms/schema/CharacterStatsData";
 import { Vector2Data } from "../rooms/schema/Vector2Data";
 import { Vector3Data } from "../rooms/schema/Vector3Data";
+import { HealthData } from "../rooms/schema/HealthData";
 
 export class MessageParser {
     parseMovement(message: any) : Movement {
@@ -17,10 +18,13 @@ export class MessageParser {
     parseCharacterStats(message: any) : CharacterStatsData {
         const stats = new CharacterStatsData();
         stats.speed = message.Speed;
-        stats.totalHealth = message.TotalHealth;
-        stats.currentHealth = message.CurrentHealth;
         stats.jumpHeight = message.JumpHeight;
         return stats;
+    }
+
+    parseHealthStats(message: any) : HealthData {
+        const health = new HealthData(message.CurrentHealth, message.TotalHealth);
+        return health;
     }
 
     parsePosition(message: any) : Vector3Data {

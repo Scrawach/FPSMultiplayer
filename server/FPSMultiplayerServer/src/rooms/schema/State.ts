@@ -22,10 +22,4 @@ export class State extends Schema {
         const player = this.players.get(sessionId);
         player.equippedGun = gunId;
     }
-
-    changeHealth(sessionId: string, current: number, total: number) {
-        const player = this.players.get(sessionId);
-        player.stats.currentHealth = current;
-        player.stats.totalHealth = total;
-    }
 }

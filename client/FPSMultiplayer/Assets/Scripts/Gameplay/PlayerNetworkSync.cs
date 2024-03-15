@@ -38,8 +38,10 @@ namespace Gameplay
         private void OnDisable() => 
             _gun.Fired -= OnGunFired;
         
-        public void OnHealthChanged(HealthData current, HealthData previousValue) => 
+        public void OnHealthChanged(HealthData current, HealthData previousValue)
+        {
             _health.Construct(current.current, current.total);
+        }
 
         private void OnGunFired()
         {

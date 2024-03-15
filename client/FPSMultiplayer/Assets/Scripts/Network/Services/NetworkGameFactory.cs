@@ -56,7 +56,7 @@ namespace Network.Services
             instance.GetComponent<UniqueId>().Construct(key);
             var networkSync = instance.GetComponent<PlayerNetworkSync>();
             var healthChangeDispose = state.OnHealthChange(networkSync.OnHealthChanged);
-            instance.UpdateStats(state.stats.ToStats());
+            instance.UpdateStats(state.health.current, state.health.total, state.stats.ToStats());
             _player.Add(key, instance, healthChangeDispose);
             return instance.gameObject;
         }

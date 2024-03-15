@@ -9,8 +9,6 @@ namespace Extensions
         {
             return new()
             {
-                CurrentHealth = data.currentHealth,
-                TotalHealth = data.totalHealth,
                 Speed = data.speed,
                 JumpHeight = data.jumpHeight
             };

@@ -44,6 +44,8 @@ namespace Network.Services
             new Dictionary<string, object>()
             {
                 ["SceneName"] = sceneName,
+                ["CurrentHealth"] = 100,
+                ["TotalHealth"] = 100,
                 [nameof(CharacterStats)] = stats
             };
     }
