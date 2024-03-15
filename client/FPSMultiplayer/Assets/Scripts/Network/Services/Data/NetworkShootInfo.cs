@@ -9,6 +9,6 @@ namespace Network.Services.Data
     {
         public string Id;
         public Vector3 Position;
-        [FormerlySerializedAs("Direction")] public Vector3 Velocity;
+        public Vector3 Velocity;
     }
 }
