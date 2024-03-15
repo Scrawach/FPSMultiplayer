@@ -27,6 +27,9 @@ namespace UI.Score
             _rows[key] = row;
         }
 
+        public void UpdateRow(string key, int kills, int death) => 
+            _rows[key].UpdateStats(kills, death);
+
         public void RemoveRow(string key)
         {
             var instance = _rows[key];

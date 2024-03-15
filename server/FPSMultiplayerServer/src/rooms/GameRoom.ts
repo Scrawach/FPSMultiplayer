@@ -4,6 +4,7 @@ import { Environment } from "../services/Environment";
 import { MessageParser } from "../services/MessageParser";
 import { StaticData } from "../services/StaticData";
 import { HealthData } from "./schema/HealthData";
+import { ScoreData } from "./schema/ScoreData";
 
 export class GameRoom extends Room<State> {
   maxClients = 4;
@@ -30,7 +31,7 @@ export class GameRoom extends Room<State> {
 
     this.onMessage("takeDamage", (client, message) => {
       const targetId = message.targetId;
-      const attackedId = message.targetId;
+      const attackedId = message.attackedId;
       const currentHealth = message.currentHealth;
 
       const targetPlayer = this.state.players.get(targetId);
@@ -41,8 +42,8 @@ export class GameRoom extends Room<State> {
       if (targetPlayer.health.current <= 0){
         console.log(`${attackedId} kill ${targetId}`);
         const attackerPlayer = this.state.players.get(attackedId);
-        attackerPlayer.score.kills++;
-        targetPlayer.score.deaths++;
+        attackerPlayer.score = new ScoreData(attackerPlayer.score.kills + 1, attackerPlayer.score.deaths);
+        targetPlayer.score = new ScoreData(targetPlayer.score.kills, targetPlayer.score.deaths + 1);
       }
     })
 
