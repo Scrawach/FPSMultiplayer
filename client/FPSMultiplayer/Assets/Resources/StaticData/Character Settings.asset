@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Character Settings
   m_EditorClassIdentifier: 
   Stats:
-    TotalHealth: 100
     CurrentHealth: 100
+    TotalHealth: 100
     Speed: 6
-    JumpHeight: 6
+    JumpHeight: 8
