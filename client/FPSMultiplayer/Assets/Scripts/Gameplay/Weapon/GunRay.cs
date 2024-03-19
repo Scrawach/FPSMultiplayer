@@ -6,7 +6,7 @@ namespace Gameplay.Weapon
 {
     public class GunRay : MonoBehaviour
     {
-        private const float MaxDistance = 50f;
+        private const float MaxDistance = 25f;
         
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private Transform _center;
@@ -23,8 +23,11 @@ namespace Gameplay.Weapon
         {
             var ray = new Ray(_center.position, _center.forward);
 
-            if (!Physics.Raycast(ray, out var hit, MaxDistance, _layerMask, QueryTriggerInteraction.Ignore)) 
+            if (!Physics.Raycast(ray, out var hit, MaxDistance, _layerMask, QueryTriggerInteraction.Ignore))
+            {
+                _center.localScale = new Vector3(1, 1, MaxDistance);
                 return;
+            }
             
             _center.localScale = new Vector3(1, 1, hit.distance);
             _point.position = hit.point;
