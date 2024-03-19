@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gameplay.DamageZones;
+using UnityEngine;
 
 namespace Gameplay.Projectiles
 {
@@ -18,8 +19,8 @@ namespace Gameplay.Projectiles
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.TryGetComponent(out Health health)) 
-                health.TakeDamage(_attackedId, _damage);
+            if (collision.gameObject.TryGetComponent(out DamageZone damageZone)) 
+                damageZone.TakeDamage(_attackedId, _damage);
 
             Destroy(gameObject);
         }
