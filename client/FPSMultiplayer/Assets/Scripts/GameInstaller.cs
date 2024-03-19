@@ -22,6 +22,7 @@ public class GameInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton(container => new ColyseusClient(container.Resolve<ColyseusSettings>()));
 
         builder.AddSingleton<Injector>();
+        builder.AddSingleton<CursorService>();
         builder.AddSingleton<InputService>();
         builder.AddSingleton<CameraProvider>();
         builder.AddSingleton<Assets>();
