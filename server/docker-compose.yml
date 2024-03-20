@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+    server:
+        build: ./FPSMultiplayerServer
+        container_name: FPSMultiplayerServer
+        ports:
+            - '2567:2567'
