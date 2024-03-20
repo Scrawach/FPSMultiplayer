@@ -1,6 +1,7 @@
 using Services;
 using StaticData.Data;
 using StaticData.ScriptableObjects;
+using UnityEngine;
 
 namespace StaticData
 {
@@ -10,7 +11,7 @@ namespace StaticData
 
         private readonly Assets _assets;
         
-        private CharacterStats _characterData;
+        private CharacterStaticData _characterData;
 
         public StaticDataService(Assets assets) => 
             _assets = assets;
@@ -21,9 +22,12 @@ namespace StaticData
         }
         
         public CharacterStats ForCharacter() => 
-            _characterData;
+            _characterData.Stats;
 
-        private CharacterStats LoadCharacterData() => 
-            _assets.Load<CharacterStaticData>(CharacterDataPath).Stats;
+        public Material[] ForSkins() =>
+            _characterData.Skins;
+
+        private CharacterStaticData LoadCharacterData() => 
+            _assets.Load<CharacterStaticData>(CharacterDataPath);
     }
 }

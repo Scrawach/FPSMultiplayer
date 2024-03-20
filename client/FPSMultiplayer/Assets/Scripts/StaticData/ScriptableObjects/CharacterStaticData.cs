@@ -7,5 +7,6 @@ namespace StaticData.ScriptableObjects
     public class CharacterStaticData : ScriptableObject
     {
         public CharacterStats Stats;
+        public Material[] Skins;
     }
 }
