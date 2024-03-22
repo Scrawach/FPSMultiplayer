@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay.Characters
+namespace Gameplay.Characters.Player
 {
     public class PlayerRotation : MonoBehaviour
     {

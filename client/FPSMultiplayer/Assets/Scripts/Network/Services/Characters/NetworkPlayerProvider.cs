@@ -1,5 +1,6 @@
 using System;
 using Gameplay;
+using Gameplay.Characters.Player;
 using Network.Services.Data;
 using UnityEngine;
 

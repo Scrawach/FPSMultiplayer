@@ -1,4 +1,6 @@
 ﻿using Gameplay;
+using Gameplay.Characters.Enemy;
+using Gameplay.Characters.Player;
 using UnityEngine;
 
 namespace Services

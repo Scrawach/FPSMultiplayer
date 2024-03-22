@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 452989797762502954}
-  _damageModifier: 1
+  _damageModifier: 2
 --- !u!135 &8101585385371546695
 SphereCollider:
   m_ObjectHideFlags: 0

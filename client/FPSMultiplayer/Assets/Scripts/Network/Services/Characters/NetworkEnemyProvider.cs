@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameplay;
+using Gameplay.Characters.Enemy;
 using Network.Services.Data;
 
 namespace Network.Services.Characters

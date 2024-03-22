@@ -1,11 +1,10 @@
-using Gameplay.Characters;
 using Gameplay.Weapon;
 using Reflex.Attributes;
 using Services;
 using StaticData.Data;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Characters.Player
 {
     public class PlayerCharacter : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿using Gameplay.Characters;
+﻿using Extensions;
 using Gameplay.Weapon;
 using Network.Schemas;
 using Network.Services.Listeners;
@@ -6,7 +6,7 @@ using Network.Services.Logic;
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Characters.Enemy
 {
     public class EnemyCharacter : MonoBehaviour
     {
@@ -40,7 +40,7 @@ namespace Gameplay
         {
             _movementPrediction.Add(current);
             _movement.UpdateVelocityTo(_movementPrediction.NextPosition());
-            _rotation.SetRotation(_movementPrediction.NextRotation());
+            _rotation.SetRotation(current.rotation.ToVector2());
             _sitting.UpdateState(current.isSitting);
         }
 
