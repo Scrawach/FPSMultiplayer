@@ -29,7 +29,7 @@ namespace Gameplay.Weapon
         public void Equip(int gunId) => 
             _equipment.Equip(gunId);
 
-        public void Shoot()
+        public void TryShoot()
         {
             if (IsCooldown()) 
                 return;

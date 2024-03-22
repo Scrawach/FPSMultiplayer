@@ -29,7 +29,7 @@ namespace Services
             Input.GetKeyDown(KeyCode.Space);
 
         public bool IsShootPressed() =>
-            Input.GetKeyDown(KeyCode.Mouse0);
+            Input.GetKey(KeyCode.Mouse0);
 
         public bool IsSit() =>
             Input.GetKey(KeyCode.LeftControl);

@@ -47,7 +47,7 @@ namespace Gameplay
                 _movement.Jump();
             
             if (_input.IsShootPressed())
-                _gun.Shoot();
+                _gun.TryShoot();
             
             if (_input.IsChangeWeaponPressed(out var gunId))
                 _gun.Equip(gunId);
