@@ -23,16 +23,22 @@ namespace Gameplay.Weapon
         {
             var ray = new Ray(_center.position, _center.forward);
 
-            if (!Physics.Raycast(ray, out var hit, MaxDistance, _layerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(ray, out var hit, MaxDistance, _layerMask, QueryTriggerInteraction.Ignore))
             {
-                _center.localScale = new Vector3(1, 1, MaxDistance);
-                return;
+                var cameraDistance = Vector3.Distance(_cameraProvider.MainCamera.transform.position, hit.point);
+                UpdateMarkPosition(hit.distance, hit.point, cameraDistance);
             }
-            
-            _center.localScale = new Vector3(1, 1, hit.distance);
-            _point.position = hit.point;
-            var distance = Vector3.Distance(_cameraProvider.MainCamera.transform.position, hit.point);
-            _point.localScale = Vector3.one * distance * _pointSize;
+            else
+            {
+                UpdateMarkPosition(MaxDistance, _center.position + ray.direction * MaxDistance, MaxDistance);
+            } 
+        }
+
+        private void UpdateMarkPosition(float distance, Vector3 markPoint, float cameraDistance)
+        {
+            _center.localScale = new Vector3(1, 1, distance / 2);
+            _point.position = markPoint;
+            _point.localScale = Vector3.one * cameraDistance * _pointSize;
         }
     }
 }
