@@ -11,7 +11,7 @@ namespace Gameplay
     public class EnemyCharacter : MonoBehaviour
     {
         [SerializeField] private CharacterMovement _movement;
-        [SerializeField] private CharacterRotation _rotation;
+        [SerializeField] private EnemyRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
         [SerializeField] private UniqueId _uniqueId;
         [SerializeField] private Health _health;

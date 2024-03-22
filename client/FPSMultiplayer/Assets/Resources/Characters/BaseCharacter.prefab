@@ -326,7 +326,6 @@ GameObject:
   - component: {fileID: 9132924609684417154}
   - component: {fileID: 6902104049720794240}
   - component: {fileID: 6516675217394328361}
-  - component: {fileID: -3485902317530680299}
   - component: {fileID: 7712389019266384299}
   - component: {fileID: 3074450395393979452}
   - component: {fileID: 3210722054349609907}
@@ -400,21 +399,6 @@ MonoBehaviour:
   _speed: 5
   _jumpHeight: 6
   _jumpDelay: 0.2
---- !u!114 &-3485902317530680299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4624505128410585335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04985fe7ad9b494ab094e4879b298868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _head: {fileID: 4523542490261965555}
-  _minAngleX: -90
-  _maxAngleX: 90
 --- !u!114 &7712389019266384299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +507,6 @@ MonoBehaviour:
   - {fileID: 3320657707135620053}
   - {fileID: 3220243720429183013}
   - {fileID: 1389779451344945126}
-  _target: {fileID: 2100000, guid: 10f5ffff68552cbe491caca9c276ff6d, type: 2}
 --- !u!1 &5070056833539412409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,7 +1030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 452989797762502954}
-  DamageModifier: 2
+  _damageModifier: 1
 --- !u!135 &8101585385371546695
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1139,7 +1122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 452989797762502954}
-  DamageModifier: 1
+  _damageModifier: 1
 --- !u!136 &8713112954952191126
 CapsuleCollider:
   m_ObjectHideFlags: 0

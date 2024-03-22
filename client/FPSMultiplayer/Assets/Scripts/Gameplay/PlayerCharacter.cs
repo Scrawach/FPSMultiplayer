@@ -10,7 +10,7 @@ namespace Gameplay
     public class PlayerCharacter : MonoBehaviour
     {
         [SerializeField] private CharacterMovement _movement;
-        [SerializeField] private CharacterRotation _rotation;
+        [SerializeField] private PlayerRotation _rotation;
         [SerializeField] private CharacterSitting _sitting;
         [SerializeField] private Health _health;
         [SerializeField] private PlayerGun _gun;
