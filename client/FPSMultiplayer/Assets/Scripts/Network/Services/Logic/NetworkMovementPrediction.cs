@@ -14,9 +14,6 @@ namespace Network.Services.Logic
         private Vector3 _position;
         private Vector3 _velocity;
 
-        private Vector2 _rotation;
-        private Vector2 _rotationAngles;
-
         public NetworkMovementPrediction() => 
             _receiveTimeIntervals = new CircularBuffer<float>(4);
 
@@ -25,15 +22,10 @@ namespace Network.Services.Logic
             SaveTimeInterval();
             _position = current.position.ToVector3();
             _velocity = current.velocity.ToVector3();
-            _rotation = current.rotation.ToVector2();
-            _rotationAngles = current.angles.ToVector2();
         }
 
         public Vector3 NextPosition() => 
             _position + _velocity * AverageTimeInterval();
-
-        public Vector2 NextRotation() => 
-            _rotation + _rotationAngles * AverageTimeInterval();
 
         private void SaveTimeInterval()
         {
