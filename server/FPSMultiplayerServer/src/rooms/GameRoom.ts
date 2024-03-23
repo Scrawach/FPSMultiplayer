@@ -4,7 +4,6 @@ import { Environment } from "../services/Environment";
 import { MessageParser } from "../services/MessageParser";
 import { StaticData } from "../services/StaticData";
 import { HealthData } from "./schema/HealthData";
-import { ScoreData } from "./schema/ScoreData";
 import { LevelData } from "../data/LevelData";
 
 export class GameRoom extends Room<State> {
@@ -57,7 +56,8 @@ export class GameRoom extends Room<State> {
     this.levelData = this.staticData.getLevelData(options.sceneName);
     const playerSettings = this.messageParser.parseCharacterStats(options);
     const health = this.messageParser.parseHealthStats(options);
-    const newPlayer = this.environment.createNewPlayer(playerSettings, health, this.levelData);
+    const skin = options.skin;
+    const newPlayer = this.environment.createNewPlayer(playerSettings, health, this.levelData, skin);
     this.state.addPlayer(client.sessionId, newPlayer);
   }
 

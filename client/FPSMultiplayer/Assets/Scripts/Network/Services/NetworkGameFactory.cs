@@ -1,8 +1,10 @@
 ﻿using Extensions;
 using Gameplay;
+using Gameplay.Characters;
 using Network.Schemas;
 using Network.Services.Characters;
 using Services;
+using StaticData;
 using StaticData.Data;
 using UnityEngine;
 
@@ -14,14 +16,16 @@ namespace Network.Services
         private readonly GameFactory _factory;
         private readonly NetworkPlayerProvider _player;
         private readonly NetworkEnemyProvider _enemies;
+        private readonly StaticDataService _staticData;
 
         public NetworkGameFactory(NetworkConnection network, GameFactory factory, NetworkPlayerProvider player,
-            NetworkEnemyProvider enemies)
+            NetworkEnemyProvider enemies, StaticDataService staticData)
         {
             _network = network;
             _factory = factory;
             _player = player;
             _enemies = enemies;
+            _staticData = staticData;
         }
         
         public GameObject CreateUnit(string key, Player state) =>
@@ -58,6 +62,8 @@ namespace Network.Services
             var networkSync = instance.GetComponent<PlayerNetworkSync>();
             var healthChangeDispose = state.OnHealthChange(networkSync.OnHealthChanged);
             instance.UpdateStats(new CharacterStats(state.health.current, state.health.total, state.stats.speed, state.stats.jumpHeight));
+            var skinMaterial = _staticData.ForSkins()[state.skin];
+            instance.GetComponent<CharacterSkin>().ChangeTo(skinMaterial);
             _player.Add(key, instance, healthChangeDispose);
             return instance.gameObject;
         }
@@ -69,7 +75,9 @@ namespace Network.Services
             var movementChangeDispose = state.OnMovementChange(enemy.OnMovementChange);
             var equippedGunChangeDispose = state.OnEquippedGunChange(enemy.OnEquippedGunChange);
             var healthChangeDispose = state.OnHealthChange(enemy.OnHealthChange);
-            _enemies.Add(key, enemy, movementChangeDispose, equippedGunChangeDispose);
+            var skinMaterial = _staticData.ForSkins()[state.skin];
+            enemy.GetComponent<CharacterSkin>().ChangeTo(skinMaterial);
+            _enemies.Add(key, enemy, movementChangeDispose, equippedGunChangeDispose, healthChangeDispose);
             return enemy.gameObject;
         }
     }

@@ -17,3 +17,9 @@ MonoBehaviour:
     TotalHealth: 100
     Speed: 6
     JumpHeight: 8
+  Skins:
+  - {fileID: 2100000, guid: 10f5ffff68552cbe491caca9c276ff6d, type: 2}
+  - {fileID: 2100000, guid: 064fa4d6e02e64dd89935332dbb285dc, type: 2}
+  - {fileID: 2100000, guid: 2759e6b7030c4931cb18ee5e517405bc, type: 2}
+  - {fileID: 2100000, guid: 7c4b0f7f70c9df6299c90ab6a365bc16, type: 2}
+  - {fileID: 2100000, guid: fb9a2f7a60ba587bbbd52f52e4c60d2f, type: 2}

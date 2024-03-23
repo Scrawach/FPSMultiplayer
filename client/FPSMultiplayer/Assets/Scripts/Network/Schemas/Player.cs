@@ -25,6 +25,9 @@ namespace Network.Schemas {
 		[Type(4, "uint8")]
 		public byte equippedGun = default(byte);
 
+		[Type(5, "uint8")]
+		public byte skin = default(byte);
+
 		/*
 		 * Support for individual property change callbacks below...
 		 */
@@ -89,6 +92,18 @@ namespace Network.Schemas {
 			};
 		}
 
+		protected event PropertyChangeHandler<byte> __skinChange;
+		public Action OnSkinChange(PropertyChangeHandler<byte> __handler, bool __immediate = true) {
+			if (__callbacks == null) { __callbacks = new SchemaCallbacks(); }
+			__callbacks.AddPropertyCallback(nameof(this.skin));
+			__skinChange += __handler;
+			if (__immediate && this.skin != default(byte)) { __handler(this.skin, default(byte)); }
+			return () => {
+				__callbacks.RemovePropertyCallback(nameof(skin));
+				__skinChange -= __handler;
+			};
+		}
+
 		protected override void TriggerFieldChange(DataChange change) {
 			switch (change.Field) {
 				case nameof(movement): __movementChange?.Invoke((Movement) change.Value, (Movement) change.PreviousValue); break;
@@ -96,6 +111,7 @@ namespace Network.Schemas {
 				case nameof(score): __scoreChange?.Invoke((ScoreData) change.Value, (ScoreData) change.PreviousValue); break;
 				case nameof(health): __healthChange?.Invoke((HealthData) change.Value, (HealthData) change.PreviousValue); break;
 				case nameof(equippedGun): __equippedGunChange?.Invoke((byte) change.Value, (byte) change.PreviousValue); break;
+				case nameof(skin): __skinChange?.Invoke((byte) change.Value, (byte) change.PreviousValue); break;
 				default: break;
 			}
 		}

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using Network.Services;
 using Services;
 using StaticData;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Game
@@ -22,10 +23,18 @@ public class Game
         _staticData.Load();
         var characterStats = _staticData.ForCharacter();
         var sceneName = SceneManager.GetActiveScene().name;
-        await _network.Connect(sceneName, characterStats);
+        var selectedSkin = GetRandomSkinIndex();
+        await _network.Connect(sceneName, characterStats, selectedSkin);
         _cursorService.HideCursor();
     }
 
     public async UniTask Stop() => 
         await _network.Disconnect();
+
+    private int GetRandomSkinIndex()
+    {
+        var availableSkins = _staticData.ForSkins();
+        var randomIndex = Random.Range(0, availableSkins.Length);
+        return randomIndex;
+    }
 }

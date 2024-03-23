@@ -12,7 +12,7 @@ export class Environment {
         this.worldSize = worldSize;
     }
     
-    createNewPlayer(settings: CharacterStatsData, health: HealthData, levelData: LevelData) : Player {
+    createNewPlayer(settings: CharacterStatsData, health: HealthData, levelData: LevelData, skin: number) : Player {
         const player = new Player();
         const position = levelData.getRandomSpawnPoint();
         console.log(`${position}`)
@@ -23,6 +23,7 @@ export class Environment {
         player.movement.isSitting = false;
         player.stats = settings;
         player.health = health;
+        player.skin = skin;
         return player;
     }
 
